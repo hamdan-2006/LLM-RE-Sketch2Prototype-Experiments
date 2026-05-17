@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronics Store</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .navbar { background-color: #333; color: white; padding: 10px; text-align: center; }
+        .navbar a { color: white; margin: 0 15px; text-decoration: none; }
+        .container { padding: 20px; }
+        .hidden { display: none; }
+        .button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        .button:hover { background-color: #45a049; }
+        .card { border: 1px solid #ccc; padding: 15px; margin: 10px 0; }
+        .flex { display: flex; justify-content: space-between; }
+        .input { padding: 5px; margin: 5px 0; width: 100%; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .table th, .table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="#" onclick="showScreen('home')">Home</a>
+    <a href="#" onclick="showScreen('products')">Products</a>
+    <a href="#" onclick="showScreen('cart')">Cart</a>
+</div>
+
+<div id="home" class="container">
+    <h1>Welcome to Electronics Store</h1>
+    <p>Shop the latest trends. Discover the best products at unbeatable prices. Fast delivery and easy returns.</p>
+    <button class="button" onclick="showScreen('products')">Shop Now</button>
+    <h2>Shop by Category</h2>
+    <div class="flex">
+        <button class="button">Laptops</button>
+        <button class="button">Headphones</button>
+        <button class="button">Games</button>
+    </div>
+    <h2>Featured Products</h2>
+    <div class="flex">
+        <div class="card">
+            <p>Product 1 - $44.99</p>
+            <button class="button" onclick="addToCart('Product 1', 44.99)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <p>Product 2 - $49.99</p>
+            <button class="button" onclick="addToCart('Product 2', 49.99)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <p>Product 3 - $49.99</p>
+            <button class="button" onclick="addToCart('Product 3', 49.99)">Add to Cart</button>
+        </div>
+    </div>
+    <h2>Special Offer</h2>
+    <button class="button">View Deals</button>
+</div>
+
+<div id="cart" class="container hidden">
+    <h1>Shopping Cart</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </tbody>
+    </table>
+    <div class="flex">
+        <div>
+            <p>Subtotal: $<span id="subtotal">0.00</span></p>
+            <p>Tax: $<span id="tax">0.00</span></p>
+            <p>Total: $<span id="total">0.00</span></p>
+        </div>
+        <div>
+            <button class="button" onclick="showScreen('home')">Continue Shopping</button>
+            <button class="button" onclick="showScreen('checkout')">Proceed to Checkout</button>
+        </div>
+    </div>
+</div>
+
+<div id="products" class="container hidden">
+    <h1>Product Listing</h1>
+    <div class="card">
+        <h2>Featured Products</h2>
+        <p>Laptop - $899 <button class="button" onclick="addToCart('Laptop', 899)">Add to Cart</button></p>
+        <p>Wireless Mouse - $25 <button class="button" onclick="addToCart('Wireless Mouse', 25)">Add to Cart</button></p>
+        <p>Headphones - $75 <button class="button" onclick="addToCart('Headphones', 75)">Add to Cart</button></p>
+        <p>Smart Watch - $199 <button class="button" onclick="addToCart('Smart Watch', 199)">Add to Cart</button></p>
+    </div>
+    <h2>Search Products</h2>
+    <input type="text" class="input" placeholder="Search...">
+    <button class="button">Search</button>
+    <h2>Promotions</h2>
+    <p>Free shipping on orders over $100</p>
+</div>
+
+<div id="checkout" class="container hidden">
+    <h1>Checkout</h1>
+    <h2>Shipping Information</h2>
+    <input type="text" class="input" placeholder="Full Name">
+    <input type="text" class="input" placeholder="Address">
+    <input type="text" class="input" placeholder="City">
+    <input type="text" class="input" placeholder="State">
+    <input type="text" class="input" placeholder="ZIP">
+    <h2>Payment Method</h2>
+    <select class="input">
+        <option>Credit Card</option>
+        <option>PayPal</option>
+    </select>
+    <input type="text" class="input" placeholder="Card Number">
+    <input type="text" class="input" placeholder="Expiration Date">
+    <p>Order Total: $<span id="checkout-total">0.00</span></p>
+    <button class="button" onclick="placeOrder()">Place Order</button>
+    <button class="button" onclick="showScreen('cart')">Cancel</button>
+</div>
+
+<div id="confirmation" class="container hidden">
+    <h1>Order Confirmation</h1>
+    <p>Your order has been placed successfully!</p>
+    <h2>Order Summary</h2>
+    <p>Order #: ORD-2045</p>
+    <p>Items: Laptop, Headphones</p>
+    <p>Total Paid: $1052</p>
+    <p>Payment Status: APPROVED</p>
+    <p>Estimated Delivery: Oct 18, 25</p>
+    <p>Shipping Address: 123 Main Street, Baltimore, MD 21201</p>
+    <button class="button" onclick="showScreen('home')">Continue Shopping</button>
+</div>
+
+<script>
+    let cart = [];
+    let taxRate = 0.08;
+
+    function showScreen(screenId) {
+        document.querySelectorAll('.container').forEach(screen => {
+            screen.classList.add('hidden');
+        });
+        document.getElementById(screenId).classList.remove('hidden');
+        updateCart();
+    }
+
+    function addToCart(product, price) {
+        cart.push({ product, price });
+        updateCart();
+        alert(product + ' added to cart.');
+    }
+
+    function updateCart() {
+        const cartItems = document.getElementById('cart-items');
+        cartItems.innerHTML = '';
+        let subtotal = 0;
+        cart.forEach((item, index) => {
+            subtotal += item.price;
+            cartItems.innerHTML += `
+                <tr>
+                    <td>${item.product}</td>
+                    <td>1</td>
+                    <td>$${item.price.toFixed(2)}</td>
+                    <td><button class="button" onclick="removeFromCart(${index})">Remove</button></td>
+                </tr>
+            `;
+        });
+        const tax = subtotal * taxRate;
+        const total = subtotal + tax;
+        document.getElementById('subtotal').innerText = subtotal.toFixed(2);
+        document.getElementById('tax').innerText = tax.toFixed(2);
+        document.getElementById('total').innerText = total.toFixed(2);
+        document.getElementById('checkout-total').innerText = total.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCart();
+    }
+
+    function placeOrder() {
+        cart = [];
+        updateCart();
+        showScreen('confirmation');
+    }
+
+    showScreen('home');
+</script>
+
+</body>
+</html>

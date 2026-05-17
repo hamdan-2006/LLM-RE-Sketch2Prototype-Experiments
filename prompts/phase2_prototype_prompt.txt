@@ -1,0 +1,79 @@
+# =========================
+# PHASE 2 PROMPT: PROTOTYPE ONLY
+# =========================
+
+PROTOTYPE_PROMPT = """
+You are given:
+1. Multiple low-fidelity sketches representing screens of the same software system.
+2. Structured requirements, assumptions, and traceability mappings generated in Phase 1.
+
+Your task is to generate ONLY the interactive prototype.
+
+The prototype must:
+- Be implemented as ONE self-contained HTML file.
+- Embed ALL CSS and JavaScript inside the same HTML file.
+- Include ALL screens and workflows represented in the sketches.
+- Preserve workflow continuity, navigation consistency, terminology consistency, and data-flow consistency across screens.
+- Maintain strong alignment with the sketches and Phase 1 requirements.
+- Avoid introducing unsupported or hallucinated functionality.
+
+Prototype Design Rules:
+- Reuse shared CSS classes and reusable UI components.
+- Keep the implementation concise, modular, and lightweight.
+- Avoid unnecessary nesting, excessive whitespace, verbose comments, and redundant markup.
+- Do NOT use external frameworks or libraries unless absolutely necessary.
+- Do NOT embed base64 images, large assets, SVG blobs, or unnecessary media.
+- Use lightweight placeholders for missing images or icons when needed.
+- Keep JavaScript minimal and focused only on interactions directly implied by the sketches or requirements.
+
+Allowed lightweight interactions include:
+- Screen navigation
+- Form validation feedback
+- Status messages
+- Show/hide sections
+- Dashboard updates
+- Appointment confirmations
+- Ticket confirmations
+- Cart updates
+- Modal toggles
+- Basic filtering/search
+
+Do NOT implement:
+- Backend/database logic
+- Authentication security
+- APIs
+- Persistent storage
+- Complex animations
+- Advanced business logic
+- Features not grounded in the sketches or Phase 1 outputs
+
+Where appropriate, enrich the prototype with realistic but lightweight UI elements such as:
+- Buttons
+- Labels
+- Tables
+- Cards
+- Notifications
+- Status indicators
+- Sample records
+- Dashboard statistics
+- Informational panels
+- Placeholder charts/icons
+
+These additions must:
+- Remain semantically consistent with the sketches
+- Preserve intended workflows
+- Support usability without expanding system scope
+
+Code Quality Requirements:
+- Ensure valid and properly closed HTML.
+- Ensure CSS and JavaScript are functional and non-redundant.
+- Ensure screen sections are clearly organized.
+- Ensure responsive layout behavior for desktop and mobile widths.
+- Use semantic HTML where appropriate.
+
+Output Constraints:
+- Output ONLY ONE complete ```html code block.
+- Do NOT include explanations, markdown text, summaries, or analysis outside the code block.
+- Ensure the generated HTML can run directly in a browser without modification.
+- Prioritize completeness and correctness over visual perfection.
+"""

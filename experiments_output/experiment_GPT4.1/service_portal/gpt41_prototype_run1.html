@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>University IT Service Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --primary: #2d3e50;
+      --accent: #4a90e2;
+      --bg: #f7f9fa;
+      --border: #d1d5db;
+      --error: #d32f2f;
+      --success: #388e3c;
+      --radius: 7px;
+      --shadow: 0 2px 8px rgba(44,62,80,0.06);
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      min-height: 100vh;
+    }
+    #app {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 8px 32px 8px;
+    }
+    .nav {
+      display: flex;
+      gap: 0.5em;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 0.75em 0;
+      margin-bottom: 1.5em;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.25em 0.75em;
+      border-radius: var(--radius);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+    .nav-link.active, .nav-link:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    .screen {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5em 1em 1.5em 1em;
+      margin-bottom: 2em;
+    }
+    .center {
+      text-align: center;
+    }
+    .logo-placeholder {
+      display: inline-block;
+      width: 90px;
+      height: 90px;
+      background: #e3e7ed;
+      border-radius: 50%;
+      margin: 1em 0;
+      font-size: 2.2em;
+      color: #b0b6be;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.6em 1.2em;
+      font-size: 1em;
+      font-weight: 500;
+      cursor: pointer;
+      margin: 0.25em 0.5em 0.25em 0;
+      transition: background 0.15s;
+      box-shadow: 0 1px 2px rgba(44,62,80,0.04);
+    }
+    .btn.secondary {
+      background: #e3e7ed;
+      color: var(--primary);
+    }
+    .btn:active {
+      background: #357ab7;
+    }
+    .services-list {
+      list-style: disc inside;
+      margin: 1em 0 1.5em 0;
+      padding: 0;
+    }
+    .announcements {
+      background: #f3f6fa;
+      border-left: 4px solid var(--accent);
+      padding: 0.75em 1em;
+      margin-top: 1em;
+      font-size: 0.98em;
+    }
+    .form-group {
+      margin-bottom: 1.1em;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .form-group label {
+      font-weight: 500;
+      margin-bottom: 0.3em;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 0.5em;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 1em;
+      background: #f7f9fa;
+      box-sizing: border-box;
+      margin-bottom: 0.1em;
+    }
+    .form-group textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+    .form-actions {
+      display: flex;
+      gap: 1em;
+      margin-top: 1.2em;
+      justify-content: flex-start;
+    }
+    .error-msg {
+      color: var(--error);
+      font-size: 0.98em;
+      margin: 0.2em 0 0.6em 0;
+    }
+    .success-msg {
+      color: var(--success);
+      font-size: 1.1em;
+      margin: 0.5em 0;
+    }
+    .ticket-summary, .ticket-info {
+      background: #f3f6fa;
+      border-radius: var(--radius);
+      padding: 1em 1em 1em 1.2em;
+      margin: 1em 0 1.5em 0;
+      font-size: 1.03em;
+      line-height: 1.7;
+      word-break: break-word;
+    }
+    .ticket-summary strong, .ticket-info strong {
+      font-weight: 600;
+    }
+    .faq-list {
+      margin: 1em 0 1.5em 0;
+      padding: 0;
+    }
+    .faq-q {
+      font-weight: 600;
+      margin-top: 1em;
+      margin-bottom: 0.2em;
+      display: flex;
+      align-items: center;
+    }
+    .faq-q::before {
+      content: "Q:";
+      color: var(--accent);
+      font-weight: bold;
+      margin-right: 0.5em;
+    }
+    .faq-a {
+      margin-left: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    .contact-info {
+      background: #f3f6fa;
+      border-radius: var(--radius);
+      padding: 0.8em 1em;
+      margin-bottom: 1.2em;
+      font-size: 1em;
+    }
+    @media (max-width: 600px) {
+      #app {
+        max-width: 100vw;
+        padding: 0 2px 24px 2px;
+      }
+      .screen {
+        padding: 1em 0.3em 1em 0.3em;
+      }
+      .nav {
+        font-size: 0.97em;
+        gap: 0.2em;
+      }
+      .form-actions {
+        flex-direction: column;
+        gap: 0.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <a class="nav-link" data-screen="home">Home</a>
+    <a class="nav-link" data-screen="submit">Submit Ticket</a>
+    <a class="nav-link" data-screen="track">Track Request</a>
+    <a class="nav-link" data-screen="help">Help</a>
+  </nav>
+
+  <!-- Screens -->
+  <section id="screen-home" class="screen">
+    <div class="center">
+      <h2 style="margin-bottom:0.2em;">University IT Service Portal</h2>
+      <div style="font-size:1.1em; margin-bottom:1.2em;">Welcome to IT support</div>
+      <div class="logo-placeholder" aria-label="IT Logo">IT</div>
+      <div>
+        <button class="btn" id="btn-home-submit">Submit New Request</button>
+      </div>
+    </div>
+    <h3 style="margin-top:2em; margin-bottom:0.5em;">Services Available</h3>
+    <ul class="services-list">
+      <li>Password Reset</li>
+      <li>Software Installation</li>
+      <li>Network Support</li>
+      <li>Account Access</li>
+    </ul>
+    <div class="announcements">
+      <strong>Support Announcements:</strong>
+      <ul style="margin:0.5em 0 0 1.2em; padding:0;">
+        <li>Scheduled maintenance: <strong>Friday</strong></li>
+        <li>New VPN instructions available</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="screen-submit" class="screen" style="display:none;">
+    <h2 class="center" style="margin-bottom:1.2em;">Submit Support Request</h2>
+    <form id="support-form" autocomplete="off" novalidate>
+      <div class="form-group">
+        <label for="input-name">Name<span style="color:var(--error);">*</span></label>
+        <input type="text" id="input-name" maxlength="50" required autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="input-email">Email<span style="color:var(--error);">*</span></label>
+        <input type="email" id="input-email" maxlength="60" required autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="input-category">Issue Category<span style="color:var(--error);">*</span></label>
+        <select id="input-category" required>
+          <option value="">Select a category</option>
+          <option>Password Reset</option>
+          <option>Software Installation</option>
+          <option>Network Support</option>
+          <option>Account Access</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="input-desc">Problem Description<span style="color:var(--error);">*</span></label>
+        <textarea id="input-desc" maxlength="400" required></textarea>
+      </div>
+      <div id="form-error" class="error-msg" style="display:none;"></div>
+      <div class="form-actions">
+        <button type="submit" class="btn" id="btn-submit-ticket">Submit Ticket</button>
+        <button type="button" class="btn secondary" id="btn-clear-form">Clear Form</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="screen-confirm" class="screen" style="display:none;">
+    <h2 class="center" style="margin-bottom:1.2em;">Support Request Submitted</h2>
+    <div class="center success-msg">Your support request has been submitted</div>
+    <h3 style="margin-top:2em; margin-bottom:0.5em;">Ticket Summary</h3>
+    <div class="ticket-summary" id="ticket-summary">
+      <!-- Populated by JS -->
+    </div>
+    <div class="form-actions">
+      <button class="btn" id="btn-confirm-track">Track Request</button>
+      <button class="btn secondary" id="btn-confirm-home">Return Home</button>
+    </div>
+  </section>
+
+  <section id="screen-track" class="screen" style="display:none;">
+    <h2 class="center" style="margin-bottom:1.2em;">Track Support Request</h2>
+    <form id="track-form" autocomplete="off" style="margin-bottom:1.2em;">
+      <div class="form-group" style="flex-direction:row; align-items:center; gap:0.6em;">
+        <label for="input-ticketid" style="margin-bottom:0;">Ticket ID</label>
+        <input type="text" id="input-ticketid" maxlength="20" style="max-width:160px;" required autocomplete="off" />
+        <button type="submit" class="btn" id="btn-search-ticket" style="margin:0;">Search</button>
+      </div>
+      <div id="track-error" class="error-msg" style="display:none;"></div>
+    </form>
+    <h3 style="margin-bottom:0.5em;">Ticket Information</h3>
+    <div class="ticket-info" id="ticket-info" style="display:none;">
+      <!-- Populated by JS -->
+    </div>
+    <button class="btn secondary" id="btn-track-home" style="margin-top:1em;">Return Home</button>
+  </section>
+
+  <section id="screen-help" class="screen" style="display:none;">
+    <h2 class="center" style="margin-bottom:1.2em;">Help and Support</h2>
+    <h3 style="margin-bottom:0.5em;">Frequently Asked Questions</h3>
+    <div class="faq-list">
+      <div class="faq-q">How do I reset my password?</div>
+      <div class="faq-a">Click "Forgot password" on the login page.</div>
+      <div class="faq-q">How long does ticket response take?</div>
+      <div class="faq-a">Most requests are answered within 24 hours.</div>
+      <div class="faq-q">How can I track my request?</div>
+      <div class="faq-a">Use the Track Request page with your Ticket ID or contact IT support.</div>
+    </div>
+    <div class="contact-info">
+      <strong>Contact IT Support:</strong><br>
+      Email: <a href="mailto:support@university.edu">support@university.edu</a><br>
+      Phone: <span style="white-space:nowrap;">(555) 123-4567</span>
+    </div>
+    <button class="btn secondary" id="btn-help-home">Return Home</button>
+  </section>
+</div>
+<script>
+  // Navigation
+  const screens = {
+    home: document.getElementById('screen-home'),
+    submit: document.getElementById('screen-submit'),
+    confirm: document.getElementById('screen-confirm'),
+    track: document.getElementById('screen-track'),
+    help: document.getElementById('screen-help')
+  };
+  const navLinks = document.querySelectorAll('.nav-link');
+  let lastTicket = null;
+
+  function showScreen(screen) {
+    Object.values(screens).forEach(s => s.style.display = 'none');
+    screens[screen].style.display = '';
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.dataset.screen === screen);
+    });
+    // Reset errors/info on navigation
+    if (screen === 'submit') {
+      document.getElementById('form-error').style.display = 'none';
+    }
+    if (screen === 'track') {
+      document.getElementById('track-error').style.display = 'none';
+      document.getElementById('ticket-info').style.display = 'none';
+      document.getElementById('input-ticketid').value = '';
+    }
+    window.scrollTo(0,0);
+  }
+  navLinks.forEach(link => {
+    link.onclick = () => showScreen(link.dataset.screen);
+  });
+
+  // Home: Submit New Request
+  document.getElementById('btn-home-submit').onclick = () => showScreen('submit');
+
+  // Submit Support Request
+  const supportForm = document.getElementById('support-form');
+  const formError = document.getElementById('form-error');
+  document.getElementById('btn-clear-form').onclick = () => {
+    supportForm.reset();
+    formError.style.display = 'none';
+  };
+  supportForm.onsubmit = function(e) {
+    e.preventDefault();
+    formError.style.display = 'none';
+    // Validate fields
+    const name = document.getElementById('input-name').value.trim();
+    const email = document.getElementById('input-email').value.trim();
+    const category = document.getElementById('input-category').value;
+    const desc = document.getElementById('input-desc').value.trim();
+    let error = '';
+    if (!name) error = 'Name is required.';
+    else if (!email) error = 'Email is required.';
+    else if (!/^[^@]+@[^@]+\.[^@]+$/.test(email)) error = 'Enter a valid email address.';
+    else if (!category) error = 'Please select an issue category.';
+    else if (!desc) error = 'Problem description is required.';
+    if (error) {
+      formError.textContent = error;
+      formError.style.display = '';
+      return;
+    }
+    // Simulate ticket creation
+    const ticketId = 'IT-' + (Math.floor(Math.random()*9000)+1000);
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', {year:'numeric', month:'short', day:'numeric'});
+    lastTicket = {
+      id: ticketId,
+      category,
+      submitter: name,
+      email,
+      status: 'Open',
+      date: dateStr,
+      response: '24 hours'
+    };
+    // Fill confirmation screen
+    const summary = document.getElementById('ticket-summary');
+    summary.innerHTML = `
+      <div><strong>Ticket ID:</strong> ${ticketId}</div>
+      <div><strong>Category:</strong> ${category}</div>
+      <div><strong>Submitted by:</strong> ${name}</div>
+      <div><strong>Status:</strong> Open</div>
+      <div><strong>Submitted Date:</strong> ${dateStr}</div>
+      <div><strong>Estimated Response Time:</strong> 24 hours</div>
+    `;
+    showScreen('confirm');
+    supportForm.reset();
+  };
+
+  // Confirmation: Track Request or Return Home
+  document.getElementById('btn-confirm-track').onclick = () => {
+    showScreen('track');
+    if (lastTicket) {
+      document.getElementById('input-ticketid').value = lastTicket.id;
+      showTicketInfo(lastTicket.id);
+    }
+  };
+  document.getElementById('btn-confirm-home').onclick = () => showScreen('home');
+
+  // Track Request
+  const trackForm = document.getElementById('track-form');
+  const trackError = document.getElementById('track-error');
+  const ticketInfo = document.getElementById('ticket-info');
+  // Simulated ticket records
+  const ticketsDB = {
+    'IT-2045': {
+      id: 'IT-2045',
+      category: 'Network Support',
+      status: 'Open',
+      submitter: 'Student',
+      lastUpdated: 'Oct 10, 2025',
+      notes: 'Awaiting technician assignment.'
+    },
+    '2055-104': {
+      id: '2055-104',
+      category: 'Network Support',
+      status: 'In Progress',
+      submitter: 'Student',
+      lastUpdated: 'April 29, 2026',
+      notes: 'Issue currently being investigated.'
+    }
+  };
+  function showTicketInfo(ticketId) {
+    trackError.style.display = 'none';
+    let t = null;
+    if (lastTicket && ticketId === lastTicket.id) t = lastTicket;
+    else if (ticketsDB[ticketId]) t = ticketsDB[ticketId];
+    if (!t) {
+      ticketInfo.style.display = 'none';
+      trackError.textContent = 'Ticket not found. Please check the Ticket ID.';
+      trackError.style.display = '';
+      return;
+    }
+    ticketInfo.innerHTML = `
+      <div><strong>Ticket #:</strong> ${t.id}</div>
+      <div><strong>Category:</strong> ${t.category}</div>
+      <div><strong>Status:</strong> ${t.status}</div>
+      <div><strong>Submitted by:</strong> ${t.submitter}</div>
+      <div><strong>Last Updated:</strong> ${t.lastUpdated || t.date || '-'}</div>
+      <div><strong>Technician Notes:</strong> ${t.notes || 'No notes yet.'}</div>
+    `;
+    ticketInfo.style.display = '';
+  }
+  trackForm.onsubmit = function(e) {
+    e.preventDefault();
+    const ticketId = document.getElementById('input-ticketid').value.trim();
+    if (!ticketId) {
+      trackError.textContent = 'Please enter a Ticket ID.';
+      trackError.style.display = '';
+      ticketInfo.style.display = 'none';
+      return;
+    }
+    showTicketInfo(ticketId);
+  };
+  document.getElementById('btn-track-home').onclick = () => showScreen('home');
+
+  // Help: Return Home
+  document.getElementById('btn-help-home').onclick = () => showScreen('home');
+
+  // Initial screen
+  showScreen('home');
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+Experiment Log
+
+Model label: Google Gemini 2.5 Pro
+Requested model ID: gemini-2.5-pro
+Pipeline: Two-phase generation
+
+Phase 1: Requirements, traceability
+Phase 2: Prototype generation using sketches + Phase 1 output
+
+Temperature: 0.2
+Top-p: 1.0
+Top-k: not set / provider default
+Max output tokens per phase: 65535
+Runs per scenario: 3
+Image detail / quality: native/original
+Timeout: 180 seconds
+Retries: 2
+Date: 2026-05-06
+
+Base folder: C:\Users\hamda\python-projects\experiments\Gemini_2.5_Pro
+
+------------------------------------------------------------
+[2026-05-06 23:51:36] Gemini connection successful.
+[2026-05-06 23:51:36] Connection response: [No text returned, but API call completed]
+[2026-05-06 23:51:36] Two-phase Gemini experiment started.
+[2026-05-06 23:51:36] Scenario service_portal: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-06 23:52:03] service_portal run 1 Phase 1 completed in 26.8s. Flagged: No
+[2026-05-06 23:52:53] service_portal run 1 Phase 2 completed in 49.8s. Flagged: No
+[2026-05-06 23:53:25] service_portal run 2 Phase 1 completed in 31.47s. Flagged: No
+[2026-05-06 23:54:11] service_portal run 2 Phase 2 completed in 46.26s. Flagged: No
+[2026-05-06 23:54:39] service_portal run 3 Phase 1 completed in 27.88s. Flagged: No
+[2026-05-06 23:55:28] service_portal run 3 Phase 2 completed in 49.01s. Flagged: No
+[2026-05-06 23:55:28] Scenario Ecommerce: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-06 23:55:59] Ecommerce run 1 Phase 1 completed in 31.22s. Flagged: No
+[2026-05-06 23:56:54] Ecommerce run 1 Phase 2 completed in 54.85s. Flagged: No
+[2026-05-06 23:57:22] Ecommerce run 2 Phase 1 completed in 28.16s. Flagged: No
+[2026-05-06 23:58:17] Ecommerce run 2 Phase 2 completed in 55.44s. Flagged: No
+[2026-05-06 23:58:50] Ecommerce run 3 Phase 1 completed in 33.05s. Flagged: No
+[2026-05-06 23:59:48] Ecommerce run 3 Phase 2 completed in 57.71s. Flagged: No
+[2026-05-06 23:59:48] Scenario Healthcare: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-07 00:00:17] Healthcare run 1 Phase 1 completed in 29.06s. Flagged: No
+[2026-05-07 00:01:09] Healthcare run 1 Phase 2 completed in 52.2s. Flagged: No
+[2026-05-07 00:02:13] Healthcare run 2 Phase 1 completed in 63.7s. Flagged: No
+[2026-05-07 00:03:28] Healthcare run 2 Phase 2 completed in 75.06s. Flagged: No
+[2026-05-07 00:04:25] Healthcare run 3 Phase 1 completed in 57.14s. Flagged: No
+[2026-05-07 00:05:18] Healthcare run 3 Phase 2 completed in 52.6s. Flagged: No
+[2026-05-07 00:05:18] Two-phase Gemini experiment completed.

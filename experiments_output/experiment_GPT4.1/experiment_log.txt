@@ -1,0 +1,46 @@
+Experiment Log
+
+Model label: OpenAI GPT-4.1
+Requested model ID: gpt-4.1
+Pipeline: Two-phase generation
+Phase 1: Requirements, traceability, ambiguities
+Phase 2: Prototype generation using sketches + Phase 1 output
+
+Temperature: 0.2
+Top-p: 1.0
+Top-k: not supported by model/API
+Max output tokens per phase: 32768
+Runs per scenario: 3
+Image detail / quality: high
+Timeout: 180.0 seconds
+Retries: 2
+Date: 2026-05-07
+
+Base folder: C:\Users\hamda\python-projects\experiments\experiment_GPT4
+
+------------------------------------------------------------
+[2026-05-07 01:05:36] OpenAI connection successful.
+[2026-05-07 01:05:36] Connection test returned model: gpt-4.1-2025-04-14
+[2026-05-07 01:05:36] Two-phase experiment started.
+[2026-05-07 01:05:36] Scenario service_portal: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-07 01:06:14] service_portal run 1 Phase 1 completed in 38.07s. Flagged: No
+[2026-05-07 01:07:29] service_portal run 1 Phase 2 completed in 74.19s. Flagged: No
+[2026-05-07 01:07:50] service_portal run 2 Phase 1 completed in 21.68s. Flagged: No
+[2026-05-07 01:08:31] service_portal run 2 Phase 2 completed in 40.43s. Flagged: No
+[2026-05-07 01:09:16] service_portal run 3 Phase 1 completed in 45.33s. Flagged: No
+[2026-05-07 01:10:20] service_portal run 3 Phase 2 completed in 63.8s. Flagged: No
+[2026-05-07 01:10:20] Scenario Ecommerce: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-07 01:10:38] Ecommerce run 1 Phase 1 completed in 18.53s. Flagged: No
+[2026-05-07 01:11:47] Ecommerce run 1 Phase 2 completed in 68.29s. Flagged: No
+[2026-05-07 01:12:52] Ecommerce run 2 Phase 1 completed in 65.0s. Flagged: No
+[2026-05-07 01:13:48] Ecommerce run 2 Phase 2 completed in 55.84s. Flagged: No
+[2026-05-07 01:14:05] Ecommerce run 3 Phase 1 completed in 17.09s. Flagged: No
+[2026-05-07 01:16:11] Ecommerce run 3 Phase 2 completed in 125.93s. Flagged: No
+[2026-05-07 01:16:11] Scenario Healthcare: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-07 01:16:36] Healthcare run 1 Phase 1 completed in 25.2s. Flagged: No
+[2026-05-07 01:18:01] Healthcare run 1 Phase 2 completed in 85.08s. Flagged: No
+[2026-05-07 01:18:30] Healthcare run 2 Phase 1 completed in 29.6s. Flagged: No
+[2026-05-07 01:19:49] Healthcare run 2 Phase 2 completed in 78.22s. Flagged: No
+[2026-05-07 01:20:17] Healthcare run 3 Phase 1 completed in 27.85s. Flagged: No
+[2026-05-07 01:21:21] Healthcare run 3 Phase 2 completed in 63.95s. Flagged: No
+[2026-05-07 01:21:21] Two-phase experiment completed.

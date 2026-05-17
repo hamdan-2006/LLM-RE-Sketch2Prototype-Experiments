@@ -1,0 +1,717 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community Health Clinic Portal</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root {
+      --primary: #2d7a7b;
+      --secondary: #eaf7f7;
+      --accent: #f9b233;
+      --danger: #d9534f;
+      --success: #5cb85c;
+      --border: #d0d7de;
+      --text: #222;
+      --muted: #666;
+      --radius: 8px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7fafb;
+      color: var(--text);
+      min-height: 100vh;
+    }
+    #app {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 10px 40px 10px;
+    }
+    .nav {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: #fff;
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow);
+    }
+    .nav-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+    .nav-link.active, .nav-link:hover {
+      background: var(--accent);
+      color: #222;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin: 2rem 0 1.2rem 0;
+    }
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      font-weight: bold;
+    }
+    .logo-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .welcome {
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+      color: var(--muted);
+    }
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem 1.2rem 1.2rem 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .services-list {
+      list-style: disc inside;
+      margin: 0.5rem 0 0.5rem 0.5rem;
+      padding: 0;
+      color: var(--primary);
+      font-size: 1rem;
+    }
+    .announcements-list {
+      list-style: square inside;
+      margin: 0.5rem 0 0.5rem 1rem;
+      padding: 0;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin: 0.3rem 0.5rem 0.3rem 0;
+      transition: background 0.15s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: #222;
+    }
+    .btn-danger {
+      background: var(--danger);
+      color: #fff;
+    }
+    .btn-success {
+      background: var(--success);
+      color: #fff;
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      color: var(--primary);
+    }
+    .form-input, .form-select, .form-textarea {
+      padding: 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 1rem;
+      background: #fff;
+      color: var(--text);
+      transition: border 0.15s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    .form-textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+    .form-row {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .form-row > .form-group {
+      flex: 1 1 180px;
+      min-width: 140px;
+    }
+    .error-msg {
+      color: var(--danger);
+      font-size: 0.98em;
+      margin-top: 0.2rem;
+    }
+    .success-msg {
+      color: var(--success);
+      font-size: 1.1em;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .appt-summary {
+      margin: 1.2rem 0 0.5rem 0;
+      padding: 1rem;
+      background: var(--secondary);
+      border-radius: var(--radius);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      border-left: 4px solid var(--primary);
+    }
+    .appt-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .appt-table th, .appt-table td {
+      padding: 0.7rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      font-size: 1rem;
+    }
+    .appt-table th {
+      background: var(--secondary);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .appt-table tr.selected {
+      background: #e0f3f3;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.2em 0.7em;
+      border-radius: 12px;
+      font-size: 0.95em;
+      font-weight: 500;
+      background: #eaf7f7;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .status-confirmed {
+      background: #e7fbe7;
+      color: var(--success);
+      border-color: var(--success);
+    }
+    .status-pending {
+      background: #fffbe7;
+      color: #bfa800;
+      border-color: #bfa800;
+    }
+    .faq-list {
+      margin: 1rem 0 1.5rem 0;
+      padding: 0;
+      list-style: none;
+    }
+    .faq-q {
+      font-weight: 600;
+      margin-top: 1rem;
+      color: var(--primary);
+    }
+    .faq-a {
+      margin: 0.2rem 0 0.7rem 0.7rem;
+      color: var(--muted);
+    }
+    .contact-info {
+      margin: 1.2rem 0 1.2rem 0;
+      font-size: 1.05rem;
+      color: var(--primary);
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 600px) {
+      #app {
+        max-width: 100vw;
+        padding: 0 2vw 30vw 2vw;
+      }
+      .nav {
+        flex-direction: column;
+        gap: 0.2rem;
+        padding: 0.5rem 0.5rem;
+      }
+      .form-row {
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .logo-title {
+        font-size: 1.1rem;
+      }
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <a class="nav-link active" data-screen="home" href="#">Home</a>
+    <a class="nav-link" data-screen="schedule" href="#">Schedule Appointment</a>
+    <a class="nav-link" data-screen="appointments" href="#">My Appointments</a>
+    <a class="nav-link" data-screen="help" href="#">Help</a>
+  </nav>
+
+  <!-- Screens -->
+  <!-- Home / Dashboard -->
+  <section id="screen-home">
+    <div class="logo">
+      <div class="logo-icon" aria-label="Clinic Logo">🏥</div>
+      <span class="logo-title">Community Health Clinic Portal</span>
+    </div>
+    <div class="welcome">Welcome to Community Health Clinic</div>
+    <div class="card" style="margin-bottom:1.5rem;">
+      <button class="btn btn-accent" id="btn-schedule-from-home">Schedule New Appointment</button>
+    </div>
+    <div class="card">
+      <div style="font-weight:600;color:var(--primary);margin-bottom:0.3rem;">Services Available:</div>
+      <ul class="services-list">
+        <li>General Checkup</li>
+        <li>Pediatric Care</li>
+        <li>Vaccination Services</li>
+        <li>Follow-up Visits</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div style="font-weight:600;color:var(--primary);margin-bottom:0.3rem;">Announcements</div>
+      <ul class="announcements-list">
+        <li>Flu shots available this week</li>
+        <li>New patient forms updated</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Schedule Appointment Form -->
+  <section id="screen-schedule" style="display:none;">
+    <div class="logo" style="margin-bottom:0.7rem;">
+      <div class="logo-icon" aria-label="Schedule Icon">📅</div>
+      <span class="logo-title">Schedule Appointment</span>
+    </div>
+    <form id="appt-form" autocomplete="off" novalidate>
+      <div class="form-row">
+        <div class="form-group" style="flex:2;">
+          <label class="form-label" for="appt-patient">Patient Name</label>
+          <input class="form-input" id="appt-patient" name="patient" type="text" maxlength="40" required>
+          <div class="error-msg" id="err-patient"></div>
+        </div>
+        <div class="form-group" style="flex:2;">
+          <label class="form-label" for="appt-email">Email Address</label>
+          <input class="form-input" id="appt-email" name="email" type="email" maxlength="50" required>
+          <div class="error-msg" id="err-email"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="flex:1;">
+          <label class="form-label" for="appt-phone">Phone Number</label>
+          <input class="form-input" id="appt-phone" name="phone" type="tel" maxlength="20" required>
+          <div class="error-msg" id="err-phone"></div>
+        </div>
+        <div class="form-group" style="flex:1;">
+          <label class="form-label" for="appt-type">Appointment Type</label>
+          <select class="form-select" id="appt-type" name="type" required>
+            <option value="">Select Type</option>
+            <option>General Checkup</option>
+            <option>Pediatric Care</option>
+            <option>Vaccination Services</option>
+            <option>Follow-up Visit</option>
+          </select>
+          <div class="error-msg" id="err-type"></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="flex:1;">
+          <label class="form-label" for="appt-doctor">Preferred Doctor</label>
+          <select class="form-select" id="appt-doctor" name="doctor" required>
+            <option value="">Select Doctor</option>
+            <option>Dr. Smith</option>
+            <option>Dr. Lee</option>
+            <option>Dr. Patel</option>
+            <option>Dr. Chen</option>
+          </select>
+          <div class="error-msg" id="err-doctor"></div>
+        </div>
+        <div class="form-group" style="flex:1;">
+          <label class="form-label" for="appt-date">Appointment Date</label>
+          <input class="form-input" id="appt-date" name="date" type="date" required>
+          <div class="error-msg" id="err-date"></div>
+        </div>
+        <div class="form-group" style="flex:1;">
+          <label class="form-label" for="appt-time">Appointment Time</label>
+          <select class="form-select" id="appt-time" name="time" required>
+            <option value="">Select Time</option>
+            <option>09:00 AM</option>
+            <option>10:30 AM</option>
+            <option>01:00 PM</option>
+            <option>02:30 PM</option>
+            <option>04:00 PM</option>
+          </select>
+          <div class="error-msg" id="err-time"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="appt-notes">Additional Notes</label>
+        <textarea class="form-textarea" id="appt-notes" name="notes" maxlength="200"></textarea>
+      </div>
+      <div style="display:flex;gap:1rem;justify-content:flex-end;">
+        <button type="button" class="btn btn-danger" id="btn-clear-form">Clear Form</button>
+        <button type="submit" class="btn btn-success" id="btn-confirm-appt">Confirm Appointment</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Appointment Confirmation -->
+  <section id="screen-confirmation" style="display:none;">
+    <div class="logo" style="margin-bottom:0.7rem;">
+      <div class="logo-icon" aria-label="Confirmation Icon">✅</div>
+      <span class="logo-title">Appointment Confirmation</span>
+    </div>
+    <div class="success-msg" id="confirmation-msg">
+      Your appointment has been scheduled successfully.
+    </div>
+    <div style="font-weight:600;color:var(--primary);margin-bottom:0.5rem;">Appointment Summary</div>
+    <div class="appt-summary" id="confirmation-summary">
+      <!-- Populated by JS -->
+    </div>
+    <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
+      <button class="btn btn-accent" id="btn-view-appointments">View My Appointments</button>
+      <button class="btn" id="btn-return-home-from-confirm">Return Home</button>
+    </div>
+  </section>
+
+  <!-- My Appointments / Tracking -->
+  <section id="screen-appointments" style="display:none;">
+    <div class="logo" style="margin-bottom:0.7rem;">
+      <div class="logo-icon" aria-label="Appointments Icon">📋</div>
+      <span class="logo-title">My Appointments</span>
+    </div>
+    <div style="font-weight:600;color:var(--primary);margin-bottom:0.5rem;">Upcoming Appointments</div>
+    <table class="appt-table" id="appt-table">
+      <thead>
+        <tr>
+          <th>Confirmation #</th>
+          <th>Doctor</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Populated by JS -->
+      </tbody>
+    </table>
+    <div style="font-weight:600;color:var(--primary);margin-bottom:0.3rem;">Appointment Details</div>
+    <div class="appt-summary" id="appt-details">
+      <span style="color:var(--muted);">Select an appointment to view details.</span>
+    </div>
+    <div style="display:flex;gap:1.2rem;justify-content:flex-end;">
+      <button class="btn btn-danger" id="btn-cancel-appt" style="display:none;">Cancel Appointment</button>
+      <button class="btn" id="btn-return-home-from-appts">Return Home</button>
+    </div>
+  </section>
+
+  <!-- Help / FAQ -->
+  <section id="screen-help" style="display:none;">
+    <div class="logo" style="margin-bottom:0.7rem;">
+      <div class="logo-icon" aria-label="Help Icon">❓</div>
+      <span class="logo-title">Help and Support</span>
+    </div>
+    <div style="font-weight:600;color:var(--primary);margin-bottom:0.5rem;">Frequently Asked Questions</div>
+    <ul class="faq-list">
+      <li>
+        <div class="faq-q">Q: How do I schedule an appointment?</div>
+        <div class="faq-a">A: Select "Schedule Appointment" from the menu and fill out the form.</div>
+      </li>
+      <li>
+        <div class="faq-q">Q: Can I cancel an appointment online?</div>
+        <div class="faq-a">A: Yes, use the My Appointments page and select the appointment to cancel.</div>
+      </li>
+      <li>
+        <div class="faq-q">Q: How will I receive confirmation?</div>
+        <div class="faq-a">A: Confirmation appears immediately after booking on the confirmation screen.</div>
+      </li>
+    </ul>
+    <div class="contact-info">
+      <span>Email: <a href="mailto:support@clinic.org">support@clinic.org</a></span>
+      <span>Phone: (000) 555-0010</span>
+    </div>
+    <button class="btn" id="btn-return-home-from-help">Return Home</button>
+  </section>
+</div>
+<script>
+  // Simple SPA navigation
+  const screens = {
+    home: document.getElementById('screen-home'),
+    schedule: document.getElementById('screen-schedule'),
+    confirmation: document.getElementById('screen-confirmation'),
+    appointments: document.getElementById('screen-appointments'),
+    help: document.getElementById('screen-help')
+  };
+  function showScreen(screen) {
+    Object.values(screens).forEach(sec => sec.style.display = 'none');
+    screens[screen].style.display = '';
+    // Set nav active
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.toggle('active', link.dataset.screen === screen);
+    });
+    // Focus first input if form
+    if (screen === 'schedule') {
+      setTimeout(() => document.getElementById('appt-patient').focus(), 200);
+    }
+  }
+  // Navigation events
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      showScreen(link.dataset.screen);
+    });
+  });
+  document.getElementById('btn-schedule-from-home').onclick = () => showScreen('schedule');
+  document.getElementById('btn-return-home-from-confirm').onclick = () => showScreen('home');
+  document.getElementById('btn-return-home-from-appts').onclick = () => showScreen('home');
+  document.getElementById('btn-return-home-from-help').onclick = () => showScreen('home');
+  document.getElementById('btn-view-appointments').onclick = () => showScreen('appointments');
+
+  // Appointment data (in-memory only)
+  let appointments = [
+    {
+      confirmation: 'HC-2045',
+      patient: 'Sarah Johnson',
+      email: 'sarah.johnson@email.com',
+      phone: '555-1234',
+      type: 'General Checkup',
+      doctor: 'Dr. Smith',
+      date: '2025-10-15',
+      time: '10:30 AM',
+      notes: 'Arrive 15 minutes early',
+      status: 'Confirmed',
+      location: 'Community Health Clinic'
+    },
+    {
+      confirmation: 'HC-1988',
+      patient: 'Michael Lee',
+      email: 'michael.lee@email.com',
+      phone: '555-5678',
+      type: 'Vaccination Services',
+      doctor: 'Dr. Lee',
+      date: '2025-10-28',
+      time: '01:00 PM',
+      notes: '',
+      status: 'Pending',
+      location: 'Community Health Clinic'
+    }
+  ];
+  let selectedApptIdx = null;
+
+  // Appointment Table Rendering
+  function renderAppointmentsTable() {
+    const tbody = document.getElementById('appt-table').querySelector('tbody');
+    tbody.innerHTML = '';
+    appointments.forEach((appt, idx) => {
+      const tr = document.createElement('tr');
+      if (selectedApptIdx === idx) tr.classList.add('selected');
+      tr.innerHTML = `
+        <td>${appt.confirmation}</td>
+        <td>${appt.doctor}</td>
+        <td>${formatDate(appt.date)}</td>
+        <td>
+          <span class="status-badge ${appt.status === 'Confirmed' ? 'status-confirmed' : 'status-pending'}">
+            ${appt.status}
+          </span>
+        </td>
+      `;
+      tr.onclick = () => {
+        selectedApptIdx = idx;
+        renderAppointmentsTable();
+        renderAppointmentDetails();
+      };
+      tbody.appendChild(tr);
+    });
+    // If no appointments, show empty row
+    if (appointments.length === 0) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td colspan="4" style="color:var(--muted);text-align:center;">No appointments scheduled.</td>`;
+      tbody.appendChild(tr);
+    }
+  }
+  function renderAppointmentDetails() {
+    const details = document.getElementById('appt-details');
+    const btnCancel = document.getElementById('btn-cancel-appt');
+    if (selectedApptIdx == null || !appointments[selectedApptIdx]) {
+      details.innerHTML = `<span style="color:var(--muted);">Select an appointment to view details.</span>`;
+      btnCancel.style.display = 'none';
+      return;
+    }
+    const appt = appointments[selectedApptIdx];
+    details.innerHTML = `
+      <div><b>Selected Appointment:</b> ${appt.confirmation}</div>
+      <div><b>Patient Name:</b> ${appt.patient}</div>
+      <div><b>Doctor:</b> ${appt.doctor}</div>
+      <div><b>Date:</b> ${formatDate(appt.date)}</div>
+      <div><b>Time:</b> ${appt.time}</div>
+      <div><b>Location:</b> ${appt.location}</div>
+      <div><b>Status:</b> <span class="status-badge ${appt.status === 'Confirmed' ? 'status-confirmed' : 'status-pending'}">${appt.status}</span></div>
+      <div><b>Notes:</b> ${appt.notes ? appt.notes : '<span style="color:var(--muted);">None</span>'}</div>
+    `;
+    btnCancel.style.display = appt.status !== 'Cancelled' ? '' : 'none';
+  }
+  // Cancel appointment
+  document.getElementById('btn-cancel-appt').onclick = function() {
+    if (selectedApptIdx == null || !appointments[selectedApptIdx]) return;
+    if (!confirm('Cancel this appointment?')) return;
+    appointments[selectedApptIdx].status = 'Cancelled';
+    renderAppointmentsTable();
+    renderAppointmentDetails();
+    selectedApptIdx = null;
+  };
+
+  // On appointments screen show, render table/details
+  function showAppointmentsScreen() {
+    selectedApptIdx = null;
+    renderAppointmentsTable();
+    renderAppointmentDetails();
+    showScreen('appointments');
+  }
+  document.querySelector('.nav-link[data-screen="appointments"]').onclick = function(e) {
+    e.preventDefault();
+    showAppointmentsScreen();
+  };
+  document.getElementById('btn-view-appointments').onclick = showAppointmentsScreen;
+
+  // Schedule Appointment Form
+  const apptForm = document.getElementById('appt-form');
+  function clearFormErrors() {
+    ['patient','email','phone','type','doctor','date','time'].forEach(id => {
+      document.getElementById('err-'+id).textContent = '';
+    });
+  }
+  function validateForm() {
+    clearFormErrors();
+    let valid = true;
+    const patient = apptForm.patient.value.trim();
+    const email = apptForm.email.value.trim();
+    const phone = apptForm.phone.value.trim();
+    const type = apptForm.type.value;
+    const doctor = apptForm.doctor.value;
+    const date = apptForm.date.value;
+    const time = apptForm.time.value;
+    if (!patient) {
+      document.getElementById('err-patient').textContent = 'Required';
+      valid = false;
+    }
+    if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+      document.getElementById('err-email').textContent = 'Valid email required';
+      valid = false;
+    }
+    if (!phone) {
+      document.getElementById('err-phone').textContent = 'Required';
+      valid = false;
+    }
+    if (!type) {
+      document.getElementById('err-type').textContent = 'Select type';
+      valid = false;
+    }
+    if (!doctor) {
+      document.getElementById('err-doctor').textContent = 'Select doctor';
+      valid = false;
+    }
+    if (!date) {
+      document.getElementById('err-date').textContent = 'Select date';
+      valid = false;
+    }
+    if (!time) {
+      document.getElementById('err-time').textContent = 'Select time';
+      valid = false;
+    }
+    return valid;
+  }
+  apptForm.onsubmit = function(e) {
+    e.preventDefault();
+    if (!validateForm()) return;
+    // Simulate confirmation number
+    const confirmation = 'HC-' + (Math.floor(Math.random()*9000)+1000);
+    const appt = {
+      confirmation,
+      patient: apptForm.patient.value.trim(),
+      email: apptForm.email.value.trim(),
+      phone: apptForm.phone.value.trim(),
+      type: apptForm.type.value,
+      doctor: apptForm.doctor.value,
+      date: apptForm.date.value,
+      time: apptForm.time.value,
+      notes: apptForm.notes.value.trim(),
+      status: 'Confirmed',
+      location: 'Community Health Clinic'
+    };
+    appointments.unshift(appt);
+    showConfirmationScreen(appt);
+    apptForm.reset();
+    clearFormErrors();
+  };
+  document.getElementById('btn-clear-form').onclick = function() {
+    apptForm.reset();
+    clearFormErrors();
+  };
+  // Confirmation Screen
+  function showConfirmationScreen(appt) {
+    showScreen('confirmation');
+    document.getElementById('confirmation-summary').innerHTML = `
+      <div><b>Patient Name:</b> ${appt.patient}</div>
+      <div><b>Appointment Type:</b> ${appt.type}</div>
+      <div><b>Doctor:</b> ${appt.doctor}</div>
+      <div><b>Date:</b> ${formatDate(appt.date)}</div>
+      <div><b>Time:</b> ${appt.time}</div>
+      <div><b>Confirmation #:</b> ${appt.confirmation}</div>
+      <div><b>Status:</b> <span class="status-badge status-confirmed">Confirmed</span></div>
+    `;
+  }
+  // Helper: format yyyy-mm-dd to readable
+  function formatDate(d) {
+    if (!d) return '';
+    const dt = new Date(d);
+    if (isNaN(dt)) return d;
+    return dt.toLocaleDateString(undefined, {year:'numeric',month:'short',day:'numeric'});
+  }
+  // On load, default to home
+  showScreen('home');
+</script>
+</body>
+</html>
+```

@@ -1,0 +1,709 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce Prototype</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        /* Layout & Containers */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #fff;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Reusable Components */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-link {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            text-decoration: underline;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            text-align: center;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            background: #fff;
+        }
+
+        .product-card h3 {
+            margin-top: 0;
+        }
+
+        .product-card .price {
+            font-weight: bold;
+            color: var(--success-color);
+            margin: 10px 0;
+        }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table th {
+            background-color: var(--light-gray);
+        }
+
+        .table td:last-child, .table th:last-child {
+            text-align: right;
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Specific Screen Styles */
+        #home-page .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--light-gray);
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+
+        #home-page .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        #home-page .special-offer {
+            background: var(--success-color);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+        }
+
+        #products-page .slideshow-placeholder {
+            height: 250px;
+            background: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+
+        #products-page .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        #products-page .search-bar input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+
+        #shopping-cart-page .cart-summary {
+            width: 100%;
+            max-width: 350px;
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        #shopping-cart-page .cart-summary p {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+
+        #shopping-cart-page .cart-summary .total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-top: 2px solid var(--dark-gray);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        #shopping-cart-page .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        #checkout-page .order-total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: right;
+            margin: 20px 0;
+        }
+
+        #checkout-page .checkout-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        #order-confirmation-page .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        #order-confirmation-page .order-summary-details p {
+            margin: 5px 0;
+        }
+
+        #order-confirmation-page .order-summary-details strong {
+            display: inline-block;
+            width: 150px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group.full-width {
+                grid-column: 1 / 1;
+            }
+            #shopping-cart-page .cart-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            #shopping-cart-page .cart-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">Electronics Store</div>
+            <nav>
+                <a data-target="home-page">Home</a>
+                <a data-target="products-page">Products</a>
+                <a data-target="shopping-cart-page">Cart</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Screen 1: Home Page -->
+        <div id="home-page" class="screen active">
+            <section class="hero">
+                <h1>Welcome to Electronics Store</h1>
+                <p>Discover the best products at unbeatable prices. Fast delivery and easy returns.</p>
+                <button class="btn btn-primary" data-target="products-page">Shop Now</button>
+            </section>
+
+            <section>
+                <h2 class="section-title">Shop by Category</h2>
+                <div class="categories">
+                    <button class="btn btn-secondary">Laptops</button>
+                    <button class="btn btn-secondary">Headphones</button>
+                    <button class="btn btn-secondary">Games</button>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">Featured Products</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <h3>Product 1</h3>
+                        <p class="price">$449.99</p>
+                        <button class="btn btn-primary add-to-cart" data-name="Product 1" data-price="449.99">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <h3>Product 2</h3>
+                        <p class="price">$49.99</p>
+                        <button class="btn btn-primary add-to-cart" data-name="Product 2" data-price="49.99">Add to Cart</button>
+                    </div>
+                    <div class="product-card">
+                        <h3>Product 3</h3>
+                        <p class="price">$49.99</p>
+                        <button class="btn btn-primary add-to-cart" data-name="Product 3" data-price="49.99">Add to Cart</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="special-offer">
+                <h2>Special Offer</h2>
+                <p>Get 30% off on selected items today!</p>
+                <button class="btn btn-primary" data-target="products-page">View Deals</button>
+            </section>
+        </div>
+
+        <!-- Screen 2: Products Page -->
+        <div id="products-page" class="screen">
+            <h1 class="section-title">Products</h1>
+            <div class="slideshow-placeholder">Products Slideshow</div>
+            
+            <div class="card">
+                <h2 class="section-title">Search Products</h2>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for products...">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">All Products</h2>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Laptop</td>
+                            <td>$899.00</td>
+                            <td><button class="btn-link add-to-cart" data-name="Laptop" data-price="899.00">Add to Cart</button></td>
+                        </tr>
+                        <tr>
+                            <td>Wireless Mouse</td>
+                            <td>$25.00</td>
+                            <td><button class="btn-link add-to-cart" data-name="Wireless Mouse" data-price="25.00">Add to Cart</button></td>
+                        </tr>
+                        <tr>
+                            <td>Headphones</td>
+                            <td>$75.00</td>
+                            <td><button class="btn-link add-to-cart" data-name="Headphones" data-price="75.00">Add to Cart</button></td>
+                        </tr>
+                        <tr>
+                            <td>Smart Watch</td>
+                            <td>$199.00</td>
+                            <td><button class="btn-link add-to-cart" data-name="Smart Watch" data-price="199.00">Add to Cart</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2 class="section-title">Promotions</h2>
+                <p>- Free shipping on orders over $100</p>
+            </div>
+        </div>
+
+        <!-- Screen 3: Shopping Cart -->
+        <div id="shopping-cart-page" class="screen">
+            <h1 class="section-title">Shopping Cart</h1>
+            <div class="card">
+                <table class="table" id="cart-items-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Cart items will be injected here by JS -->
+                    </tbody>
+                </table>
+                <div id="cart-empty-message" style="display: none; text-align: center; padding: 20px;">Your cart is empty.</div>
+
+                <div class="cart-summary">
+                    <p><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></p>
+                    <p><span>Tax (8%):</span> <span id="cart-tax">$0.00</span></p>
+                    <p class="total"><span>Total:</span> <span id="cart-total">$0.00</span></p>
+                </div>
+
+                <div class="cart-actions">
+                    <button class="btn btn-secondary" data-target="products-page">Continue shopping</button>
+                    <button class="btn btn-primary" data-target="checkout-page" id="proceed-to-checkout-btn">Proceed to checkout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 4: Checkout Page -->
+        <div id="checkout-page" class="screen">
+            <h1 class="section-title">Checkout</h1>
+            <form id="checkout-form" class="card">
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <h2>Shipping Information</h2>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip">Zip</label>
+                        <input type="text" id="zip" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <h2>Payment Method</h2>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Payment Method</label>
+                        <select id="paymentMethod">
+                            <option>Credit Card</option>
+                            <option>Debit Card</option>
+                            <option>PayPal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expDate">Expiration Date (MM/YY)</label>
+                        <input type="text" id="expDate" placeholder="MM/YY" required>
+                    </div>
+                </div>
+
+                <div class="order-total">
+                    Order Total: <span id="checkout-total">$0.00</span>
+                </div>
+
+                <div class="checkout-actions">
+                    <button type="button" class="btn btn-secondary" data-target="shopping-cart-page">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Place order</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Screen 5: Order Confirmation Page -->
+        <div id="order-confirmation-page" class="screen">
+            <h1 class="section-title">Order Confirmation</h1>
+            <div class="success-message">
+                Your order has been placed successfully!
+            </div>
+            <div class="card">
+                <h2>Order Summary</h2>
+                <div class="order-summary-details">
+                    <p><strong>Order #:</strong> <span id="conf-order-number"></span></p>
+                    <p><strong>Items:</strong> <span id="conf-items"></span></p>
+                    <p><strong>Total Paid:</strong> <span id="conf-total-paid"></span></p>
+                    <p><strong>Payment Status:</strong> <span id="conf-payment-status">Approved</span></p>
+                    <p><strong>Estimated Delivery:</strong> <span id="conf-delivery-date"></span></p>
+                    <p><strong>Shipping Address:</strong> <span id="conf-shipping-address"></span></p>
+                </div>
+            </div>
+            <button class="btn btn-primary" data-target="home-page">Continue Shopping</button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const screens = document.querySelectorAll('.screen');
+            const navLinks = document.querySelectorAll('nav a, .btn[data-target]');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartTableBody = document.querySelector('#cart-items-table tbody');
+            const cartSubtotalEl = document.getElementById('cart-subtotal');
+            const cartTaxEl = document.getElementById('cart-tax');
+            const cartTotalEl = document.getElementById('cart-total');
+            const checkoutTotalEl = document.getElementById('checkout-total');
+            const checkoutForm = document.getElementById('checkout-form');
+            const cartEmptyMessage = document.getElementById('cart-empty-message');
+            const proceedToCheckoutBtn = document.getElementById('proceed-to-checkout-btn');
+
+            let cart = [
+                { name: 'Laptop', price: 899.00, quantity: 1 },
+                { name: 'Headphones', price: 75.00, quantity: 1 }
+            ];
+
+            const showScreen = (screenId) => {
+                screens.forEach(screen => {
+                    screen.classList.remove('active');
+                });
+                const activeScreen = document.getElementById(screenId);
+                if (activeScreen) {
+                    activeScreen.classList.add('active');
+                    window.scrollTo(0, 0);
+                }
+
+                if (screenId === 'shopping-cart-page' || screenId === 'checkout-page') {
+                    renderCart();
+                }
+            };
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetScreenId = e.currentTarget.getAttribute('data-target');
+                    showScreen(targetScreenId);
+                });
+            });
+
+            const calculateTotals = () => {
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const tax = subtotal * 0.08;
+                const total = subtotal + tax;
+                
+                cartSubtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+                cartTaxEl.textContent = `$${tax.toFixed(2)}`;
+                cartTotalEl.textContent = `$${total.toFixed(2)}`;
+                checkoutTotalEl.textContent = `$${total.toFixed(2)}`;
+
+                return { subtotal, tax, total };
+            };
+
+            const renderCart = () => {
+                cartTableBody.innerHTML = '';
+                if (cart.length === 0) {
+                    cartEmptyMessage.style.display = 'block';
+                    proceedToCheckoutBtn.disabled = true;
+                } else {
+                    cartEmptyMessage.style.display = 'none';
+                    proceedToCheckoutBtn.disabled = false;
+                    cart.forEach((item, index) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.name}</td>
+                            <td>${item.quantity}</td>
+                            <td>$${(item.price * item.quantity).toFixed(2)}</td>
+                            <td><button class="btn-link btn-danger remove-from-cart" data-index="${index}">Remove</button></td>
+                        `;
+                        cartTableBody.appendChild(row);
+                    });
+                }
+                calculateTotals();
+                addRemoveListeners();
+            };
+
+            const addToCart = (name, price) => {
+                const existingItem = cart.find(item => item.name === name);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ name, price: parseFloat(price), quantity: 1 });
+                }
+                alert(`${name} has been added to your cart.`);
+                renderCart();
+            };
+
+            const removeFromCart = (index) => {
+                cart.splice(index, 1);
+                renderCart();
+            };
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const name = e.target.dataset.name;
+                    const price = e.target.dataset.price;
+                    addToCart(name, price);
+                });
+            });
+
+            const addRemoveListeners = () => {
+                document.querySelectorAll('.remove-from-cart').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const index = e.target.dataset.index;
+                        removeFromCart(index);
+                    });
+                });
+            };
+
+            checkoutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    address: document.getElementById('address').value,
+                    city: document.getElementById('city').value,
+                    state: document.getElementById('state').value,
+                    zip: document.getElementById('zip').value,
+                };
+
+                // Populate confirmation screen
+                document.getElementById('conf-order-number').textContent = `ORD-${Math.floor(Math.random() * 9000) + 1000}`;
+                document.getElementById('conf-items').textContent = cart.map(item => `${item.name} (x${item.quantity})`).join(', ');
+                document.getElementById('conf-total-paid').textContent = cartTotalEl.textContent;
+                
+                const deliveryDate = new Date();
+                deliveryDate.setDate(deliveryDate.getDate() + 5);
+                document.getElementById('conf-delivery-date').textContent = deliveryDate.toLocaleDateString();
+                
+                document.getElementById('conf-shipping-address').textContent = `${formData.fullName}, ${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}`;
+                
+                // Clear cart and form
+                cart = [];
+                checkoutForm.reset();
+
+                showScreen('order-confirmation-page');
+            });
+
+            // Initial render
+            showScreen('home-page');
+        });
+    </script>
+
+</body>
+</html>
+```

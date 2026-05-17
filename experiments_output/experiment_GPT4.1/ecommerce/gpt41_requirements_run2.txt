@@ -1,0 +1,102 @@
+## A. Screen Descriptions
+
+### 1. Home Page (Landing)
+- **Purpose:** Welcome users, highlight promotions, enable navigation, and showcase featured products/categories.
+- **Key UI Components:** Header (store name, navigation: Home | Products | Cart), welcome message, Shop Now button, category buttons (Laptops, Headphones, Games), featured products (with prices and Add to Cart), special offer section (View Deals).
+- **Main User Interactions:** Navigate to other pages, shop by category, add featured products to cart, view special offers.
+
+### 2. Products Page
+- **Purpose:** Display a list of products, allow searching, highlight promotions, and enable adding products to the cart.
+- **Key UI Components:** Header (navigation), product slideshow, featured products list (with prices and Add to Cart), search bar, promotions section.
+- **Main User Interactions:** Search for products, add products to cart, view promotions.
+
+### 3. Shopping Cart
+- **Purpose:** Show selected items, allow item removal, display totals, and provide checkout options.
+- **Key UI Components:** Header (navigation), selected items table (product, quantity, price, remove action), subtotal/tax/total, Continue Shopping and Proceed to Checkout buttons.
+- **Main User Interactions:** Remove items, proceed to checkout, continue shopping.
+
+### 4. Checkout
+- **Purpose:** Collect shipping and payment information, confirm order details, and finalize purchase.
+- **Key UI Components:** Header (navigation), shipping information form (name, address, city, state, zip), payment method dropdown, card number, expiration date, order total, Place Order and Cancel buttons.
+- **Main User Interactions:** Enter shipping/payment info, place or cancel order.
+
+### 5. Order Confirmation
+- **Purpose:** Confirm successful order placement and summarize order details.
+- **Key UI Components:** Header (navigation), success message, order summary (order number, items, total paid, payment status, estimated delivery, shipping address), Continue Shopping button.
+- **Main User Interactions:** Review order, continue shopping.
+
+---
+
+## B. Functional Requirements
+
+### Navigation & General
+- **FR-1:** The system shall display a consistent header with navigation links (Home, Products, Cart) on all screens.
+- **FR-2:** The system shall allow users to navigate between Home, Products, and Cart pages via the header links.
+
+### Home Page
+- **FR-3:** The Home Page shall display a welcome message and store introduction.
+- **FR-4:** The Home Page shall provide a “Shop Now” button that navigates to the Products Page.
+- **FR-5:** The Home Page shall display category buttons (Laptops, Headphones, Games) that filter or navigate to relevant product listings.
+- **FR-6:** The Home Page shall display a section of featured products, each with a name, price, and Add to Cart button.
+- **FR-7:** The Home Page shall display a special offer section with a “View Deals” button.
+
+### Products Page
+- **FR-8:** The Products Page shall display a product slideshow at the top.
+- **FR-9:** The Products Page shall list featured products with names, prices, and Add to Cart buttons.
+- **FR-10:** The Products Page shall provide a search bar for users to search for products by name.
+- **FR-11:** The Products Page shall display current promotions (e.g., free shipping on orders over $100).
+
+### Cart & Checkout
+- **FR-12:** The Cart Page shall display a table of selected items, showing product name, quantity, price, and a Remove button for each item.
+- **FR-13:** The Cart Page shall display subtotal, tax, and total amounts.
+- **FR-14:** The Cart Page shall provide “Continue Shopping” and “Proceed to Checkout” buttons.
+- **FR-15:** The Checkout Page shall display a form to collect shipping information (full name, address, city, state, zip).
+- **FR-16:** The Checkout Page shall provide a dropdown for payment method selection.
+- **FR-17:** The Checkout Page shall collect card number and expiration date for payment.
+- **FR-18:** The Checkout Page shall display the order total.
+- **FR-19:** The Checkout Page shall provide “Place Order” and “Cancel” buttons.
+
+### Order Confirmation
+- **FR-20:** The Order Confirmation Page shall display a success message upon order placement.
+- **FR-21:** The Order Confirmation Page shall display an order summary including order number, items, total paid, payment status, estimated delivery, and shipping address.
+- **FR-22:** The Order Confirmation Page shall provide a “Continue Shopping” button.
+
+---
+
+## C. Traceability Mapping
+
+| Screen                | Requirement IDs         | Interface Elements                                      |
+|-----------------------|------------------------|---------------------------------------------------------|
+| Home Page             | FR-1, FR-2, FR-3, FR-4, FR-5, FR-6, FR-7 | Header, welcome message, Shop Now, category buttons, featured products, special offer |
+| Products Page         | FR-1, FR-2, FR-8, FR-9, FR-10, FR-11     | Header, product slideshow, product list, search bar, promotions |
+| Shopping Cart         | FR-1, FR-2, FR-12, FR-13, FR-14           | Header, items table, subtotal/tax/total, action buttons |
+| Checkout              | FR-1, FR-2, FR-15, FR-16, FR-17, FR-18, FR-19 | Header, shipping/payment form, order total, action buttons |
+| Order Confirmation    | FR-1, FR-2, FR-20, FR-21, FR-22           | Header, success message, order summary, continue shopping |
+
+---
+
+## D. Ambiguities, Missing Information, and Assumptions
+
+- **Ambiguities:**
+  - The exact behavior of category buttons (filter vs. navigation) is unclear.
+  - The payment method dropdown options are not specified.
+  - The handling of invalid or incomplete checkout information is not shown.
+  - The “View Deals” button’s destination or behavior is not detailed.
+  - The product slideshow’s content and controls are unspecified.
+
+- **Missing Information:**
+  - No user authentication or account management is depicted.
+  - No indication of product details or individual product pages.
+  - No explicit error handling or validation requirements.
+  - No indication of mobile responsiveness or accessibility features.
+
+- **Assumptions:**
+  - Clicking “Add to Cart” adds the product to the cart and updates the cart count.
+  - Tax calculation is automatic and based on cart contents.
+  - “Continue Shopping” returns the user to the Products or Home page.
+  - “Cancel” on checkout returns to the cart without placing an order.
+  - Order confirmation page is only shown after successful payment processing.
+
+---
+
+**End of requirements analysis.**

@@ -1,0 +1,709 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>University IT Service Portal</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+header {
+  background-color: #003366;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+nav {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+nav a:hover, nav a.active {
+  border-bottom-color: #66aaff;
+}
+
+main {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.screen {
+  display: none;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.screen.active {
+  display: block;
+}
+
+h2 {
+  color: #003366;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.welcome-section {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.logo-placeholder {
+  width: 120px;
+  height: 120px;
+  background-color: #e0e0e0;
+  margin: 1rem auto;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.btn {
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #004488;
+}
+
+.btn-secondary {
+  background-color: #666;
+}
+
+.btn-secondary:hover {
+  background-color: #777;
+}
+
+.services-section, .announcements-section {
+  margin: 2rem 0;
+}
+
+.services-section h3, .announcements-section h3 {
+  color: #003366;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.services-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.services-list li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.services-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #003366;
+  font-weight: bold;
+}
+
+.announcements-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.announcements-list li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.announcements-list li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #003366;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.confirmation-message {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.ticket-summary {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.ticket-summary h3 {
+  color: #003366;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.ticket-detail {
+  display: flex;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.ticket-detail:last-child {
+  border-bottom: none;
+}
+
+.ticket-detail-label {
+  font-weight: bold;
+  width: 200px;
+  color: #555;
+}
+
+.ticket-detail-value {
+  flex: 1;
+  color: #333;
+}
+
+.search-section {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.search-form {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.search-form .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.ticket-info {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.ticket-info h3 {
+  color: #003366;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.faq-section {
+  margin-bottom: 2rem;
+}
+
+.faq-item {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-question {
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.faq-answer {
+  color: #555;
+  line-height: 1.6;
+}
+
+.contact-section {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-top: 2rem;
+}
+
+.contact-section h3 {
+  color: #003366;
+  margin-bottom: 1rem;
+}
+
+.contact-section p {
+  margin-bottom: 0.5rem;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.status-open {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-in-progress {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-closed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+@media (max-width: 768px) {
+  nav {
+    gap: 1rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  .search-form {
+    flex-direction: column;
+  }
+  
+  .ticket-detail {
+    flex-direction: column;
+  }
+  
+  .ticket-detail-label {
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>University IT Service Portal</h1>
+  <nav>
+    <a href="#" data-screen="home" class="nav-link active">Home</a>
+    <a href="#" data-screen="submit" class="nav-link">Submit Ticket</a>
+    <a href="#" data-screen="track" class="nav-link">Track Request</a>
+    <a href="#" data-screen="help" class="nav-link">Help</a>
+  </nav>
+</header>
+
+<main>
+  <!-- Screen 1: Home -->
+  <div id="home" class="screen active">
+    <div class="welcome-section">
+      <h2>Welcome to IT Support</h2>
+      <div class="logo-placeholder">[Image / Logo]</div>
+      <button class="btn" onclick="navigateTo('submit')">Submit New Request</button>
+    </div>
+    
+    <div class="services-section">
+      <h3>Services Available</h3>
+      <ul class="services-list">
+        <li>Password Reset</li>
+        <li>Software Installation</li>
+        <li>Network Support</li>
+        <li>Account Access</li>
+      </ul>
+    </div>
+    
+    <div class="announcements-section">
+      <h3>Support Announcements</h3>
+      <ul class="announcements-list">
+        <li>Scheduled maintenance Friday</li>
+        <li>New VPN instructions available</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Screen 2: Submit Support Request -->
+  <div id="submit" class="screen">
+    <h2>Submit Support Request</h2>
+    
+    <div id="submitError" class="error-message"></div>
+    
+    <form id="submitForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="category">Issue Category:</label>
+        <select id="category" name="category" required>
+          <option value="">Select a category...</option>
+          <option value="Password Reset">Password Reset</option>
+          <option value="Software Installation">Software Installation</option>
+          <option value="Network Support">Network Support</option>
+          <option value="Account Access">Account Access</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="description">Problem Description:</label>
+        <textarea id="description" name="description" required></textarea>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="btn">Submit Ticket</button>
+        <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Screen 3: Ticket Submission Confirmation -->
+  <div id="confirmation" class="screen">
+    <h2>Support Request Submitted</h2>
+    
+    <div class="confirmation-message">
+      Your support request has been submitted
+    </div>
+    
+    <div class="ticket-summary">
+      <h3>Ticket Summary</h3>
+      <div class="ticket-detail">
+        <div class="ticket-detail-label">Ticket ID:</div>
+        <div class="ticket-detail-value" id="confirmTicketId">IT-2045</div>
+      </div>
+      <div class="ticket-detail">
+        <div class="ticket-detail-label">Category:</div>
+        <div class="ticket-detail-value" id="confirmCategory">Network Support</div>
+      </div>
+      <div class="ticket-detail">
+        <div class="ticket-detail-label">Submitted by:</div>
+        <div class="ticket-detail-value" id="confirmSubmitter">Student</div>
+      </div>
+      <div class="ticket-detail">
+        <div class="ticket-detail-label">Status:</div>
+        <div class="ticket-detail-value">
+          <span class="status-badge status-open">Open</span>
+        </div>
+      </div>
+      <div class="ticket-detail">
+        <div class="ticket-detail-label">Submitted Date:</div>
+        <div class="ticket-detail-value" id="confirmDate">Oct 16, 2025</div>
+      </div>
+      <div class="ticket-detail">
+        <div class="ticket-detail-label">Estimated Response Time:</div>
+        <div class="ticket-detail-value">24 Hours</div>
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button class="btn" onclick="navigateTo('track')">Track Request</button>
+      <button class="btn btn-secondary" onclick="navigateTo('home')">Return Home</button>
+    </div>
+  </div>
+
+  <!-- Screen 4: Track Request Status -->
+  <div id="track" class="screen">
+    <h2>Track Support Request</h2>
+    
+    <div class="search-section">
+      <form id="searchForm" class="search-form">
+        <div class="form-group">
+          <label for="ticketId">Ticket ID:</label>
+          <input type="text" id="ticketId" name="ticketId" placeholder="Enter ticket ID">
+        </div>
+        <button type="submit" class="btn">Search</button>
+      </form>
+    </div>
+    
+    <div id="ticketResults" style="display: none;">
+      <div class="ticket-info">
+        <h3>Ticket Information</h3>
+        <div class="ticket-detail">
+          <div class="ticket-detail-label">Ticket #:</div>
+          <div class="ticket-detail-value" id="trackTicketId">2025-164</div>
+        </div>
+        <div class="ticket-detail">
+          <div class="ticket-detail-label">Category:</div>
+          <div class="ticket-detail-value" id="trackCategory">Network Support</div>
+        </div>
+        <div class="ticket-detail">
+          <div class="ticket-detail-label">Status:</div>
+          <div class="ticket-detail-value">
+            <span class="status-badge status-in-progress" id="trackStatus">In Progress</span>
+          </div>
+        </div>
+        <div class="ticket-detail">
+          <div class="ticket-detail-label">Submitted by:</div>
+          <div class="ticket-detail-value" id="trackSubmitter">Student</div>
+        </div>
+        <div class="ticket-detail">
+          <div class="ticket-detail-label">Last Updated:</div>
+          <div class="ticket-detail-value" id="trackUpdated">April 29, 2026</div>
+        </div>
+        <div class="ticket-detail">
+          <div class="ticket-detail-label">Technician Notes:</div>
+          <div class="ticket-detail-value" id="trackNotes">Issue currently being investigated</div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="btn btn-secondary" onclick="navigateTo('home')">Return Home</button>
+  </div>
+
+  <!-- Screen 5: Help / FAQ -->
+  <div id="help" class="screen">
+    <h2>Help and Support</h2>
+    
+    <div class="faq-section">
+      <h3>Frequently Asked Questions</h3>
+      
+      <div class="faq-item">
+        <div class="faq-question">Q: How do I reset my password?</div>
+        <div class="faq-answer">A: Click "Forgot Password" on the login page</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Q: How long does ticket response take?</div>
+        <div class="faq-answer">A: Most requests are answered within 24 hours</div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Q: How can I track my request?</div>
+        <div class="faq-answer">A: Use the Track Request page with your Ticket ID</div>
+      </div>
+    </div>
+    
+    <div class="contact-section">
+      <h3>Contact IT Support</h3>
+      <p><strong>Email:</strong> support@university.edu</p>
+      <p><strong>Phone:</strong> Available during business hours</p>
+    </div>
+    
+    <button class="btn btn-secondary" onclick="navigateTo('home')" style="margin-top: 1rem;">Return Home</button>
+  </div>
+</main>
+
+<script>
+// Navigation
+function navigateTo(screenId) {
+  document.querySelectorAll('.screen').forEach(screen => {
+    screen.classList.remove('active');
+  });
+  document.getElementById(screenId).classList.add('active');
+  
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+  });
+  document.querySelector(`[data-screen="${screenId}"]`)?.classList.add('active');
+  
+  window.scrollTo(0, 0);
+}
+
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const screen = e.target.getAttribute('data-screen');
+    navigateTo(screen);
+  });
+});
+
+// Form submission
+document.getElementById('submitForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const category = document.getElementById('category').value;
+  const description = document.getElementById('description').value.trim();
+  
+  if (!name || !email || !category || !description) {
+    const errorDiv = document.getElementById('submitError');
+    errorDiv.textContent = 'Please fill in all required fields.';
+    errorDiv.classList.add('show');
+    return;
+  }
+  
+  // Generate ticket ID
+  const ticketId = 'IT-' + Math.floor(Math.random() * 9000 + 1000);
+  
+  // Get current date
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  
+  // Update confirmation screen
+  document.getElementById('confirmTicketId').textContent = ticketId;
+  document.getElementById('confirmCategory').textContent = category;
+  document.getElementById('confirmSubmitter').textContent = name;
+  document.getElementById('confirmDate').textContent = dateStr;
+  
+  // Store ticket data for tracking
+  const ticketData = {
+    id: ticketId,
+    category: category,
+    submitter: name,
+    status: 'Open',
+    date: dateStr,
+    updated: dateStr,
+    notes: 'Ticket received and awaiting assignment'
+  };
+  
+  sessionStorage.setItem('lastTicket', JSON.stringify(ticketData));
+  
+  navigateTo('confirmation');
+});
+
+// Clear form
+function clearForm() {
+  document.getElementById('submitForm').reset();
+  document.getElementById('submitError').classList.remove('show');
+}
+
+// Track ticket
+document.getElementById('searchForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const ticketId = document.getElementById('ticketId').value.trim();
+  
+  if (!ticketId) {
+    return;
+  }
+  
+  // Check if it's the last submitted ticket
+  const lastTicket = sessionStorage.getItem('lastTicket');
+  if (lastTicket) {
+    const ticket = JSON.parse(lastTicket);
+    if (ticketId === ticket.id || ticketId === '2025-164' || ticketId.toLowerCase().includes('it-')) {
+      document.getElementById('trackTicketId').textContent = ticket.id || '2025-164';
+      document.getElementById('trackCategory').textContent = ticket.category || 'Network Support';
+      document.getElementById('trackSubmitter').textContent = ticket.submitter || 'Student';
+      document.getElementById('trackUpdated').textContent = ticket.updated || 'April 29, 2026';
+      document.getElementById('trackNotes').textContent = ticket.notes || 'Issue currently being investigated';
+      
+      const statusBadge = document.getElementById('trackStatus');
+      statusBadge.textContent = ticket.status === 'Open' ? 'In Progress' : ticket.status;
+      statusBadge.className = 'status-badge status-in-progress';
+      
+      document.getElementById('ticketResults').style.display = 'block';
+      return;
+    }
+  }
+  
+  // Default ticket for demo
+  document.getElementById('trackTicketId').textContent = '2025-164';
+  document.getElementById('trackCategory').textContent = 'Network Support';
+  document.getElementById('trackSubmitter').textContent = 'Student';
+  document.getElementById('trackUpdated').textContent = 'April 29, 2026';
+  document.getElementById('trackNotes').textContent = 'Issue currently being investigated';
+  
+  const statusBadge = document.getElementById('trackStatus');
+  statusBadge.textContent = 'In Progress';
+  statusBadge.className = 'status-badge status-in-progress';
+  
+  document.getElementById('ticketResults').style.display = 'block';
+});
+</script>
+
+</body>
+</html>
+```

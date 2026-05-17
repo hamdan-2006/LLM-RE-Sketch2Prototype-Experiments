@@ -1,0 +1,80 @@
+A. Screen Descriptions
+
+1. **Screen 1: Home/Service Portal Dashboard**
+   - **Purpose:** To provide an overview of available IT services and announcements.
+   - **Key UI Components:** Navigation bar (Home, Submit Ticket, Track Request, Help), Welcome message, Image/Logo, Service list, Announcements.
+   - **Main User Interactions:** Navigate to other screens, view services, read announcements.
+
+2. **Screen 2: Submit Support Request**
+   - **Purpose:** To allow users to submit a new IT support request.
+   - **Key UI Components:** Form fields (Name, Email, Issue Category, Problem Description), Submit Ticket button, Clear Form button.
+   - **Main User Interactions:** Fill out and submit the support request form.
+
+3. **Screen 3: Ticket Submission Confirmation**
+   - **Purpose:** To confirm submission of a support request and provide ticket details.
+   - **Key UI Components:** Confirmation message, Ticket Summary (ID, Category, Submitted by, Status, Date, Estimated Response Time), Track Request button, Return Home button.
+   - **Main User Interactions:** View ticket details, navigate to track request or home.
+
+4. **Screen 4: Track Request Status**
+   - **Purpose:** To allow users to track the status of their support requests.
+   - **Key UI Components:** Ticket ID input, Search button, Ticket Information (Number, Category, Status, Submitted by, Last Updated, Technician Notes), Return Home button.
+   - **Main User Interactions:** Enter Ticket ID, view ticket status and details.
+
+5. **Screen 5: Help/FAQ**
+   - **Purpose:** To provide answers to frequently asked questions and contact information.
+   - **Key UI Components:** FAQ list, Contact information, Return Home button.
+   - **Main User Interactions:** Read FAQs, contact support, navigate home.
+
+B. Functional Requirements
+
+1. **Navigation**
+   - FR-1: The system shall provide a navigation bar with links to Home, Submit Ticket, Track Request, and Help on all screens.
+
+2. **Home/Service Portal Dashboard**
+   - FR-2: The system shall display a welcome message and logo on the Home screen.
+   - FR-3: The system shall list available services on the Home screen.
+   - FR-4: The system shall display support announcements on the Home screen.
+
+3. **Submit Support Request**
+   - FR-5: The system shall provide a form with fields for Name, Email, Issue Category, and Problem Description.
+   - FR-6: The system shall allow users to submit the support request form.
+   - FR-7: The system shall allow users to clear the form fields.
+
+4. **Ticket Submission Confirmation**
+   - FR-8: The system shall display a confirmation message upon successful ticket submission.
+   - FR-9: The system shall display a ticket summary including ID, Category, Submitted by, Status, Date, and Estimated Response Time.
+
+5. **Track Request Status**
+   - FR-10: The system shall provide an input field for Ticket ID on the Track Request screen.
+   - FR-11: The system shall display ticket information including Number, Category, Status, Submitted by, Last Updated, and Technician Notes.
+
+6. **Help/FAQ**
+   - FR-12: The system shall display a list of frequently asked questions and answers.
+   - FR-13: The system shall provide contact information for IT support.
+
+C. Traceability Mapping
+
+- **Screen 1: Home/Service Portal Dashboard**
+  - FR-1, FR-2, FR-3, FR-4 → Navigation bar, Welcome message, Service list, Announcements
+
+- **Screen 2: Submit Support Request**
+  - FR-1, FR-5, FR-6, FR-7 → Navigation bar, Form fields, Submit Ticket button, Clear Form button
+
+- **Screen 3: Ticket Submission Confirmation**
+  - FR-1, FR-8, FR-9 → Navigation bar, Confirmation message, Ticket Summary
+
+- **Screen 4: Track Request Status**
+  - FR-1, FR-10, FR-11 → Navigation bar, Ticket ID input, Ticket Information
+
+- **Screen 5: Help/FAQ**
+  - FR-1, FR-12, FR-13 → Navigation bar, FAQ list, Contact information
+
+D. Ambiguities and Assumptions
+
+- **Ambiguities:**
+  - The exact format and validation rules for form fields (e.g., email format).
+  - The specific categories available in the Issue Category dropdown.
+
+- **Assumptions:**
+  - Users can navigate between screens using the navigation bar.
+  - The system will handle form submissions and ticket tracking in real-time.

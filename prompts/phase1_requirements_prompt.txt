@@ -1,0 +1,44 @@
+# =========================
+# PHASE 1 PROMPT
+# =========================
+
+REQUIREMENTS_PROMPT = """
+You are given multiple low-fidelity, hand-drawn sketches representing different screens of the same software system.
+
+Treat the sketches as a connected multi-screen workflow created during early-stage requirements elicitation.
+
+Your task is to generate ONLY requirements-related artifacts. Do NOT generate HTML, CSS, or JavaScript in this phase.
+
+Tasks:
+1. Identify each screen and briefly describe:
+   - Screen name
+   - Purpose
+   - Key UI components
+   - Main user interactions
+
+2. Generate approximately 12–20 functional requirements using formal “shall” statements.
+
+3. Ensure all requirements are grounded in the sketches and workflow context.
+   - Do not introduce unsupported advanced functionality.
+   - Reasonable assumptions are allowed only when needed to complete the workflow.
+
+4. Maintain traceability by linking requirements to relevant screen(s) and interface elements.
+
+5. Identify ambiguities, missing information, unclear elements, and assumptions.
+
+Output Format:
+
+A. Screen Descriptions
+
+B. Functional Requirements
+- Use identifiers such as FR-1, FR-2, etc.
+- Use formal “shall” statements.
+- Group logically.
+
+C. Traceability Mapping
+Screen → Requirement IDs → Interface Elements
+
+D. Ambiguities and Assumptions
+
+Keep the response concise and avoid unnecessary repetition.
+"""

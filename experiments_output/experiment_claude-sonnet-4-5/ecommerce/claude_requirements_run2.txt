@@ -1,0 +1,230 @@
+# Requirements Analysis: Ecommerce System
+
+---
+
+## A. Screen Descriptions
+
+### Screen 1: Home Page (Landing)
+**Purpose:** Serve as the entry point to the Electronics Store, showcasing promotional content, featured products, and navigation options.
+
+**Key UI Components:**
+- Site header: "Electronics Store" branding
+- Navigation menu: Home | Products | Cart
+- Welcome banner with promotional text
+- "Shop Now" call-to-action button
+- "Shop by Category" section with category buttons (Laptops, Headphones, Gaming)
+- "Featured Products" section displaying 3 products with prices and "Add to Cart" buttons
+- "Special Offer" banner: "Get 30% off on selected items" with "View Deals" button
+
+**Main User Interactions:**
+- Navigate between sections via header menu
+- Browse products by category
+- Add featured products to cart
+- Access special offers
+
+---
+
+### Screen 2: Shopping Cart
+**Purpose:** Display selected items, allow quantity adjustments, show pricing breakdown, and enable checkout or continued shopping.
+
+**Key UI Components:**
+- Header: "Shopping Cart" with navigation (Home | Products | Cart)
+- "Selected Items" table with columns: Product, Qty, Price, Action
+- Line items showing products (Laptop, Headphones) with quantities and prices
+- Remove action buttons for each item
+- Subtotal, Tax, and Total calculations
+- "Continue Shopping" button
+- "Proceed to Checkout" button
+
+**Main User Interactions:**
+- Remove items from cart
+- View pricing breakdown
+- Proceed to checkout or return to shopping
+
+---
+
+### Screen 3: Products Page
+**Purpose:** Display product catalog with search functionality and detailed product listings.
+
+**Key UI Components:**
+- Header: "Electronics Store" with navigation (Home | Products | Cart)
+- "Product Slideshow" banner area
+- "Featured Products" list with product names, prices, and "Add to Cart" buttons
+  - Laptop ($899)
+  - Wireless Mouse ($25)
+  - Headphones ($75)
+  - Smart Watch ($199)
+- "Search Products" input field with search button
+- "Promotions" section: "Free shipping on orders over $100"
+
+**Main User Interactions:**
+- Browse featured products
+- Add products to cart
+- Search for specific products
+- View promotional information
+
+---
+
+### Screen 4: Checkout
+**Purpose:** Collect shipping information and payment details to complete the purchase.
+
+**Key UI Components:**
+- Header: "Checkout" with navigation (Home | Products | Carts)
+- "Shipping Information" form section:
+  - Full Name input field
+  - Address input field
+  - City input field
+  - State input field
+  - Zip input field
+- "Payment Method" section with dropdown selector
+- Payment card fields:
+  - Card Number input
+  - Expiration Date input
+- Order Total display ($1052)
+- "Place Order" button
+- "Cancel" button
+
+**Main User Interactions:**
+- Enter shipping address
+- Select payment method
+- Enter payment details
+- Submit or cancel order
+
+---
+
+### Screen 5: Order Confirmation
+**Purpose:** Confirm successful order placement and provide order summary details.
+
+**Key UI Components:**
+- Header: "Order Confirmation" with navigation (Home | Products | Cart)
+- Success message: "Your order has been placed successfully"
+- "Order Summary" section displaying:
+  - Order number (ORD-2045)
+  - Items purchased (Laptop, Headphones)
+  - Total Paid ($1052)
+  - Payment Status (Approved)
+  - Estimated Delivery date (Oct 18, 25)
+  - Shipping Address (123 Main Street, Baltimore, MD 21201)
+- "Continue Shopping" button
+
+**Main User Interactions:**
+- Review order confirmation details
+- Return to shopping
+
+---
+
+## B. Functional Requirements
+
+### Navigation & Site Structure
+
+**FR-1:** The system shall provide a persistent navigation menu on all screens containing links to Home, Products, and Cart pages.
+
+**FR-2:** The system shall display the store branding ("Electronics Store") in the header of all pages.
+
+**FR-3:** The system shall allow users to navigate between screens using the header navigation menu.
+
+---
+
+### Product Browsing & Discovery
+
+**FR-4:** The system shall display featured products on the home page with product name, price, and an "Add to Cart" action button.
+
+**FR-5:** The system shall provide category-based browsing with at least three product categories (Laptops, Headphones, Gaming).
+
+**FR-6:** The system shall display promotional banners including special offers and discount information.
+
+**FR-7:** The system shall provide a product search functionality allowing users to search products by keyword.
+
+**FR-8:** The system shall display a product slideshow or carousel on the Products page.
+
+---
+
+### Shopping Cart Management
+
+**FR-9:** The system shall allow users to add products to the shopping cart from the home page and products page.
+
+**FR-10:** The system shall display cart contents in a tabular format showing Product name, Quantity, Price, and Action columns.
+
+**FR-11:** The system shall allow users to remove individual items from the shopping cart.
+
+**FR-12:** The system shall calculate and display Subtotal, Tax, and Total amounts for items in the cart.
+
+**FR-13:** The system shall provide a "Continue Shopping" option from the cart page to return to product browsing.
+
+**FR-14:** The system shall provide a "Proceed to Checkout" button to initiate the checkout process when items are in the cart.
+
+---
+
+### Checkout & Payment
+
+**FR-15:** The system shall collect shipping information including Full Name, Address, City, State, and Zip code during checkout.
+
+**FR-16:** The system shall provide a payment method selection mechanism (dropdown) supporting multiple payment options.
+
+**FR-17:** The system shall collect payment card information including Card Number and Expiration Date.
+
+**FR-18:** The system shall display the order total amount on the checkout page before order submission.
+
+**FR-19:** The system shall provide a "Place Order" button to submit the order and a "Cancel" button to abort the checkout process.
+
+---
+
+### Order Confirmation & Processing
+
+**FR-20:** The system shall generate a unique order number upon successful order placement.
+
+**FR-21:** The system shall display an order confirmation page showing order summary including order number, items purchased, total paid, payment status, estimated delivery date, and shipping address.
+
+**FR-22:** The system shall display a success message confirming the order has been placed successfully.
+
+**FR-23:** The system shall provide a "Continue Shopping" option from the order confirmation page to return to browsing.
+
+---
+
+### Promotions & Pricing
+
+**FR-24:** The system shall display promotional offers such as free shipping thresholds (e.g., "Free shipping on orders over $100").
+
+**FR-25:** The system shall support percentage-based discounts on selected items (e.g., "Get 30% off on selected items").
+
+---
+
+## C. Traceability Mapping
+
+| Screen | Requirement IDs | Interface Elements |
+|--------|----------------|-------------------|
+| **Home Page** | FR-1, FR-2, FR-3, FR-4, FR-5, FR-6, FR-9, FR-24, FR-25 | Navigation menu, Store branding, Category buttons (Laptops/Headphones/Gaming), Featured Products section with "Add to Cart" buttons, "Shop Now" button, "View Deals" button, Special offer banner |
+| **Shopping Cart** | FR-1, FR-2, FR-3, FR-10, FR-11, FR-12, FR-13, FR-14 | Navigation menu, Selected Items table (Product/Qty/Price/Action columns), Remove buttons, Subtotal/Tax/Total display, "Continue Shopping" button, "Proceed to Checkout" button |
+| **Products Page** | FR-1, FR-2, FR-3, FR-4, FR-7, FR-8, FR-9, FR-24 | Navigation menu, Product slideshow, Featured Products list with prices and "Add to Cart" buttons, Search input field and button, Promotions section |
+| **Checkout** | FR-1, FR-2, FR-3, FR-15, FR-16, FR-17, FR-18, FR-19 | Navigation menu, Shipping Information form (Full Name/Address/City/State/Zip fields), Payment Method dropdown, Card Number field, Expiration Date field, Order Total display, "Place Order" button, "Cancel" button |
+| **Order Confirmation** | FR-1, FR-2, FR-3, FR-20, FR-21, FR-22, FR-23 | Navigation menu, Success message, Order Summary section (Order #, Items, Total Paid, Payment Status, Estimated Delivery, Shipping Address), "Continue Shopping" button |
+
+---
+
+## D. Ambiguities, Missing Information & Assumptions
+
+### Ambiguities:
+1. **Quantity Adjustment:** Screen 2 shows quantity values but no explicit increment/decrement controls for modifying quantities
+2. **Payment Method Options:** The dropdown shows "Payment Method" but specific options (credit card, PayPal, etc.) are not detailed
+3. **Product Details:** No product detail page is shown; unclear how users view full product specifications
+4. **User Authentication:** No login/registration screens; unclear if guest checkout is supported or if user accounts are required
+5. **Tax Calculation:** Tax calculation logic and rate determination (based on location?) not specified
+6. **Discount Application:** How the "30% off on selected items" is applied (automatic vs. coupon code) is unclear
+
+### Missing Information:
+1. **Error Handling:** No error states shown for invalid inputs, payment failures, or out-of-stock scenarios
+2. **Order History:** No mechanism shown for users to view past orders
+3. **Product Inventory:** No indication of stock availability or quantity limits
+4. **Shipping Options:** Only one shipping method implied; no express/standard shipping choices
+5. **Email Confirmation:** No indication of email receipt or order tracking functionality
+6. **Security Features:** No CVV field shown for card payment; no indication of secure payment processing
+
+### Assumptions Made:
+1. **Single Currency:** All prices are in USD ($ symbol used throughout)
+2. **Guest Checkout:** Users can complete purchases without creating an account (no login shown in workflow)
+3. **Automatic Tax Calculation:** Tax is calculated automatically based on shipping address
+4. **Single Shipping Address:** One shipping address per order (no multiple delivery locations)
+5. **Immediate Payment Processing:** Payment is processed synchronously during checkout
+6. **Order Number Generation:** System automatically generates sequential or unique order identifiers
+7. **Default Quantities:** Products added to cart default to quantity of 1
+8. **Navigation Persistence:** "Cart" link in navigation shows current cart state across all pages

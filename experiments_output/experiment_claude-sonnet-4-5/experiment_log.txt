@@ -1,0 +1,48 @@
+Experiment Log
+
+Model label: Anthropic Claude Sonnet 4.5
+Requested model ID: claude-sonnet-4-5
+Pipeline: Two-phase generation
+
+Phase 1: Requirements, traceability
+Phase 2: Prototype generation using sketches + Phase 1 output
+
+Temperature: 0.2
+Top-p: not supported / provider default
+Top-k: not supported / provider default
+Max output tokens per phase: 64000
+Runs per scenario: 3
+Image detail / quality: original/native
+Timeout: 180.0 seconds
+Retries: 2
+Date: 2026-05-07
+
+Base folder: C:\Users\hamda\python-projects\experiments\claude-sonnet-4-5
+
+------------------------------------------------------------
+[2026-05-07 00:11:45] Claude connection successful.
+[2026-05-07 00:11:45] Connection test returned model: claude-sonnet-4-5-20250929
+[2026-05-07 00:11:45] Connection response: connection successful
+[2026-05-07 00:11:45] Two-phase Claude experiment started.
+[2026-05-07 00:11:45] Scenario service_portal: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-07 00:12:35] service_portal run 1 Phase 1 completed in 50.24s. Flagged: No
+[2026-05-07 00:13:40] service_portal run 1 Phase 2 completed in 65.37s. Flagged: No
+[2026-05-07 00:14:35] service_portal run 2 Phase 1 completed in 54.64s. Flagged: No
+[2026-05-07 00:15:34] service_portal run 2 Phase 2 completed in 59.38s. Flagged: No
+[2026-05-07 00:16:31] service_portal run 3 Phase 1 completed in 56.16s. Flagged: No
+[2026-05-07 00:17:32] service_portal run 3 Phase 2 completed in 61.12s. Flagged: No
+[2026-05-07 00:17:32] Scenario Ecommerce: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-07 00:18:23] Ecommerce run 1 Phase 1 completed in 51.19s. Flagged: No
+[2026-05-07 00:19:36] Ecommerce run 1 Phase 2 completed in 72.68s. Flagged: No
+[2026-05-07 00:20:27] Ecommerce run 2 Phase 1 completed in 51.53s. Flagged: No
+[2026-05-07 00:21:26] Ecommerce run 2 Phase 2 completed in 59.06s. Flagged: No
+[2026-05-07 00:22:16] Ecommerce run 3 Phase 1 completed in 50.07s. Flagged: No
+[2026-05-07 00:23:18] Ecommerce run 3 Phase 2 completed in 61.45s. Flagged: No
+[2026-05-07 00:23:18] Scenario Healthcare: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-07 00:24:13] Healthcare run 1 Phase 1 completed in 55.2s. Flagged: No
+[2026-05-07 00:25:21] Healthcare run 1 Phase 2 completed in 68.46s. Flagged: No
+[2026-05-07 00:26:19] Healthcare run 2 Phase 1 completed in 57.5s. Flagged: No
+[2026-05-07 00:27:31] Healthcare run 2 Phase 2 completed in 72.16s. Flagged: No
+[2026-05-07 00:28:27] Healthcare run 3 Phase 1 completed in 55.68s. Flagged: No
+[2026-05-07 00:29:33] Healthcare run 3 Phase 2 completed in 66.43s. Flagged: No
+[2026-05-07 00:29:33] Two-phase Claude experiment completed.

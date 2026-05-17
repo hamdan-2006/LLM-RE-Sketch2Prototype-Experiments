@@ -1,0 +1,84 @@
+A. Screen Descriptions
+
+1. **Screen Name:** Home/Service Portal Dashboard
+   - **Purpose:** To provide an overview of available services and navigation options.
+   - **Key UI Components:** Navigation bar (Home, Submit Ticket, Track Request, Help), Welcome message, Image/Logo, Services list, Support announcements.
+   - **Main User Interactions:** Navigate to other screens, view available services, read announcements.
+
+2. **Screen Name:** Submit Support Request
+   - **Purpose:** To allow users to submit a new support ticket.
+   - **Key UI Components:** Form fields (Name, Email, Issue Category, Problem Description), Submit Ticket button, Clear Form button.
+   - **Main User Interactions:** Fill out and submit the support request form, clear the form.
+
+3. **Screen Name:** Ticket Submission Confirmation
+   - **Purpose:** To confirm the submission of a support request and provide a summary.
+   - **Key UI Components:** Confirmation message, Ticket Summary (ID, Category, Submitted by, Status, Date, Estimated Response Time), Track Request button, Return Home button.
+   - **Main User Interactions:** View ticket summary, navigate to track request or return home.
+
+4. **Screen Name:** Track Request Status
+   - **Purpose:** To allow users to track the status of their submitted tickets.
+   - **Key UI Components:** Ticket ID input, Search button, Ticket Information (Number, Category, Status, Submitted by, Last Updated, Technician Notes), Return Home button.
+   - **Main User Interactions:** Enter Ticket ID, search for ticket status, view ticket details, return home.
+
+5. **Screen Name:** Help/FAQ
+   - **Purpose:** To provide answers to frequently asked questions and support contact information.
+   - **Key UI Components:** FAQ section, Contact information (Email, Phone), Return Home button.
+   - **Main User Interactions:** Read FAQs, contact support, return home.
+
+B. Functional Requirements
+
+1. **Navigation Requirements**
+   - FR-1: The system shall provide a navigation bar with links to Home, Submit Ticket, Track Request, and Help on all screens.
+   - FR-2: The system shall allow users to navigate to the Home screen from any other screen.
+
+2. **Ticket Submission Requirements**
+   - FR-3: The system shall provide a form on the Submit Support Request screen for users to enter their Name, Email, Issue Category, and Problem Description.
+   - FR-4: The system shall allow users to submit a support ticket by clicking the Submit Ticket button.
+   - FR-5: The system shall clear all form fields when the Clear Form button is clicked.
+
+3. **Confirmation and Tracking Requirements**
+   - FR-6: The system shall display a confirmation message and ticket summary after a ticket is submitted.
+   - FR-7: The system shall provide a Track Request button on the Ticket Submission Confirmation screen to navigate to the Track Request Status screen.
+   - FR-8: The system shall allow users to enter a Ticket ID and search for its status on the Track Request Status screen.
+   - FR-9: The system shall display ticket information including Ticket Number, Category, Status, Submitted by, Last Updated, and Technician Notes.
+
+4. **Help and Support Requirements**
+   - FR-10: The system shall display frequently asked questions on the Help/FAQ screen.
+   - FR-11: The system shall provide contact information for support on the Help/FAQ screen.
+
+5. **General Requirements**
+   - FR-12: The system shall display support announcements on the Home screen.
+   - FR-13: The system shall display an image or logo on the Home screen.
+
+C. Traceability Mapping
+
+- **Home/Service Portal Dashboard**
+  - Requirements: FR-1, FR-2, FR-12, FR-13
+  - Interface Elements: Navigation bar, Announcements, Image/Logo
+
+- **Submit Support Request**
+  - Requirements: FR-1, FR-2, FR-3, FR-4, FR-5
+  - Interface Elements: Form fields, Submit Ticket button, Clear Form button
+
+- **Ticket Submission Confirmation**
+  - Requirements: FR-1, FR-2, FR-6, FR-7
+  - Interface Elements: Confirmation message, Ticket Summary, Track Request button
+
+- **Track Request Status**
+  - Requirements: FR-1, FR-2, FR-8, FR-9
+  - Interface Elements: Ticket ID input, Search button, Ticket Information
+
+- **Help/FAQ**
+  - Requirements: FR-1, FR-2, FR-10, FR-11
+  - Interface Elements: FAQ section, Contact information
+
+D. Ambiguities and Assumptions
+
+- **Ambiguities:**
+  - The sketches do not specify validation rules for form fields.
+  - The exact format and content of support announcements are unclear.
+
+- **Assumptions:**
+  - The system will have basic validation for form inputs (e.g., email format).
+  - The navigation bar is consistent across all screens.
+  - Users are authenticated before accessing the portal.

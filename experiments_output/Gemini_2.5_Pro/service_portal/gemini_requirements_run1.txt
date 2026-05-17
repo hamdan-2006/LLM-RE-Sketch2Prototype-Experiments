@@ -1,0 +1,76 @@
+### A. Screen Descriptions
+
+**1. Screen 1: Home/Service Portal Dashboard**
+*   **Purpose:** To serve as the main landing page for the IT Service Portal, providing navigation, key links, and important announcements.
+*   **Key UI Components:** Title ("University IT Service Portal"), Navigation Bar ("Home", "Submit Ticket", "Track Request", "Help"), "Submit New Request" link/button, list of "Services Available", and a section for "Support Announcements".
+*   **Main User Interactions:** Navigating to other sections of the portal, initiating a new support request.
+
+**2. Screen 2: Submit Support Request**
+*   **Purpose:** To allow users to create and submit a new IT support ticket.
+*   **Key UI Components:** Form with input fields for "Name" and "Email", a dropdown for "Issue Category", a text area for "Problem Description", a "Submit Ticket" button, and a "Clear Form" button.
+*   **Main User Interactions:** Entering personal and issue details, selecting an issue category, submitting the form, or clearing the form.
+
+**3. Screen 3: Ticket Submission Confirmation**
+*   **Purpose:** To confirm that a support request has been successfully submitted and to provide the user with a ticket reference number.
+*   **Key UI Components:** Confirmation message, Ticket Summary section displaying "Ticket ID", "Category", "Submitted by", "Status", "Submitted Date", and "Estimated Response Time". It also includes a "Track Request" button and a "Return Home" button.
+*   **Main User Interactions:** Viewing the ticket summary, navigating to the tracking page, or returning to the home page.
+
+**4. Screen 4: Track Request Status**
+*   **Purpose:** To allow users to check the status and details of a previously submitted ticket.
+*   **Key UI Components:** Input field for "Ticket ID", "Search" button, "Ticket Information" display area showing "Ticket #", "Category", "Status", "Submitted by", "Last Updated", and "Technician Notes". A "Return Home" button is also present.
+*   **Main User Interactions:** Entering a Ticket ID, searching for the ticket, and viewing its current status and details.
+
+**5. Screen 5: Help/FAQ**
+*   **Purpose:** To provide users with self-service support through frequently asked questions and contact information.
+*   **Key UI Components:** A list of questions and answers (Q&A format), and contact details (Email, Phone).
+*   **Main User Interactions:** Reading FAQs to find answers, finding contact information to reach support directly.
+
+### B. Functional Requirements
+
+**General & Navigation**
+*   **FR-1:** The system shall provide a persistent main navigation bar on all screens.
+*   **FR-2:** The main navigation bar shall contain links to "Home", "Submit Ticket", "Track Request", and "Help".
+*   **FR-3:** The Home screen shall display a list of available IT services (e.g., Password Reset, Software Installation).
+*   **FR-4:** The Home screen shall display current support announcements (e.g., Scheduled Maintenance).
+
+**Ticket Submission**
+*   **FR-5:** The system shall provide a form for users to submit a new support request.
+*   **FR-6:** The support request form shall capture the user's Name and Email.
+*   **FR-7:** The support request form shall include a selectable "Issue Category" from a dropdown list.
+*   **FR-8:** The support request form shall include a text area for a "Problem Description".
+*   **FR-9:** The system shall allow the user to submit the completed support request form.
+*   **FR-10:** The system shall provide an option to clear all fields on the support request form.
+*   **FR-11:** Upon successful submission, the system shall display a confirmation screen.
+*   **FR-12:** The confirmation screen shall display a unique Ticket ID for the submitted request.
+*   **FR-13:** The confirmation screen shall display a summary of the ticket, including Category, Status (defaulting to "Open"), and Submitted Date.
+
+**Ticket Tracking**
+*   **FR-14:** The system shall provide a page for users to track the status of a support request.
+*   **FR-15:** The user shall be able to search for a ticket by entering its Ticket ID.
+*   **FR-16:** Upon a successful search, the system shall display the ticket's information, including its Category, Status, and Last Updated date.
+*   **FR-17:** The ticket tracking screen shall display any notes added by a technician.
+
+**Help & Support**
+*   **FR-18:** The system shall provide a Help/FAQ page.
+*   **FR-19:** The Help/FAQ page shall display a list of frequently asked questions and their corresponding answers.
+*   **FR-20:** The Help/FAQ page shall display IT support contact information, including an email address and phone number.
+
+### C. Traceability Mapping
+
+| Screen | Requirement IDs | Interface Elements |
+| :--- | :--- | :--- |
+| **1. Home** | FR-2, FR-3, FR-4 | Navigation Bar, "Services Available" list, "Support Announcements" list, "Submit New Request" link |
+| **2. Submit Request** | FR-2, FR-5, FR-6, FR-7, FR-8, FR-9, FR-10 | Navigation Bar, Name field, Email field, Issue Category dropdown, Problem Description text area, "Submit Ticket" button, "Clear form" button |
+| **3. Confirmation** | FR-2, FR-11, FR-12, FR-13 | Navigation Bar, Confirmation Message, Ticket Summary (Ticket ID, Category, Status, etc.), "Track Request" button, "Return Home" button |
+| **4. Track Request** | FR-2, FR-14, FR-15, FR-16, FR-17 | Navigation Bar, Ticket ID input field, "Search" button, Ticket Information display area, "Return Home" button |
+| **5. Help/FAQ** | FR-2, FR-18, FR-19, FR-20 | Navigation Bar, Frequently Asked Questions list, Contact Information (Email, Phone) |
+
+### D. Ambiguities, Missing Information, and Assumptions
+
+*   **Authentication:** The sketches do not show any login mechanism. It is unclear if the system is for authenticated (e.g., students, staff) or public users. The "Submitted by: Student" field suggests some user role awareness, but the form asks for Name/Email, which is common for unauthenticated systems.
+*   **Error Handling:** There are no designs for handling errors, such as what happens when a user enters an invalid Ticket ID on the tracking page or if the form submission fails.
+*   **Inconsistent Data:** The Ticket ID format is inconsistent between Screen 3 ("IT-2045") and Screen 4 ("2025-104"). The format needs to be standardized.
+*   **Missing Dropdown Content:** The options for the "Issue Category" dropdown on Screen 2 are not specified. It is assumed they would relate to the "Services Available" list on the Home screen.
+*   **"Submitted by" Field:** It is unclear how the "Submitted by: Student" value is determined. Is it a default, derived from an authenticated session, or based on the email domain?
+*   **Technician Interface:** The workflow only covers the end-user perspective. There are no screens showing how an IT technician would view, update the status of, or add notes to a ticket.
+*   **Search Functionality:** The behavior of the "Search" button on Screen 4 is not fully defined (e.g., what happens on a failed search).

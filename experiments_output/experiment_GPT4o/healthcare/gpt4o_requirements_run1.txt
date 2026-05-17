@@ -1,0 +1,72 @@
+A. Screen Descriptions
+
+1. **Screen Name:** Home/Dashboard
+   - **Purpose:** To provide an overview of available services and announcements.
+   - **Key UI Components:** Navigation bar, welcome message, infographic/logo, service list, announcements.
+   - **Main User Interactions:** Navigate to other sections via the navigation bar, view services and announcements.
+
+2. **Screen Name:** Appointment Scheduling Form
+   - **Purpose:** To allow users to schedule a new appointment.
+   - **Key UI Components:** Form fields (patient name, email, phone), dropdowns (appointment type, doctor, time), date picker, buttons (confirm, clear).
+   - **Main User Interactions:** Fill out form, select options, submit or clear form.
+
+3. **Screen Name:** Appointment Confirmation
+   - **Purpose:** To confirm and summarize the scheduled appointment.
+   - **Key UI Components:** Confirmation message, appointment summary, navigation links.
+   - **Main User Interactions:** View appointment details, navigate to other sections.
+
+4. **Screen Name:** My Appointments
+   - **Purpose:** To display and manage upcoming appointments.
+   - **Key UI Components:** Appointment list, appointment details, buttons (cancel, return home).
+   - **Main User Interactions:** View appointments, cancel appointments, navigate back.
+
+5. **Screen Name:** Help/FAQ
+   - **Purpose:** To provide help and support information.
+   - **Key UI Components:** FAQ list, contact information, return home button.
+   - **Main User Interactions:** Read FAQs, contact support, navigate back.
+
+B. Functional Requirements
+
+1. **Navigation Requirements**
+   - FR-1: The system shall provide a navigation bar on all screens with links to Home, Schedule Appointment, My Appointments, and Help.
+   - FR-2: The system shall allow users to navigate to the Home screen from any other screen.
+
+2. **Appointment Scheduling Requirements**
+   - FR-3: The system shall allow users to enter patient name, email address, and phone number on the Appointment Scheduling Form.
+   - FR-4: The system shall provide dropdown menus for selecting appointment type, preferred doctor, and appointment time.
+   - FR-5: The system shall provide a date picker for selecting the appointment date.
+   - FR-6: The system shall allow users to submit the appointment form by clicking the "Confirm" button.
+   - FR-7: The system shall clear all form fields when the "Clear Form" button is clicked.
+
+3. **Appointment Confirmation Requirements**
+   - FR-8: The system shall display a confirmation message upon successful scheduling of an appointment.
+   - FR-9: The system shall display an appointment summary including patient name, appointment type, doctor, date, time, and confirmation number.
+
+4. **My Appointments Requirements**
+   - FR-10: The system shall display a list of upcoming appointments with confirmation number, doctor, date, and status.
+   - FR-11: The system shall allow users to view detailed information about a selected appointment.
+   - FR-12: The system shall allow users to cancel an appointment by clicking the "Cancel App" button.
+
+5. **Help/FAQ Requirements**
+   - FR-13: The system shall display a list of frequently asked questions on the Help screen.
+   - FR-14: The system shall provide contact information for support on the Help screen.
+   - FR-15: The system shall allow users to return to the Home screen from the Help screen.
+
+C. Traceability Mapping
+
+- **Home/Dashboard →** FR-1, FR-2 → Navigation bar
+- **Appointment Scheduling Form →** FR-3, FR-4, FR-5, FR-6, FR-7 → Form fields, dropdowns, date picker, buttons
+- **Appointment Confirmation →** FR-8, FR-9 → Confirmation message, appointment summary
+- **My Appointments →** FR-10, FR-11, FR-12 → Appointment list, details, buttons
+- **Help/FAQ →** FR-13, FR-14, FR-15 → FAQ list, contact information, return button
+
+D. Ambiguities and Assumptions
+
+- **Ambiguities:** 
+  - The sketches do not specify error handling for invalid form inputs.
+  - The process for handling appointment conflicts is unclear.
+
+- **Assumptions:**
+  - Users can only schedule appointments for themselves.
+  - The system will validate email and phone number formats.
+  - Appointment cancellations are allowed up to a certain time before the appointment.

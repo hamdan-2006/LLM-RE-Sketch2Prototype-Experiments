@@ -1,0 +1,664 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electronics Store</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+.screen {
+  display: none;
+}
+.screen.active {
+  display: block;
+}
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+}
+header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+nav {
+  display: flex;
+  gap: 1.5rem;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+.banner h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.banner p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+.btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:hover {
+  background: #2980b9;
+}
+.btn-secondary {
+  background: #95a5a6;
+}
+.btn-secondary:hover {
+  background: #7f8c8d;
+}
+.btn-success {
+  background: #27ae60;
+}
+.btn-success:hover {
+  background: #229954;
+}
+.btn-danger {
+  background: #e74c3c;
+}
+.btn-danger:hover {
+  background: #c0392b;
+}
+.section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.section h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.5rem;
+}
+.category-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.category-btn {
+  background: #ecf0f1;
+  border: 2px solid #bdc3c7;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.category-btn:hover {
+  background: #bdc3c7;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.product-card {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+}
+.product-card h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+.product-card .price {
+  font-size: 1.5rem;
+  color: #27ae60;
+  margin: 1rem 0;
+  font-weight: bold;
+}
+.special-offer {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+.special-offer h3 {
+  color: #856404;
+  border: none;
+  margin-bottom: 1rem;
+}
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+.cart-table th,
+.cart-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+.cart-table th {
+  background: #f8f9fa;
+  font-weight: bold;
+}
+.cart-summary {
+  text-align: right;
+  margin-top: 1.5rem;
+}
+.cart-summary div {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+.cart-summary .total {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #27ae60;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid #dee2e6;
+}
+.cart-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+.product-list {
+  list-style: none;
+}
+.product-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+.product-list li:last-child {
+  border-bottom: none;
+}
+.slideshow {
+  background: #34495e;
+  color: white;
+  padding: 3rem;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+.search-box {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.search-box input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.promotions {
+  background: #d4edda;
+  border: 2px solid #28a745;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  color: #155724;
+  font-weight: bold;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+}
+.order-total {
+  background: #e9ecef;
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1.5rem 0;
+}
+.checkout-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+.success-message {
+  background: #d4edda;
+  border: 2px solid #28a745;
+  color: #155724;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+.order-summary {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+.order-summary div {
+  margin: 0.75rem 0;
+  font-size: 1rem;
+}
+.order-summary strong {
+  display: inline-block;
+  width: 180px;
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .cart-actions,
+  .checkout-actions {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Screen 1: Home Page -->
+<div id="home" class="screen active">
+  <header>
+    <h1>Electronics Store</h1>
+    <nav>
+      <a href="#" onclick="showScreen('home')">Home</a>
+      <a href="#" onclick="showScreen('products')">Products</a>
+      <a href="#" onclick="showScreen('cart')">Cart</a>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="banner">
+      <h2>Welcome to Electronics Store</h2>
+      <p>Shop the latest trends. Discover the best products at unbeatable prices. Fast delivery and easy returns.</p>
+      <button class="btn" onclick="showScreen('products')">Shop Now</button>
+    </div>
+    
+    <div class="section">
+      <h3>Shop by Category</h3>
+      <div class="category-buttons">
+        <button class="category-btn">Laptops</button>
+        <button class="category-btn">Headphones</button>
+        <button class="category-btn">Gaming</button>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h3>Featured Products</h3>
+      <div class="product-grid">
+        <div class="product-card">
+          <h4>Product 1</h4>
+          <div class="price">$49.99</div>
+          <button class="btn" onclick="addToCart('Product 1', 49.99)">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <h4>Product 2</h4>
+          <div class="price">$99.99</div>
+          <button class="btn" onclick="addToCart('Product 2', 99.99)">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <h4>Product 3</h4>
+          <div class="price">$149.99</div>
+          <button class="btn" onclick="addToCart('Product 3', 149.99)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="special-offer">
+      <h3>Special Offer</h3>
+      <p>Get 30% off on selected items!</p>
+      <button class="btn">View Deals</button>
+    </div>
+  </div>
+</div>
+
+<!-- Screen 2: Shopping Cart -->
+<div id="cart" class="screen">
+  <header>
+    <h1>Shopping Cart</h1>
+    <nav>
+      <a href="#" onclick="showScreen('home')">Home</a>
+      <a href="#" onclick="showScreen('products')">Products</a>
+      <a href="#" onclick="showScreen('cart')">Cart</a>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="section">
+      <h3>Selected Items</h3>
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items">
+          <tr>
+            <td>Laptop</td>
+            <td>1</td>
+            <td>$899</td>
+            <td><button class="btn btn-danger" onclick="removeFromCart(0)">Remove</button></td>
+          </tr>
+          <tr>
+            <td>Headphones</td>
+            <td>1</td>
+            <td>$75</td>
+            <td><button class="btn btn-danger" onclick="removeFromCart(1)">Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="cart-summary">
+        <div>Subtotal: <span id="subtotal">$974</span></div>
+        <div>Tax: <span id="tax">$78</span></div>
+        <div class="total">Total: <span id="total">$1052</span></div>
+      </div>
+      
+      <div class="cart-actions">
+        <button class="btn btn-secondary" onclick="showScreen('products')">Continue Shopping</button>
+        <button class="btn btn-success" onclick="showScreen('checkout')">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Screen 3: Products Page -->
+<div id="products" class="screen">
+  <header>
+    <h1>Electronics Store</h1>
+    <nav>
+      <a href="#" onclick="showScreen('home')">Home</a>
+      <a href="#" onclick="showScreen('products')">Products</a>
+      <a href="#" onclick="showScreen('cart')">Cart</a>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="slideshow">
+      Product Slideshow
+    </div>
+    
+    <div class="section">
+      <h3>Featured Products</h3>
+      <ul class="product-list">
+        <li>
+          <div>
+            <strong>Laptop</strong><br>
+            <span class="price">$899</span>
+          </div>
+          <button class="btn" onclick="addToCart('Laptop', 899)">Add to Cart</button>
+        </li>
+        <li>
+          <div>
+            <strong>Wireless Mouse</strong><br>
+            <span class="price">$25</span>
+          </div>
+          <button class="btn" onclick="addToCart('Wireless Mouse', 25)">Add to Cart</button>
+        </li>
+        <li>
+          <div>
+            <strong>Headphones</strong><br>
+            <span class="price">$75</span>
+          </div>
+          <button class="btn" onclick="addToCart('Headphones', 75)">Add to Cart</button>
+        </li>
+        <li>
+          <div>
+            <strong>Smart Watch</strong><br>
+            <span class="price">$199</span>
+          </div>
+          <button class="btn" onclick="addToCart('Smart Watch', 199)">Add to Cart</button>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="section">
+      <h3>Search Products</h3>
+      <div class="search-box">
+        <input type="text" placeholder="Search for products...">
+        <button class="btn">Search</button>
+      </div>
+    </div>
+    
+    <div class="promotions">
+      <strong>Promotions:</strong> Free shipping on orders over $100
+    </div>
+  </div>
+</div>
+
+<!-- Screen 4: Checkout -->
+<div id="checkout" class="screen">
+  <header>
+    <h1>Checkout</h1>
+    <nav>
+      <a href="#" onclick="showScreen('home')">Home</a>
+      <a href="#" onclick="showScreen('products')">Products</a>
+      <a href="#" onclick="showScreen('cart')">Cart</a>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="section">
+      <h3>Shipping Information</h3>
+      <form id="checkout-form">
+        <div class="form-group">
+          <label for="fullname">Full Name:</label>
+          <input type="text" id="fullname" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <input type="text" id="address" required>
+        </div>
+        <div class="form-group">
+          <label for="city">City:</label>
+          <input type="text" id="city" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="state">State:</label>
+            <input type="text" id="state" required>
+          </div>
+          <div class="form-group">
+            <label for="zip">Zip:</label>
+            <input type="text" id="zip" required>
+          </div>
+        </div>
+        
+        <h3>Payment Method</h3>
+        <div class="form-group">
+          <label for="payment-method">Payment Method:</label>
+          <select id="payment-method">
+            <option>Credit Card</option>
+            <option>Debit Card</option>
+            <option>PayPal</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="card-number">Card Number:</label>
+          <input type="text" id="card-number" required>
+        </div>
+        <div class="form-group">
+          <label for="expiration">Expiration Date:</label>
+          <input type="text" id="expiration" placeholder="MM/YY" required>
+        </div>
+        
+        <div class="order-total">
+          Order Total: $1052
+        </div>
+        
+        <div class="checkout-actions">
+          <button type="button" class="btn btn-secondary" onclick="showScreen('cart')">Cancel</button>
+          <button type="button" class="btn btn-success" onclick="placeOrder()">Place Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Screen 5: Order Confirmation -->
+<div id="confirmation" class="screen">
+  <header>
+    <h1>Order Confirmation</h1>
+    <nav>
+      <a href="#" onclick="showScreen('home')">Home</a>
+      <a href="#" onclick="showScreen('products')">Products</a>
+      <a href="#" onclick="showScreen('cart')">Cart</a>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="success-message">
+      Your order has been placed successfully!
+    </div>
+    
+    <div class="section">
+      <h3>Order Summary</h3>
+      <div class="order-summary">
+        <div><strong>Order Number:</strong> ORD-2045</div>
+        <div><strong>Items:</strong> Laptop, Headphones</div>
+        <div><strong>Total Paid:</strong> $1052</div>
+        <div><strong>Payment Status:</strong> Approved</div>
+        <div><strong>Estimated Delivery:</strong> Oct 18, 25</div>
+        <div><strong>Shipping Address:</strong> 123 Main Street, Baltimore, MD 21201</div>
+      </div>
+      
+      <div style="margin-top: 2rem; text-align: center;">
+        <button class="btn" onclick="showScreen('home')">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let cart = [
+  { name: 'Laptop', qty: 1, price: 899 },
+  { name: 'Headphones', qty: 1, price: 75 }
+];
+
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(screen => {
+    screen.classList.remove('active');
+  });
+  document.getElementById(screenId).classList.add('active');
+  
+  if (screenId === 'cart') {
+    updateCart();
+  }
+}
+
+function addToCart(name, price) {
+  const existing = cart.find(item => item.name === name);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ name, qty: 1, price });
+  }
+  alert(`${name} added to cart!`);
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
+
+function updateCart() {
+  const tbody = document.getElementById('cart-items');
+  tbody.innerHTML = '';
+  
+  let subtotal = 0;
+  cart.forEach((item, index) => {
+    const row = tbody.insertRow();
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>${item.qty}</td>
+      <td>$${item.price}</td>
+      <td><button class="btn btn-danger" onclick="removeFromCart(${index})">Remove</button></td>
+    `;
+    subtotal += item.price * item.qty;
+  });
+  
+  const tax = Math.round(subtotal * 0.08);
+  const total = subtotal + tax;
+  
+  document.getElementById('subtotal').textContent = `$${subtotal}`;
+  document.getElementById('tax').textContent = `$${tax}`;
+  document.getElementById('total').textContent = `$${total}`;
+}
+
+function placeOrder() {
+  const form = document.getElementById('checkout-form');
+  if (form.checkValidity()) {
+    showScreen('confirmation');
+  } else {
+    alert('Please fill in all required fields.');
+  }
+}
+
+updateCart();
+</script>
+
+</body>
+</html>
+```

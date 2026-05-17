@@ -1,0 +1,78 @@
+### A. Screen Descriptions
+
+**1. Screen 1: Healthcare Portal Dashboard/Home**
+*   **Purpose:** To serve as the main landing page for the patient portal, providing access to key functions and information.
+*   **Key UI Components:** Main navigation bar, welcome message, infographic/logo area, a link to schedule an appointment, a list of available services, and an announcements section.
+*   **Main User Interactions:** Navigating to other sections ("Schedule Appointment", "My Appointments", "Help"), viewing available services and announcements.
+
+**2. Screen 2: Appointment Scheduling Form**
+*   **Purpose:** To allow users to request a new medical appointment.
+*   **Key UI Components:** Form fields for Patient Name, Email, and Phone Number; dropdowns for Appointment Type, Preferred Doctor, and Appointment Time; a date input field; a text area for additional notes; "Confirm App" and "Clear Form" buttons.
+*   **Main User Interactions:** Filling in personal and appointment details, submitting the form to book an appointment, or clearing the form fields.
+
+**3. Screen 3: Appointment Confirmation**
+*   **Purpose:** To confirm that an appointment has been successfully scheduled and provide a summary.
+*   **Key UI Components:** Confirmation message, appointment summary section (Patient Name, Type, Doctor, Date, Time, Confirmation #, Status), a link to "View my Appointments", and a link to "Return Home".
+*   **Main User Interactions:** Reviewing the appointment details, navigating to the "My Appointments" list, or returning to the home screen.
+
+**4. Screen 4: My Appointments / Appointment Tracking**
+*   **Purpose:** To allow users to view and manage their upcoming appointments.
+*   **Key UI Components:** A list of upcoming appointments with columns for Confirmation #, Doctor, Date, and Status; a details section for a selected appointment; "Cancel App" and "Return Home" links/buttons.
+*   **Main User Interactions:** Viewing the list of appointments, selecting an appointment to see more details, and canceling a selected appointment.
+
+**5. Screen 5: Help / FAQ Page**
+*   **Purpose:** To provide users with support and answers to common questions.
+*   **Key UI Components:** A list of Frequently Asked Questions (FAQs) with answers, support email and phone number, and a "Return Home" link.
+*   **Main User Interactions:** Reading help content, finding contact information, and navigating back to the home screen.
+
+### B. Functional Requirements
+
+**General & Navigation**
+*   **FR-1:** The system shall provide a persistent main navigation bar on all screens.
+*   **FR-2:** The main navigation bar shall include links to "Home", "Schedule Appointment", "My Appointments", and "Help".
+
+**Home Screen**
+*   **FR-3:** The Home screen shall display a list of available services, such as "General Checkup" and "Pediatric Care".
+*   **FR-4:** The Home screen shall display clinic announcements.
+*   **FR-5:** The Home screen shall provide a primary call-to-action to schedule a new appointment.
+
+**Appointment Scheduling**
+*   **FR-6:** The system shall provide a form for users to schedule an appointment.
+*   **FR-7:** The scheduling form shall require the user to provide a Patient Name, Email Address, and Phone Number.
+*   **FR-8:** The scheduling form shall allow the user to select an Appointment Type from a pre-defined list.
+*   **FR-9:** The scheduling form shall allow the user to select a Preferred Doctor from a pre-defined list.
+*   **FR-10:** The scheduling form shall allow the user to select an Appointment Date and Time.
+*   **FR-11:** The system shall provide a button to submit the completed appointment scheduling form.
+
+**Appointment Confirmation & Management**
+*   **FR-12:** Upon successful submission of the scheduling form, the system shall display a confirmation screen.
+*   **FR-13:** The confirmation screen shall display a summary of the scheduled appointment, including a unique confirmation number and a "Confirmed" status.
+*   **FR-14:** The "My Appointments" screen shall display a list of the user's upcoming appointments.
+*   **FR-15:** The appointment list shall display the Confirmation Number, Doctor, Date, and Status for each appointment.
+*   **FR-16:** The system shall allow a user to select an appointment from the list to view additional details.
+*   **FR-17:** The system shall provide an option for the user to cancel an upcoming appointment from the "My Appointments" screen.
+
+**Help & Support**
+*   **FR-18:** The system shall provide a Help page containing Frequently Asked Questions (FAQs).
+*   **FR-19:** The Help page shall display support contact information, including an email address and a phone number.
+
+### C. Traceability Mapping
+
+| Screen | Requirement IDs | Interface Elements |
+| :--- | :--- | :--- |
+| **1. Home** | FR-3, FR-4, FR-5 | Services Availables list, Announcements list, [Schedule New App] link |
+| **2. Scheduling Form** | FR-6, FR-7, FR-8, FR-9, FR-10, FR-11 | Patient Name, Email, Phone Number fields; Appointment Type, Preferred Doctor, Appointment Time dropdowns; Appointment Date field; Confirm App button |
+| **3. Confirmation** | FR-12, FR-13 | Confirmation message, Appointment Summary, [View my Appointments] link |
+| **4. My Appointments** | FR-14, FR-15, FR-16, FR-17 | Upcoming Appointments list, Selected Appointment details, [Cancel App] button |
+| **5. Help Page** | FR-18, FR-19 | Frequently Asked Questions list, Email/Phone contact info |
+| **All Screens** | FR-1, FR-2 | Main navigation bar (Home, Schedule Appointment, My Appointments, Help) |
+
+### D. Ambiguities, Missing Information, and Assumptions
+
+*   **Authentication:** It is unclear if the user is authenticated (logged in). The "My Appointments" screen implies the system knows the user, but the scheduling form asks for basic patient details (Name, Email), which is common for unauthenticated guest flows.
+*   **Appointment Status:** The "My Appointments" screen shows a "Pending" status. The workflow for an appointment to move from "Pending" to "Confirmed" is not defined.
+*   **Date/Time Selection:** The mechanism for selecting an "Appointment Date" (e.g., calendar picker) is not specified. It's also unclear how the system determines available times in the "Appointment Time" dropdown based on the selected doctor and date.
+*   **Error Handling:** There are no screens or details showing how the system handles validation errors (e.g., invalid email format, required field left blank) or scheduling conflicts (e.g., time slot is no longer available).
+*   **Cancellation Workflow:** The process after a user clicks "[Cancel App]" is not defined. It is unclear if there is a confirmation step or what notification is sent.
+*   **Assumption:** It is assumed that the dropdown lists for "Appointment Type", "Preferred Doctor", and "Appointment Time" are populated with valid, available options from a backend system.
+*   **Assumption:** It is assumed that the "Return Home" links on various screens navigate the user back to the main Dashboard/Home screen (Screen 1).

@@ -1,0 +1,195 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .container {
+            padding: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .faq {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="#" onclick="showScreen('home')">Home</a>
+    <a href="#" onclick="showScreen('submit')">Submit Ticket</a>
+    <a href="#" onclick="showScreen('track')">Track Request</a>
+    <a href="#" onclick="showScreen('help')">Help</a>
+</div>
+
+<div id="home" class="container">
+    <h1>University IT Service Portal</h1>
+    <h2>Welcome to IT Support</h2>
+    <p>[Image/Logo Placeholder]</p>
+    <h3>Services Available:</h3>
+    <ul>
+        <li>Password Reset</li>
+        <li>Software Installation</li>
+        <li>Network Support</li>
+        <li>Account Access</li>
+    </ul>
+    <h3>Support Announcements:</h3>
+    <ul>
+        <li>Scheduled maintenance Friday</li>
+        <li>New VPN instructions available</li>
+    </ul>
+</div>
+
+<div id="submit" class="container hidden">
+    <h1>Submit Support Request</h1>
+    <form id="supportForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Issue Category:</label>
+            <select id="category" required>
+                <option value="">Select</option>
+                <option value="password">Password Reset</option>
+                <option value="software">Software Installation</option>
+                <option value="network">Network Support</option>
+                <option value="account">Account Access</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Problem Description:</label>
+            <textarea id="description" rows="4" required></textarea>
+        </div>
+        <button type="button" onclick="submitTicket()">Submit Ticket</button>
+        <button type="reset">Clear Form</button>
+    </form>
+</div>
+
+<div id="confirmation" class="container hidden">
+    <h1>Support Request Submitted</h1>
+    <p>Your support request has been submitted.</p>
+    <h3>Ticket Summary:</h3>
+    <p>Ticket ID: IT-2045</p>
+    <p>Category: Network Support</p>
+    <p>Submitted by: Student</p>
+    <p>Status: Open</p>
+    <p>Submitted Date: Oct 10, 2023</p>
+    <p>Estimated Response Time: 24 hours</p>
+    <button onclick="showScreen('track')">Track Request</button>
+    <button onclick="showScreen('home')">Return Home</button>
+</div>
+
+<div id="track" class="container hidden">
+    <h1>Track Support Request</h1>
+    <div class="form-group">
+        <label for="ticketId">Ticket ID:</label>
+        <input type="text" id="ticketId">
+    </div>
+    <button onclick="searchTicket()">Search</button>
+    <div id="ticketInfo" class="hidden">
+        <h3>Ticket Information:</h3>
+        <p>Ticket #: 205-104</p>
+        <p>Category: Network Support</p>
+        <p>Status: In Progress</p>
+        <p>Submitted by: Student</p>
+        <p>Last Updated: April 29, 2026</p>
+        <p>Technician Notes: "Issue currently being investigated"</p>
+    </div>
+    <button onclick="showScreen('home')">Return Home</button>
+</div>
+
+<div id="help" class="container hidden">
+    <h1>Help and Support</h1>
+    <div class="faq">
+        <h3>Frequently Asked Questions:</h3>
+        <p><strong>Q: How do I reset my password?</strong></p>
+        <p>A: Click "Forgot Password" on the login page.</p>
+        <p><strong>Q: How long does ticket response take?</strong></p>
+        <p>A: Most requests are answered within 24 hours.</p>
+        <p><strong>Q: How can I track my request?</strong></p>
+        <p>A: Use the Track Request page with your Ticket ID or contact IT Support.</p>
+    </div>
+    <h3>Contact IT Support:</h3>
+    <p>Email: support@university.edu</p>
+    <p>Phone: (123) 456-7890</p>
+    <button onclick="showScreen('home')">Return Home</button>
+</div>
+
+<script>
+    function showScreen(screenId) {
+        document.querySelectorAll('.container').forEach(screen => {
+            screen.classList.add('hidden');
+        });
+        document.getElementById(screenId).classList.remove('hidden');
+    }
+
+    function submitTicket() {
+        const form = document.getElementById('supportForm');
+        if (form.checkValidity()) {
+            showScreen('confirmation');
+        } else {
+            alert('Please fill out all fields.');
+        }
+    }
+
+    function searchTicket() {
+        const ticketId = document.getElementById('ticketId').value;
+        if (ticketId === '205-104') {
+            document.getElementById('ticketInfo').classList.remove('hidden');
+        } else {
+            alert('Ticket not found.');
+        }
+    }
+</script>
+
+</body>
+</html>
+```

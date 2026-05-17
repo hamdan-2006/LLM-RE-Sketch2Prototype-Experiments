@@ -1,0 +1,288 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Appointment System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+        }
+        header {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            margin: 10px 0;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        h2 {
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Community Health Clinic Portal</h1>
+</header>
+
+<nav>
+    <a href="#" onclick="showScreen('home')">Home</a>
+    <a href="#" onclick="showScreen('schedule')">Schedule Appointment</a>
+    <a href="#" onclick="showScreen('appointments')">My Appointments</a>
+    <a href="#" onclick="showScreen('help')">Help</a>
+</nav>
+
+<div id="home" class="container active">
+    <h2>Welcome to Community Health Clinic</h2>
+    <p>Infographic/Image/Logo</p>
+    <h3>Services Available:</h3>
+    <ul>
+        <li>General Checkup</li>
+        <li>Pediatric Care</li>
+        <li>Vaccination Services</li>
+        <li>Follow-up Visits</li>
+    </ul>
+    <h3>Announcements:</h3>
+    <ul>
+        <li>Flu shots available this week</li>
+        <li>New patient forms updated</li>
+    </ul>
+</div>
+
+<div id="schedule" class="container">
+    <h2>Schedule Appointment</h2>
+    <div class="form-group">
+        <label for="patientName">Patient Name:</label>
+        <input type="text" id="patientName">
+    </div>
+    <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email">
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone">
+    </div>
+    <div class="form-group">
+        <label for="appointmentType">Appointment Type:</label>
+        <select id="appointmentType">
+            <option>General Checkup</option>
+            <option>Pediatric Care</option>
+            <option>Vaccination</option>
+            <option>Follow-up</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="doctor">Preferred Doctor:</label>
+        <select id="doctor">
+            <option>Dr. Smith</option>
+            <option>Dr. Lee</option>
+            <option>Dr. Johnson</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="date">Appointment Date:</label>
+        <input type="date" id="date">
+    </div>
+    <div class="form-group">
+        <label for="time">Appointment Time:</label>
+        <select id="time">
+            <option>09:00 AM</option>
+            <option>10:00 AM</option>
+            <option>11:00 AM</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="notes">Additional Notes:</label>
+        <textarea id="notes" rows="3"></textarea>
+    </div>
+    <button class="btn" onclick="confirmAppointment()">Confirm Appointment</button>
+    <button class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+</div>
+
+<div id="confirmation" class="container">
+    <h2>Appointment Confirmation</h2>
+    <p>Your appointment has been scheduled successfully.</p>
+    <h3>Appointment Summary:</h3>
+    <p id="summary"></p>
+    <button class="btn" onclick="showScreen('appointments')">View My Appointments</button>
+    <button class="btn btn-secondary" onclick="showScreen('home')">Return Home</button>
+</div>
+
+<div id="appointments" class="container">
+    <h2>My Appointments</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Confirmation #</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="appointmentList">
+            <tr>
+                <td>HC-2045</td>
+                <td>Dr. Smith</td>
+                <td>Oct 15, 2023</td>
+                <td>Confirmed</td>
+            </tr>
+            <tr>
+                <td>HC-1988</td>
+                <td>Dr. Lee</td>
+                <td>Oct 28, 2023</td>
+                <td>Pending</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Appointment Details:</h3>
+    <p>Selected Appointment: HC-2045</p>
+    <p>Location: Community Health Clinic</p>
+    <p>Notes: Arrive 15 minutes early</p>
+    <button class="btn" onclick="cancelAppointment()">Cancel Appointment</button>
+    <button class="btn btn-secondary" onclick="showScreen('home')">Return Home</button>
+</div>
+
+<div id="help" class="container">
+    <h2>Help and Support</h2>
+    <h3>Frequently Asked Questions</h3>
+    <p>Q: How do I schedule an appointment?</p>
+    <p>A: Select "Schedule Appointment" from the menu.</p>
+    <p>Q: Can I cancel an appointment online?</p>
+    <p>A: Yes, use the My Appointments page.</p>
+    <p>Q: How will I receive confirmation?</p>
+    <p>A: Confirmation appears immediately after booking.</p>
+    <h3>Contact Information</h3>
+    <p>Email: support@clinic.org</p>
+    <p>Phone: (000) 555-0000</p>
+    <button class="btn btn-secondary" onclick="showScreen('home')">Return Home</button>
+</div>
+
+<script>
+    function showScreen(screenId) {
+        document.querySelectorAll('.container').forEach(container => {
+            container.classList.remove('active');
+        });
+        document.getElementById(screenId).classList.add('active');
+    }
+
+    function confirmAppointment() {
+        const patientName = document.getElementById('patientName').value;
+        const appointmentType = document.getElementById('appointmentType').value;
+        const doctor = document.getElementById('doctor').value;
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+
+        const summary = `
+            Patient Name: ${patientName}<br>
+            Appointment Type: ${appointmentType}<br>
+            Doctor: ${doctor}<br>
+            Date: ${date}<br>
+            Time: ${time}<br>
+            Confirmation #: HC-2045<br>
+            Status: Confirmed
+        `;
+        document.getElementById('summary').innerHTML = summary;
+        showScreen('confirmation');
+    }
+
+    function clearForm() {
+        document.getElementById('patientName').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('appointmentType').selectedIndex = 0;
+        document.getElementById('doctor').selectedIndex = 0;
+        document.getElementById('date').value = '';
+        document.getElementById('time').selectedIndex = 0;
+        document.getElementById('notes').value = '';
+    }
+
+    function cancelAppointment() {
+        alert('Appointment cancelled.');
+        showScreen('home');
+    }
+</script>
+
+</body>
+</html>
+```

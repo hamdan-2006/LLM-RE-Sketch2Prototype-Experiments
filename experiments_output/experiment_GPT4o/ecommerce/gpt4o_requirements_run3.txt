@@ -1,0 +1,69 @@
+A. Screen Descriptions
+
+1. **Home Page (Landing)**
+   - **Purpose**: Introduce the store and guide users to products.
+   - **Key UI Components**: Navigation bar, welcome message, category buttons, featured products, special offers.
+   - **Main User Interactions**: Navigate categories, view products, add to cart, view deals.
+
+2. **Shopping Cart**
+   - **Purpose**: Display selected items and allow modifications.
+   - **Key UI Components**: Item list, quantity, price, remove option, subtotal, tax, total, navigation buttons.
+   - **Main User Interactions**: Remove items, proceed to checkout, continue shopping.
+
+3. **Product Listing**
+   - **Purpose**: Display available products and promotions.
+   - **Key UI Components**: Product slideshow, featured products, search bar, promotions.
+   - **Main User Interactions**: Add products to cart, search products.
+
+4. **Checkout**
+   - **Purpose**: Collect shipping and payment information.
+   - **Key UI Components**: Form fields for shipping details, payment method dropdown, order total, action buttons.
+   - **Main User Interactions**: Enter shipping/payment details, place order, cancel order.
+
+5. **Order Confirmation**
+   - **Purpose**: Confirm order placement and provide summary.
+   - **Key UI Components**: Order number, item list, total paid, payment status, estimated delivery, shipping address.
+   - **Main User Interactions**: Continue shopping.
+
+B. Functional Requirements
+
+**Navigation and Browsing**
+- FR-1: The system shall display a navigation bar with links to Home, Products, and Cart on all screens.
+- FR-2: The system shall allow users to navigate to product categories from the Home Page.
+
+**Product Management**
+- FR-3: The system shall display featured products on the Home Page and Product Listing screen.
+- FR-4: The system shall allow users to add products to the cart from the Home Page and Product Listing screen.
+- FR-5: The system shall allow users to search for products using a search bar.
+
+**Shopping Cart**
+- FR-6: The system shall display selected items with quantity and price in the Shopping Cart.
+- FR-7: The system shall allow users to remove items from the Shopping Cart.
+- FR-8: The system shall calculate and display the subtotal, tax, and total in the Shopping Cart.
+
+**Checkout Process**
+- FR-9: The system shall require users to enter shipping information during checkout.
+- FR-10: The system shall provide a dropdown for selecting a payment method during checkout.
+- FR-11: The system shall allow users to place or cancel an order during checkout.
+
+**Order Confirmation**
+- FR-12: The system shall display an order confirmation message with order details after a successful purchase.
+- FR-13: The system shall provide an estimated delivery date in the order confirmation.
+
+C. Traceability Mapping
+
+- **Home Page** → FR-1, FR-2, FR-3, FR-4 → Navigation bar, category buttons, featured products
+- **Shopping Cart** → FR-6, FR-7, FR-8 → Item list, remove option, subtotal/tax/total
+- **Product Listing** → FR-3, FR-4, FR-5 → Product slideshow, featured products, search bar
+- **Checkout** → FR-9, FR-10, FR-11 → Shipping form, payment dropdown, action buttons
+- **Order Confirmation** → FR-12, FR-13 → Order summary, estimated delivery
+
+D. Ambiguities and Assumptions
+
+- **Ambiguities**: 
+  - The sketches do not specify the exact behavior of the "View Deals" button.
+  - The tax calculation method is not detailed.
+
+- **Assumptions**:
+  - The "Add to Cart" button functionality is consistent across screens.
+  - The "Continue Shopping" button returns the user to the Home Page.

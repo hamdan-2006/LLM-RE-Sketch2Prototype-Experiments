@@ -1,0 +1,293 @@
+# Healthcare Appointment System - Requirements Analysis
+
+## A. Screen Descriptions
+
+### Screen 1: Healthcare Portal Dashboard/Home
+**Purpose:** Serves as the main landing page for the Community Health Clinic portal, providing access to core functions and displaying system information.
+
+**Key UI Components:**
+- Header: "Community Health Clinic Portal"
+- Navigation menu: Home | Schedule Appointment | My Appointments | Help
+- Welcome message: "Welcome to community health clinic"
+- Infographic/image/logo area
+- "Schedule New Appt" button
+- Services Available section listing:
+  - General checkup
+  - Pediatric care
+  - Vaccination Services
+  - Follow-up Visits
+- Announcements section displaying:
+  - Flu shots available this week
+  - New patient forms updated
+
+**Main User Interactions:**
+- Navigate between main sections via menu
+- Click to schedule new appointment
+- View available services
+- Read announcements
+
+---
+
+### Screen 2: Appointment Scheduling Form
+**Purpose:** Allows patients to enter required information to schedule a new appointment at the clinic.
+
+**Key UI Components:**
+- Header: "Schedule Appointment"
+- Navigation breadcrumb: Home | Schedule Appointment | My Appointments | Help
+- Form fields:
+  - Patient name (text input)
+  - Email Address (text input)
+  - Phone Number (text input)
+  - Appointment Type (dropdown)
+  - Preferred Doctor (dropdown)
+  - Appointment Date (date picker format: __/__/__)
+  - Appointment Time (dropdown)
+  - Additional Notes (text area)
+- Action buttons: "Confirm Appt" and "Clear Form"
+
+**Main User Interactions:**
+- Fill out patient information
+- Select appointment type from dropdown
+- Select preferred doctor from dropdown
+- Choose date and time
+- Add optional notes
+- Submit or clear form
+
+---
+
+### Screen 3: Appointment Confirmation
+**Purpose:** Confirms successful appointment scheduling and displays a summary of the booked appointment.
+
+**Key UI Components:**
+- Header: "Appointment Confirmation"
+- Navigation: Home | Schedule Appointment | My Appointments | Help
+- Success message: "Your appointment has been scheduled successfully"
+- Appointment Summary section displaying:
+  - Patient Name: Sarah Johnson
+  - Appointment Type: General Checkup
+  - Doctor: Dr. Smith
+  - Date: Oct 15, 2025
+  - Time: 10:30 AM
+  - Confirmation #: HC-2045
+  - Status: Confirmed
+- Action buttons: "View my Appointments" and "Return Home"
+
+**Main User Interactions:**
+- Review confirmation details
+- Navigate to appointments list
+- Return to home page
+
+---
+
+### Screen 4: My Appointments / Appointments Tracking
+**Purpose:** Displays a list of all patient appointments with their current status and allows management of existing appointments.
+
+**Key UI Components:**
+- Header: "My Appointments"
+- Navigation: Home | Schedule Appointment | My Appointments | Help
+- Section: "Upcoming Appointments"
+- Appointment list table with columns:
+  - Confirmation #
+  - Doctor
+  - Date
+  - Status
+- Two appointment entries shown:
+  - HC-2045 | Dr. Smith | Oct 15 | Confirmed
+  - HC-1988 | Dr. Lee | Oct 28 | Pending
+- Appointment Details panel (for selected appointment):
+  - Selected Appointment: HC-2045
+  - Location: Community Health Clinic
+  - Notes: Arrive 15 minutes early
+- Action buttons: "Cancel App" and "Return Home"
+
+**Main User Interactions:**
+- View list of upcoming appointments
+- Select appointment to view details
+- Cancel appointments
+- Return to home
+
+---
+
+### Screen 5: Help / FAQ Page
+**Purpose:** Provides answers to frequently asked questions and support contact information.
+
+**Key UI Components:**
+- Header: "Help and Support"
+- Navigation: Home | Schedule Appointment | My Appointments | Help
+- Section: "Frequently Asked Questions"
+- Q&A pairs:
+  - Q: How do I schedule an appointment?
+  - A: Select "Schedule Appointment" from the menu
+  - Q: Can I cancel an appointment online?
+  - A: Yes, use the My Appointments page
+  - Q: How will I receive confirmation?
+  - A: Confirmation appears immediately after booking
+- Contact information:
+  - Email: support@clinic.org
+  - Phone: (000) 555-0000
+- Action button: "Return Home"
+
+**Main User Interactions:**
+- Browse FAQ content
+- Access contact information
+- Return to home page
+
+---
+
+## B. Functional Requirements
+
+### Navigation & Access (FR-1 to FR-3)
+
+**FR-1:** The system shall provide a persistent navigation menu on all screens containing links to Home, Schedule Appointment, My Appointments, and Help sections.
+
+**FR-2:** The system shall allow users to return to the home page from any screen via the navigation menu or dedicated "Return Home" buttons.
+
+**FR-3:** The system shall display the clinic branding (logo/infographic) and portal title "Community Health Clinic Portal" on the home screen.
+
+### Appointment Scheduling (FR-4 to FR-10)
+
+**FR-4:** The system shall provide a "Schedule New Appt" button on the home screen that navigates users to the appointment scheduling form.
+
+**FR-5:** The system shall require users to enter patient name, email address, and phone number when scheduling an appointment.
+
+**FR-6:** The system shall provide dropdown menus for selecting appointment type, preferred doctor, and appointment time.
+
+**FR-7:** The system shall provide a date picker interface for selecting the appointment date.
+
+**FR-8:** The system shall allow users to enter optional additional notes in a text area field on the scheduling form.
+
+**FR-9:** The system shall provide a "Clear Form" button that resets all fields on the appointment scheduling form.
+
+**FR-10:** The system shall validate all required fields before allowing appointment submission via the "Confirm Appt" button.
+
+### Appointment Confirmation (FR-11 to FR-13)
+
+**FR-11:** The system shall generate a unique confirmation number (format: HC-####) upon successful appointment scheduling.
+
+**FR-12:** The system shall display an appointment confirmation screen showing patient name, appointment type, doctor, date, time, confirmation number, and status after successful booking.
+
+**FR-13:** The system shall display a success message "Your appointment has been scheduled successfully" on the confirmation screen.
+
+### Appointment Management (FR-14 to FR-17)
+
+**FR-14:** The system shall display a list of upcoming appointments showing confirmation number, doctor name, date, and status on the My Appointments screen.
+
+**FR-15:** The system shall support at least two appointment statuses: "Confirmed" and "Pending".
+
+**FR-16:** The system shall display detailed information for a selected appointment including location and special notes (e.g., "Arrive 15 minutes early").
+
+**FR-17:** The system shall provide a "Cancel App" button on the My Appointments screen to allow users to cancel appointments.
+
+### Information Display (FR-18 to FR-20)
+
+**FR-18:** The system shall display available services on the home screen including General checkup, Pediatric care, Vaccination Services, and Follow-up Visits.
+
+**FR-19:** The system shall display announcements on the home screen including time-sensitive information such as flu shot availability and form updates.
+
+**FR-20:** The system shall provide a Help/FAQ page containing frequently asked questions about scheduling, cancellation, and confirmation processes, along with clinic contact information (email and phone).
+
+---
+
+## C. Traceability Mapping
+
+### Screen 1 (Healthcare Portal Dashboard/Home)
+**Requirements:** FR-1, FR-2, FR-3, FR-4, FR-18, FR-19
+
+**Interface Elements:**
+- Navigation menu → FR-1
+- Portal title and logo → FR-3
+- "Schedule New Appt" button → FR-4
+- Services Available list → FR-18
+- Announcements section → FR-19
+- Home link → FR-2
+
+---
+
+### Screen 2 (Appointment Scheduling Form)
+**Requirements:** FR-1, FR-2, FR-5, FR-6, FR-7, FR-8, FR-9, FR-10
+
+**Interface Elements:**
+- Navigation menu → FR-1
+- Patient name field → FR-5
+- Email address field → FR-5
+- Phone number field → FR-5
+- Appointment Type dropdown → FR-6
+- Preferred Doctor dropdown → FR-6
+- Appointment Date picker → FR-7
+- Appointment Time dropdown → FR-6
+- Additional Notes text area → FR-8
+- "Clear Form" button → FR-9
+- "Confirm Appt" button → FR-10
+
+---
+
+### Screen 3 (Appointment Confirmation)
+**Requirements:** FR-1, FR-2, FR-11, FR-12, FR-13
+
+**Interface Elements:**
+- Navigation menu → FR-1
+- Success message → FR-13
+- Appointment Summary (all fields) → FR-12
+- Confirmation number display → FR-11
+- "View my Appointments" button → FR-2
+- "Return Home" button → FR-2
+
+---
+
+### Screen 4 (My Appointments / Appointments Tracking)
+**Requirements:** FR-1, FR-2, FR-14, FR-15, FR-16, FR-17
+
+**Interface Elements:**
+- Navigation menu → FR-1
+- Upcoming Appointments table → FR-14
+- Status column (Confirmed/Pending) → FR-15
+- Appointment Details panel → FR-16
+- "Cancel App" button → FR-17
+- "Return Home" button → FR-2
+
+---
+
+### Screen 5 (Help / FAQ Page)
+**Requirements:** FR-1, FR-2, FR-20
+
+**Interface Elements:**
+- Navigation menu → FR-1
+- FAQ section with Q&A pairs → FR-20
+- Contact information (email/phone) → FR-20
+- "Return Home" button → FR-2
+
+---
+
+## D. Ambiguities, Missing Information, and Assumptions
+
+### Ambiguities:
+1. **User Authentication:** No login/registration screens are shown. It's unclear if the system requires user authentication or operates as an open portal.
+2. **Appointment Type Options:** The specific list of appointment types available in the dropdown is not defined beyond the services listed on the home page.
+3. **Doctor Selection:** The criteria for doctor selection (specialty, availability) and the complete list of doctors are not specified.
+4. **Time Slot Availability:** The mechanism for displaying only available time slots is not shown.
+5. **Cancellation Process:** The confirmation or consequences of canceling an appointment are not depicted.
+6. **Status Transitions:** How appointments move from "Pending" to "Confirmed" status is not explained.
+
+### Missing Information:
+1. **Error Handling:** No error messages or validation feedback screens are shown.
+2. **Edit Functionality:** No ability to modify existing appointments is depicted.
+3. **Past Appointments:** Only "Upcoming Appointments" are shown; no historical view is provided.
+4. **Notification System:** How users receive email/SMS confirmations is not detailed.
+5. **Multi-patient Support:** Whether one user can schedule for multiple patients (e.g., family members) is unclear.
+6. **Appointment Duration:** No indication of how long appointments last or how this affects scheduling.
+7. **Waitlist/Overflow:** No mechanism for handling fully booked time slots.
+
+### Unclear Elements:
+1. **Date Format:** The date picker shows "__/__/__" but the confirmation shows "Oct 15, 2025" - format consistency is unclear.
+2. **Required vs Optional Fields:** Only "Additional Notes" is clearly optional; requirements for other fields are assumed.
+3. **Dropdown Population:** How dropdowns are populated (static vs. dynamic based on availability) is not specified.
+4. **Confirmation Number Generation:** The logic for generating unique confirmation numbers is not defined.
+
+### Assumptions Made:
+1. **Single User Session:** Assumed the system tracks a single patient's appointments per session.
+2. **Real-time Availability:** Assumed the system checks doctor/time availability in real-time during scheduling.
+3. **Immediate Confirmation:** Assumed appointments are confirmed immediately upon submission (though "Pending" status exists, suggesting possible manual review).
+4. **Service-Type Alignment:** Assumed the services listed on the home page correspond to the appointment types in the dropdown.
+5. **Linear Workflow:** Assumed the typical user flow is: Home → Schedule → Confirmation → My Appointments.
+6. **Contact Information Persistence:** Assumed patient contact information is stored for future appointments (though no account management is shown).
+7. **Cancellation Availability:** Assumed all appointments can be canceled online regardless of status or timing.

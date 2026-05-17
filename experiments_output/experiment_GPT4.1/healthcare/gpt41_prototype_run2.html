@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community Health Clinic Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #1976d2;
+      --secondary: #f5f5f5;
+      --accent: #e3f2fd;
+      --border: #cfd8dc;
+      --danger: #d32f2f;
+      --success: #388e3c;
+      --font: 'Segoe UI', Arial, sans-serif;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font);
+      background: var(--secondary);
+      color: #222;
+      min-height: 100vh;
+    }
+    #app-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      min-height: 100vh;
+      box-shadow: 0 0 8px #e0e0e0;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 1.2rem 1rem 0.7rem 1rem;
+      text-align: center;
+      letter-spacing: 1px;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: var(--accent);
+      border-bottom: 1px solid var(--border);
+      font-size: 1rem;
+    }
+    nav .nav-link {
+      color: #1976d2;
+      text-decoration: none;
+      padding: 0.8rem 1.2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: none;
+      background: none;
+      font: inherit;
+      outline: none;
+    }
+    nav .nav-link.active, nav .nav-link:hover {
+      background: #bbdefb;
+      font-weight: 600;
+    }
+    main {
+      flex: 1;
+      padding: 2rem 1.5rem 2.5rem 1.5rem;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .section {
+      margin-bottom: 1.5rem;
+    }
+    .center {
+      text-align: center;
+    }
+    .logo-placeholder {
+      width: 90px;
+      height: 90px;
+      background: #e3f2fd;
+      border-radius: 50%;
+      margin: 0 auto 1rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: #1976d2;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border: 2px solid #bbdefb;
+    }
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.7rem 1.3rem;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 0.2rem 0.3rem;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+    .btn.secondary {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .btn.danger {
+      background: var(--danger);
+      color: #fff;
+    }
+    .btn:active {
+      background: #1565c0;
+    }
+    .services-list {
+      list-style: disc inside;
+      margin: 0.5rem 0 0 1rem;
+      padding: 0;
+      color: #333;
+    }
+    .announcements {
+      background: #fffde7;
+      border-left: 4px solid #ffd600;
+      padding: 0.8rem 1rem;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+    .form-group {
+      margin-bottom: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.1rem;
+    }
+    .form-input, .form-select, .form-textarea {
+      padding: 0.6rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fafbfc;
+    }
+    .form-select {
+      min-width: 160px;
+    }
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+    .error-msg {
+      color: var(--danger);
+      font-size: 0.97rem;
+      margin-top: -0.5rem;
+      margin-bottom: 0.7rem;
+    }
+    .success-msg {
+      color: var(--success);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .appt-summary {
+      background: #e3f2fd;
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      border: 1px solid #bbdefb;
+    }
+    .appt-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+    }
+    .appt-table th, .appt-table td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.5rem;
+      text-align: left;
+    }
+    .appt-table th {
+      background: #e3f2fd;
+      font-weight: 600;
+    }
+    .appt-table tr.selected {
+      background: #bbdefb;
+    }
+    .status-confirmed {
+      color: var(--success);
+      font-weight: 600;
+    }
+    .status-pending {
+      color: #fbc02d;
+      font-weight: 600;
+    }
+    .faq-list {
+      margin: 0.5rem 0 1.2rem 0;
+      padding: 0;
+      list-style: none;
+    }
+    .faq-q {
+      font-weight: 600;
+      margin-top: 0.7rem;
+      margin-bottom: 0.2rem;
+    }
+    .faq-a {
+      margin-left: 1rem;
+      margin-bottom: 0.2rem;
+    }
+    .contact-info {
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+    }
+    @media (max-width: 600px) {
+      #app-container {
+        max-width: 100vw;
+        min-width: 0;
+        box-shadow: none;
+      }
+      main {
+        padding: 1rem 0.4rem 2rem 0.4rem;
+      }
+      .form-row {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .appt-table th, .appt-table td {
+        font-size: 0.97rem;
+        padding: 0.5rem 0.3rem;
+      }
+      .logo-placeholder {
+        width: 65px;
+        height: 65px;
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app-container">
+    <header>
+      Community Health Clinic Portal
+    </header>
+    <nav>
+      <button class="nav-link active" data-screen="home" id="nav-home">Home</button>
+      <button class="nav-link" data-screen="schedule" id="nav-schedule">Schedule Appointment</button>
+      <button class="nav-link" data-screen="appointments" id="nav-appointments">My Appointments</button>
+      <button class="nav-link" data-screen="help" id="nav-help">Help</button>
+    </nav>
+    <main>
+      <!-- Home / Dashboard -->
+      <section id="screen-home" class="screen">
+        <div class="center">
+          <div class="logo-placeholder" aria-label="Clinic Logo">CHC</div>
+          <h2>Welcome to Community Health Clinic</h2>
+        </div>
+        <div class="section center">
+          <button class="btn" id="btn-home-schedule">Schedule New Appointment</button>
+        </div>
+        <div class="section">
+          <h3>Services Available</h3>
+          <ul class="services-list">
+            <li>General Checkup</li>
+            <li>Pediatric Care</li>
+            <li>Vaccination Services</li>
+            <li>Follow-up Visits</li>
+          </ul>
+        </div>
+        <div class="section">
+          <h3>Announcements</h3>
+          <div class="announcements">
+            <ul style="margin:0; padding-left:1.2em;">
+              <li>Flu shots available this week</li>
+              <li>New patient forms updated</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Appointment Scheduling Form -->
+      <section id="screen-schedule" class="screen" style="display:none;">
+        <h2>Schedule Appointment</h2>
+        <form id="appt-form" autocomplete="off" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="appt-patient">Patient Name</label>
+            <input class="form-input" type="text" id="appt-patient" name="patient" maxlength="40" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="appt-email">Email Address</label>
+            <input class="form-input" type="email" id="appt-email" name="email" maxlength="50" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="appt-phone">Phone Number</label>
+            <input class="form-input" type="tel" id="appt-phone" name="phone" maxlength="20" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="flex:1;">
+              <label class="form-label" for="appt-type">Appointment Type</label>
+              <select class="form-select" id="appt-type" name="type" required>
+                <option value="">Select type...</option>
+                <option>General Checkup</option>
+                <option>Pediatric Care</option>
+                <option>Vaccination Services</option>
+                <option>Follow-up Visit</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex:1;">
+              <label class="form-label" for="appt-doctor">Preferred Doctor</label>
+              <select class="form-select" id="appt-doctor" name="doctor" required>
+                <option value="">Select doctor...</option>
+                <option>Dr. Smith</option>
+                <option>Dr. Lee</option>
+                <option>Dr. Patel</option>
+                <option>First Available</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="flex:1;">
+              <label class="form-label" for="appt-date">Appointment Date</label>
+              <input class="form-input" type="date" id="appt-date" name="date" required>
+            </div>
+            <div class="form-group" style="flex:1;">
+              <label class="form-label" for="appt-time">Appointment Time</label>
+              <select class="form-select" id="appt-time" name="time" required>
+                <option value="">Select time...</option>
+                <option>09:00 AM</option>
+                <option>10:30 AM</option>
+                <option>01:00 PM</option>
+                <option>02:30 PM</option>
+                <option>04:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="appt-notes">Additional Notes</label>
+            <textarea class="form-textarea" id="appt-notes" name="notes" rows="2" maxlength="120"></textarea>
+          </div>
+          <div id="appt-form-error" class="error-msg" style="display:none;"></div>
+          <div class="form-actions">
+            <button type="submit" class="btn" id="btn-confirm-appt">Confirm Appointment</button>
+            <button type="button" class="btn secondary" id="btn-clear-appt">Clear Form</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Appointment Confirmation -->
+      <section id="screen-confirmation" class="screen" style="display:none;">
+        <h2>Appointment Confirmation</h2>
+        <div class="success-msg" id="confirmation-msg">
+          Your appointment has been scheduled successfully.
+        </div>
+        <div class="appt-summary" id="confirmation-summary">
+          <!-- Populated by JS -->
+        </div>
+        <div class="form-actions center">
+          <button class="btn" id="btn-view-appts">View My Appointments</button>
+          <button class="btn secondary" id="btn-confirm-return-home">Return Home</button>
+        </div>
+      </section>
+
+      <!-- My Appointments / Appointment Tracking -->
+      <section id="screen-appointments" class="screen" style="display:none;">
+        <h2>My Appointments</h2>
+        <h3>Upcoming Appointments</h3>
+        <table class="appt-table" id="appt-table">
+          <thead>
+            <tr>
+              <th>Confirmation #</th>
+              <th>Doctor</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+        <div id="appt-details-section" style="display:none;">
+          <h3>Appointment Details</h3>
+          <div class="appt-summary" id="appt-details">
+            <!-- Populated by JS -->
+          </div>
+          <div class="form-actions">
+            <button class="btn danger" id="btn-cancel-appt">Cancel Appointment</button>
+            <button class="btn secondary" id="btn-appts-return-home">Return Home</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Help / FAQ -->
+      <section id="screen-help" class="screen" style="display:none;">
+        <h2>Help and Support</h2>
+        <div>
+          <h3>Frequently Asked Questions</h3>
+          <ul class="faq-list">
+            <li>
+              <div class="faq-q">Q: How do I schedule an appointment?</div>
+              <div class="faq-a">A: Select "Schedule Appointment" from the menu.</div>
+            </li>
+            <li>
+              <div class="faq-q">Q: Can I cancel an appointment online?</div>
+              <div class="faq-a">A: Yes, use the My Appointments page.</div>
+            </li>
+            <li>
+              <div class="faq-q">Q: How will I receive confirmation?</div>
+              <div class="faq-a">A: Confirmation appears immediately after booking.</div>
+            </li>
+          </ul>
+          <div class="contact-info">
+            <span>Email: <a href="mailto:support@clinic.org">support@clinic.org</a></span>
+            <span>Phone: (000) 555-0010</span>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn secondary" id="btn-help-return-home">Return Home</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    // --- Navigation ---
+    const screens = {
+      home: document.getElementById('screen-home'),
+      schedule: document.getElementById('screen-schedule'),
+      confirmation: document.getElementById('screen-confirmation'),
+      appointments: document.getElementById('screen-appointments'),
+      help: document.getElementById('screen-help')
+    };
+    const navLinks = document.querySelectorAll('.nav-link');
+    function showScreen(screen) {
+      for (const key in screens) {
+        screens[key].style.display = (key === screen) ? '' : 'none';
+      }
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.screen === screen);
+      });
+      // Special: reset details section on appointments screen
+      if (screen === 'appointments') {
+        document.getElementById('appt-details-section').style.display = 'none';
+        renderAppointmentsTable();
+      }
+      // Special: clear form errors on schedule
+      if (screen === 'schedule') {
+        document.getElementById('appt-form-error').style.display = 'none';
+      }
+    }
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => showScreen(link.dataset.screen));
+    });
+    document.getElementById('btn-home-schedule').onclick = () => {
+      showScreen('schedule');
+    };
+    document.getElementById('btn-confirm-return-home').onclick = () => {
+      showScreen('home');
+    };
+    document.getElementById('btn-view-appts').onclick = () => {
+      showScreen('appointments');
+    };
+    document.getElementById('btn-appts-return-home').onclick = () => {
+      showScreen('home');
+    };
+    document.getElementById('btn-help-return-home').onclick = () => {
+      showScreen('home');
+    };
+
+    // --- Appointment Scheduling Form ---
+    const apptForm = document.getElementById('appt-form');
+    const apptFormError = document.getElementById('appt-form-error');
+    const clearFormBtn = document.getElementById('btn-clear-appt');
+    function clearApptForm() {
+      apptForm.reset();
+      apptFormError.style.display = 'none';
+    }
+    clearFormBtn.onclick = clearApptForm;
+
+    // --- Appointment Data ---
+    let appointments = [
+      {
+        confirmation: 'HC-2045',
+        patient: 'Sarah Johnson',
+        email: 'sarah.johnson@email.com',
+        phone: '555-1234',
+        type: 'General Checkup',
+        doctor: 'Dr. Smith',
+        date: '2025-10-15',
+        time: '10:30 AM',
+        notes: '',
+        status: 'Confirmed',
+        location: 'Community Health Clinic'
+      },
+      {
+        confirmation: 'HC-1988',
+        patient: 'Michael Lee',
+        email: 'michael.lee@email.com',
+        phone: '555-5678',
+        type: 'Vaccination Services',
+        doctor: 'Dr. Lee',
+        date: '2025-10-28',
+        time: '01:00 PM',
+        notes: '',
+        status: 'Pending',
+        location: 'Community Health Clinic'
+      }
+    ];
+    let lastConfirmationNum = 2045;
+
+    // --- Appointment Submission ---
+    apptForm.onsubmit = function(e) {
+      e.preventDefault();
+      apptFormError.style.display = 'none';
+      // Validate
+      const patient = apptForm.patient.value.trim();
+      const email = apptForm.email.value.trim();
+      const phone = apptForm.phone.value.trim();
+      const type = apptForm.type.value;
+      const doctor = apptForm.doctor.value;
+      const date = apptForm.date.value;
+      const time = apptForm.time.value;
+      const notes = apptForm.notes.value.trim();
+      let error = '';
+      if (!patient) error = 'Patient name is required.';
+      else if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) error = 'Valid email is required.';
+      else if (!phone) error = 'Phone number is required.';
+      else if (!type) error = 'Please select an appointment type.';
+      else if (!doctor) error = 'Please select a preferred doctor.';
+      else if (!date) error = 'Please select an appointment date.';
+      else if (!time) error = 'Please select an appointment time.';
+      if (error) {
+        apptFormError.textContent = error;
+        apptFormError.style.display = '';
+        return;
+      }
+      // Add appointment
+      lastConfirmationNum++;
+      const confirmation = 'HC-' + lastConfirmationNum;
+      const appt = {
+        confirmation,
+        patient,
+        email,
+        phone,
+        type,
+        doctor,
+        date,
+        time,
+        notes,
+        status: 'Confirmed',
+        location: 'Community Health Clinic'
+      };
+      appointments.unshift(appt);
+      // Show confirmation screen
+      renderConfirmation(appt);
+      showScreen('confirmation');
+      apptForm.reset();
+    };
+
+    // --- Confirmation Screen ---
+    function renderConfirmation(appt) {
+      const summary = document.getElementById('confirmation-summary');
+      summary.innerHTML = `
+        <div><strong>Patient Name:</strong> ${escapeHTML(appt.patient)}</div>
+        <div><strong>Appointment Type:</strong> ${escapeHTML(appt.type)}</div>
+        <div><strong>Doctor:</strong> ${escapeHTML(appt.doctor)}</div>
+        <div><strong>Date:</strong> ${formatDate(appt.date)}</div>
+        <div><strong>Time:</strong> ${escapeHTML(appt.time)}</div>
+        <div><strong>Confirmation #:</strong> ${escapeHTML(appt.confirmation)}</div>
+        <div><strong>Status:</strong> <span class="status-confirmed">Confirmed</span></div>
+      `;
+    }
+
+    // --- My Appointments Table ---
+    function renderAppointmentsTable() {
+      const tbody = document.querySelector('#appt-table tbody');
+      tbody.innerHTML = '';
+      if (!appointments.length) {
+        tbody.innerHTML = `<tr><td colspan="4" class="center" style="color:#888;">No appointments found.</td></tr>`;
+        return;
+      }
+      appointments.forEach((appt, idx) => {
+        const tr = document.createElement('tr');
+        tr.tabIndex = 0;
+        tr.setAttribute('data-idx', idx);
+        tr.innerHTML = `
+          <td>${escapeHTML(appt.confirmation)}</td>
+          <td>${escapeHTML(appt.doctor)}</td>
+          <td>${formatDate(appt.date)}</td>
+          <td>
+            <span class="${appt.status === 'Confirmed' ? 'status-confirmed' : 'status-pending'}">
+              ${escapeHTML(appt.status)}
+            </span>
+          </td>
+        `;
+        tr.onclick = () => selectAppointment(idx);
+        tr.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') selectAppointment(idx); };
+        tbody.appendChild(tr);
+      });
+    }
+    let selectedApptIdx = null;
+    function selectAppointment(idx) {
+      selectedApptIdx = idx;
+      // Highlight row
+      const rows = document.querySelectorAll('#appt-table tbody tr');
+      rows.forEach((row, i) => row.classList.toggle('selected', i === idx));
+      // Show details
+      const appt = appointments[idx];
+      const details = document.getElementById('appt-details');
+      details.innerHTML = `
+        <div><strong>Selected Appointment:</strong> ${escapeHTML(appt.confirmation)}</div>
+        <div><strong>Location:</strong> ${escapeHTML(appt.location)}</div>
+        <div><strong>Date:</strong> ${formatDate(appt.date)}</div>
+        <div><strong>Time:</strong> ${escapeHTML(appt.time)}</div>
+        <div><strong>Doctor:</strong> ${escapeHTML(appt.doctor)}</div>
+        <div><strong>Status:</strong> <span class="${appt.status === 'Confirmed' ? 'status-confirmed' : 'status-pending'}">${escapeHTML(appt.status)}</span></div>
+        <div><strong>Notes:</strong> ${appt.notes ? escapeHTML(appt.notes) : 'Arrive 15 minutes early'}</div>
+      `;
+      document.getElementById('appt-details-section').style.display = '';
+      // Hide cancel button for past appointments (not implemented, but could check date)
+      document.getElementById('btn-cancel-appt').style.display = (appt.status === 'Confirmed') ? '' : 'none';
+    }
+
+    // --- Cancel Appointment ---
+    document.getElementById('btn-cancel-appt').onclick = function() {
+      if (selectedApptIdx === null) return;
+      const appt = appointments[selectedApptIdx];
+      if (!confirm(`Cancel appointment ${appt.confirmation}?`)) return;
+      appointments[selectedApptIdx].status = 'Cancelled';
+      // Remove from list (or mark as cancelled)
+      appointments = appointments.filter((a, i) => i !== selectedApptIdx);
+      selectedApptIdx = null;
+      renderAppointmentsTable();
+      document.getElementById('appt-details-section').style.display = 'none';
+    };
+
+    // --- Utility Functions ---
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      if (isNaN(d)) return escapeHTML(dateStr);
+      return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>"']/g, function(m) {
+        return ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[m];
+      });
+    }
+
+    // --- Initial Render ---
+    renderAppointmentsTable();
+
+    // --- Keyboard accessibility for navigation ---
+    navLinks.forEach(link => {
+      link.onkeydown = e => {
+        if (e.key === 'Enter' || e.key === ' ') link.click();
+      };
+    });
+  </script>
+</body>
+</html>

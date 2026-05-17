@@ -1,0 +1,235 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .navbar {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .container {
+            padding: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#" onclick="showScreen('home')">Home</a>
+        <a href="#" onclick="showScreen('schedule')">Schedule Appointment</a>
+        <a href="#" onclick="showScreen('appointments')">My Appointments</a>
+        <a href="#" onclick="showScreen('help')">Help</a>
+    </div>
+
+    <div id="home" class="container">
+        <h1>Welcome to Community Health Clinic</h1>
+        <p>Infographic/Image/Logo</p>
+        <h2>Services Available:</h2>
+        <ul>
+            <li>General Checkup</li>
+            <li>Pediatric Care</li>
+            <li>Vaccination Services</li>
+            <li>Follow-up Visits</li>
+        </ul>
+        <h2>Announcements:</h2>
+        <ul>
+            <li>Flu shots available this week</li>
+            <li>New patient forms updated</li>
+        </ul>
+    </div>
+
+    <div id="schedule" class="container hidden">
+        <h1>Schedule Appointment</h1>
+        <form id="appointmentForm">
+            <div class="form-group">
+                <label for="patientName">Patient Name:</label>
+                <input type="text" id="patientName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="appointmentType">Appointment Type:</label>
+                <select id="appointmentType" required>
+                    <option>General Checkup</option>
+                    <option>Pediatric Care</option>
+                    <option>Vaccination</option>
+                    <option>Follow-up</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="preferredDoctor">Preferred Doctor:</label>
+                <select id="preferredDoctor" required>
+                    <option>Dr. Smith</option>
+                    <option>Dr. Lee</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="appointmentDate">Appointment Date:</label>
+                <input type="date" id="appointmentDate" required>
+            </div>
+            <div class="form-group">
+                <label for="appointmentTime">Appointment Time:</label>
+                <select id="appointmentTime" required>
+                    <option>10:00 AM</option>
+                    <option>11:00 AM</option>
+                    <option>1:00 PM</option>
+                    <option>2:00 PM</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="additionalNotes">Additional Notes:</label>
+                <textarea id="additionalNotes"></textarea>
+            </div>
+            <button type="button" class="button" onclick="confirmAppointment()">Confirm Appointment</button>
+            <button type="reset" class="button">Clear Form</button>
+        </form>
+    </div>
+
+    <div id="confirmation" class="container hidden">
+        <h1>Appointment Confirmation</h1>
+        <p>Your appointment has been scheduled successfully!</p>
+        <h2>Appointment Summary:</h2>
+        <p id="appointmentSummary"></p>
+        <button class="button" onclick="showScreen('appointments')">View My Appointments</button>
+        <button class="button" onclick="showScreen('home')">Return Home</button>
+    </div>
+
+    <div id="appointments" class="container hidden">
+        <h1>My Appointments</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Confirmation #</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="appointmentList">
+                <tr>
+                    <td>HC-2045</td>
+                    <td>Dr. Smith</td>
+                    <td>Oct 15, 2023</td>
+                    <td>Confirmed</td>
+                </tr>
+                <tr>
+                    <td>HC-1988</td>
+                    <td>Dr. Lee</td>
+                    <td>Oct 28, 2023</td>
+                    <td>Pending</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Appointment Details</h2>
+        <p>Selected Appointment: HC-2045</p>
+        <p>Location: Community Health Clinic</p>
+        <p>Notes: Arrive 15 minutes early</p>
+        <button class="button">Cancel Appointment</button>
+        <button class="button" onclick="showScreen('home')">Return Home</button>
+    </div>
+
+    <div id="help" class="container hidden">
+        <h1>Help and Support</h1>
+        <h2>Frequently Asked Questions</h2>
+        <p>Q: How do I schedule an appointment?</p>
+        <p>A: Select "Schedule Appointment" from the menu.</p>
+        <p>Q: Can I cancel an appointment online?</p>
+        <p>A: Yes, use the My Appointments page.</p>
+        <p>Q: How will I receive confirmation?</p>
+        <p>A: Confirmation appears immediately after booking.</p>
+        <h2>Contact Information</h2>
+        <p>Email: support@clinic.org</p>
+        <p>Phone: (000) 555-0000</p>
+        <button class="button" onclick="showScreen('home')">Return Home</button>
+    </div>
+
+    <script>
+        function showScreen(screenId) {
+            document.querySelectorAll('.container').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        function confirmAppointment() {
+            const name = document.getElementById('patientName').value;
+            const type = document.getElementById('appointmentType').value;
+            const doctor = document.getElementById('preferredDoctor').value;
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('appointmentTime').value;
+
+            const summary = `
+                Patient Name: ${name}<br>
+                Appointment Type: ${type}<br>
+                Doctor: ${doctor}<br>
+                Date: ${date}<br>
+                Time: ${time}<br>
+                Confirmation #: HC-2045<br>
+                Status: Confirmed
+            `;
+            document.getElementById('appointmentSummary').innerHTML = summary;
+            showScreen('confirmation');
+        }
+    </script>
+</body>
+</html>
+```

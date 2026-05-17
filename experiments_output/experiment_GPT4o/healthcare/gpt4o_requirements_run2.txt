@@ -1,0 +1,71 @@
+A. Screen Descriptions
+
+1. **Screen Name:** Healthcare Portal Dashboard/Home
+   - **Purpose:** To provide an overview of services and announcements.
+   - **Key UI Components:** Navigation bar (Home, Schedule Appointment, My Appointments, Help), welcome message, infographic/logo, services list, announcements section.
+   - **Main User Interactions:** Navigate to other sections, view services, read announcements.
+
+2. **Screen Name:** Appointment Scheduling Form
+   - **Purpose:** To allow users to schedule a new appointment.
+   - **Key UI Components:** Input fields (Patient Name, Email, Phone), dropdowns (Appointment Type, Preferred Doctor, Appointment Time), date picker, additional notes, buttons (Confirm Appointment, Clear Form).
+   - **Main User Interactions:** Enter appointment details, submit or clear the form.
+
+3. **Screen Name:** Appointment Confirmation
+   - **Purpose:** To confirm and summarize the scheduled appointment.
+   - **Key UI Components:** Confirmation message, appointment summary (Patient Name, Appointment Type, Doctor, Date, Time, Confirmation Number, Status), navigation options (View My Appointments, Return Home).
+   - **Main User Interactions:** View confirmation details, navigate to other sections.
+
+4. **Screen Name:** My Appointments
+   - **Purpose:** To display and manage upcoming appointments.
+   - **Key UI Components:** List of appointments (Confirmation Number, Doctor, Date, Status), appointment details, buttons (Cancel Appointment, Return Home).
+   - **Main User Interactions:** View appointment details, cancel appointments, navigate.
+
+5. **Screen Name:** Help/FAQ
+   - **Purpose:** To provide assistance and answer common questions.
+   - **Key UI Components:** FAQ list, contact information (Email, Phone), Return Home button.
+   - **Main User Interactions:** Read FAQs, contact support, navigate back home.
+
+B. Functional Requirements
+
+1. **Navigation Requirements**
+   - FR-1: The system shall provide a navigation bar with links to Home, Schedule Appointment, My Appointments, and Help on all screens.
+   - FR-2: The system shall allow users to navigate to the Home screen from any other screen.
+
+2. **Appointment Scheduling Requirements**
+   - FR-3: The system shall allow users to enter their name, email, and phone number on the Appointment Scheduling Form.
+   - FR-4: The system shall provide dropdowns for selecting Appointment Type, Preferred Doctor, and Appointment Time.
+   - FR-5: The system shall provide a date picker for selecting the Appointment Date.
+   - FR-6: The system shall allow users to enter additional notes for the appointment.
+   - FR-7: The system shall allow users to confirm the appointment by clicking the Confirm Appointment button.
+   - FR-8: The system shall allow users to clear the form by clicking the Clear Form button.
+
+3. **Appointment Confirmation Requirements**
+   - FR-9: The system shall display a confirmation message upon successful scheduling of an appointment.
+   - FR-10: The system shall display an appointment summary including Patient Name, Appointment Type, Doctor, Date, Time, Confirmation Number, and Status.
+
+4. **Appointment Management Requirements**
+   - FR-11: The system shall display a list of upcoming appointments on the My Appointments screen.
+   - FR-12: The system shall allow users to view details of a selected appointment.
+   - FR-13: The system shall allow users to cancel an appointment by clicking the Cancel Appointment button.
+
+5. **Help and Support Requirements**
+   - FR-14: The system shall display a list of frequently asked questions on the Help screen.
+   - FR-15: The system shall provide contact information including Email and Phone on the Help screen.
+
+C. Traceability Mapping
+
+- **Home Screen → FR-1, FR-2 → Navigation Bar**
+- **Appointment Scheduling Form → FR-3, FR-4, FR-5, FR-6, FR-7, FR-8 → Input Fields, Dropdowns, Date Picker, Buttons**
+- **Appointment Confirmation → FR-9, FR-10 → Confirmation Message, Appointment Summary**
+- **My Appointments → FR-11, FR-12, FR-13 → Appointment List, Appointment Details, Buttons**
+- **Help/FAQ → FR-14, FR-15 → FAQ List, Contact Information**
+
+D. Ambiguities and Assumptions
+
+- **Ambiguities:** 
+  - The exact format for date and time inputs is not specified.
+  - The system's response to invalid input is not defined.
+
+- **Assumptions:**
+  - Users are authenticated before accessing these screens.
+  - The system has predefined lists for Appointment Types and Doctors.

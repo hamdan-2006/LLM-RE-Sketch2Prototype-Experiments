@@ -1,0 +1,106 @@
+## A. Screen Descriptions
+
+### 1. Home Page (Landing)
+- **Purpose:** Welcome users, highlight store features, allow navigation to categories, featured products, and deals.
+- **Key UI Components:** Store name, navigation bar (Home, Products, Cart), welcome message, "Shop Now" button, category buttons (Laptops, Headphones, Games), featured products with prices and "Add to Cart" buttons, special offer section with "View Deals" button.
+- **Main User Interactions:** Navigate to other screens, shop by category, add featured products to cart, view special deals.
+
+### 2. Products Page
+- **Purpose:** Display a list of products, allow searching, adding to cart, and viewing promotions.
+- **Key UI Components:** Navigation bar, product slideshow, featured products list with prices and "Add to Cart" buttons, search bar, promotions section.
+- **Main User Interactions:** Search for products, add products to cart, view promotions.
+
+### 3. Shopping Cart
+- **Purpose:** Show selected items, allow quantity review, removal of items, and proceed to checkout.
+- **Key UI Components:** Navigation bar, selected items table (product, quantity, price, remove action), subtotal, tax, total, "Continue Shopping" and "Proceed to Checkout" buttons.
+- **Main User Interactions:** Remove items from cart, proceed to checkout, continue shopping.
+
+### 4. Checkout
+- **Purpose:** Collect shipping and payment information, confirm order.
+- **Key UI Components:** Navigation bar, shipping information form (name, address, city, state, zip), payment method dropdown, card number, expiration date, order total, "Place Order" and "Cancel" buttons.
+- **Main User Interactions:** Enter shipping/payment details, place or cancel order.
+
+### 5. Order Confirmation
+- **Purpose:** Confirm successful order placement and summarize order details.
+- **Key UI Components:** Navigation bar, confirmation message, order summary (order number, items, total paid, payment status, estimated delivery, shipping address), "Continue Shopping" button.
+- **Main User Interactions:** Review order summary, continue shopping.
+
+---
+
+## B. Functional Requirements
+
+### Navigation & General
+- **FR-1:** The system shall display a navigation bar with links to Home, Products, and Cart on all screens. *(All screens)*
+- **FR-2:** The system shall allow users to navigate to the Home, Products, and Cart screens by clicking the respective navigation links. *(All screens)*
+
+### Home Page
+- **FR-3:** The Home Page shall display a welcome message and store description. *(Home Page)*
+- **FR-4:** The Home Page shall provide a "Shop Now" button that navigates to the Products Page. *(Home Page)*
+- **FR-5:** The Home Page shall display category buttons (Laptops, Headphones, Games) that filter or navigate to the respective product categories. *(Home Page)*
+- **FR-6:** The Home Page shall display a list of featured products, each with a price and "Add to Cart" button. *(Home Page)*
+- **FR-7:** The Home Page shall display a special offer section with a "View Deals" button that navigates to a deals or promotions page/section. *(Home Page)*
+
+### Products Page
+- **FR-8:** The Products Page shall display a product slideshow highlighting selected products. *(Products Page)*
+- **FR-9:** The Products Page shall display a list of featured products, each with a price and "Add to Cart" button. *(Products Page)*
+- **FR-10:** The Products Page shall provide a search bar for users to search for products by name or keyword. *(Products Page)*
+- **FR-11:** The Products Page shall display current promotions (e.g., free shipping on orders over $100). *(Products Page)*
+
+### Shopping Cart
+- **FR-12:** The Shopping Cart shall display a table of selected items, including product name, quantity, price, and a "Remove" action. *(Shopping Cart)*
+- **FR-13:** The Shopping Cart shall display the subtotal, tax, and total for the items in the cart. *(Shopping Cart)*
+- **FR-14:** The Shopping Cart shall provide a "Continue Shopping" button that returns the user to the Products or Home Page. *(Shopping Cart)*
+- **FR-15:** The Shopping Cart shall provide a "Proceed to Checkout" button that navigates to the Checkout screen. *(Shopping Cart)*
+- **FR-16:** The Shopping Cart shall update the cart contents and totals when an item is removed. *(Shopping Cart)*
+
+### Checkout
+- **FR-17:** The Checkout screen shall provide a form for users to enter shipping information (full name, address, city, state, zip). *(Checkout)*
+- **FR-18:** The Checkout screen shall provide a dropdown for selecting payment method and fields for card number and expiration date. *(Checkout)*
+- **FR-19:** The Checkout screen shall display the order total. *(Checkout)*
+- **FR-20:** The Checkout screen shall provide "Place Order" and "Cancel" buttons. *(Checkout)*
+- **FR-21:** The system shall validate that all required fields are completed before allowing the order to be placed. *(Checkout)*
+
+### Order Confirmation
+- **FR-22:** The Order Confirmation screen shall display a confirmation message upon successful order placement. *(Order Confirmation)*
+- **FR-23:** The Order Confirmation screen shall display an order summary including order number, items, total paid, payment status, estimated delivery, and shipping address. *(Order Confirmation)*
+- **FR-24:** The Order Confirmation screen shall provide a "Continue Shopping" button that navigates to the Home or Products Page. *(Order Confirmation)*
+
+---
+
+## C. Traceability Mapping
+
+| Screen             | Requirement IDs         | Interface Elements                                   |
+|--------------------|------------------------|------------------------------------------------------|
+| Home Page          | FR-1, FR-2, FR-3, FR-4, FR-5, FR-6, FR-7 | Navigation bar, welcome message, Shop Now, category buttons, featured products, special offer section |
+| Products Page      | FR-1, FR-2, FR-8, FR-9, FR-10, FR-11     | Navigation bar, product slideshow, featured products, search bar, promotions section |
+| Shopping Cart      | FR-1, FR-2, FR-12, FR-13, FR-14, FR-15, FR-16 | Navigation bar, selected items table, subtotal/tax/total, Continue Shopping, Proceed to Checkout, Remove action |
+| Checkout           | FR-1, FR-2, FR-17, FR-18, FR-19, FR-20, FR-21 | Navigation bar, shipping/payment form, order total, Place Order, Cancel |
+| Order Confirmation | FR-1, FR-2, FR-22, FR-23, FR-24           | Navigation bar, confirmation message, order summary, Continue Shopping |
+
+---
+
+## D. Ambiguities, Missing Information, and Assumptions
+
+- **Ambiguities:**
+  - The exact behavior of category buttons (filter vs. navigation) is unclear.
+  - The "View Deals" button's destination is not fully specified.
+  - The payment method dropdown options are not detailed.
+  - No explicit login/authentication process is shown.
+  - No indication of product details or ability to adjust quantity in cart.
+
+- **Missing Information:**
+  - Error handling for invalid input or failed transactions.
+  - Confirmation or feedback for actions like "Add to Cart" or "Remove."
+  - No indication of inventory/stock levels.
+  - No support for guest checkout vs. registered users.
+
+- **Assumptions:**
+  - "Add to Cart" adds one unit of the product.
+  - "Continue Shopping" returns to the Products or Home Page.
+  - All prices are in the same currency.
+  - Tax calculation is automatic and based on cart contents.
+  - Order confirmation is shown immediately after successful payment.
+
+---
+
+**End of Requirements Artifacts**

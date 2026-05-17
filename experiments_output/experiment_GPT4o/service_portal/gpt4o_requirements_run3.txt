@@ -1,0 +1,68 @@
+## A. Screen Descriptions
+
+### Screen 1: Home/Service Portal Dashboard
+- **Purpose:** To provide an overview of available IT services and announcements.
+- **Key UI Components:** Navigation bar (Home, Submit Ticket, Track Request, Help), service list, announcements section.
+- **Main User Interactions:** Navigate to other screens, view services, read announcements.
+
+### Screen 2: Submit Support Request
+- **Purpose:** To allow users to submit a new IT support request.
+- **Key UI Components:** Form fields (Name, Email, Issue Category, Problem Description), Submit Ticket button, Clear Form button.
+- **Main User Interactions:** Fill out and submit the support request form, clear the form.
+
+### Screen 3: Ticket Submission Confirmation
+- **Purpose:** To confirm the submission of a support request and provide a summary.
+- **Key UI Components:** Confirmation message, ticket summary (ID, Category, Submitted by, Status, Date, Estimated Response Time), Track Request button, Return Home button.
+- **Main User Interactions:** View ticket summary, navigate to track request or home.
+
+### Screen 4: Track Request Status
+- **Purpose:** To allow users to track the status of their submitted support requests.
+- **Key UI Components:** Ticket ID input, Search button, ticket information display.
+- **Main User Interactions:** Enter Ticket ID, search for ticket status, view ticket details, return home.
+
+### Screen 5: Help/FAQ
+- **Purpose:** To provide answers to frequently asked questions and support contact information.
+- **Key UI Components:** FAQ list, contact information, Return Home button.
+- **Main User Interactions:** Read FAQs, contact support, return home.
+
+## B. Functional Requirements
+
+### General Navigation
+- **FR-1:** The system shall provide a navigation bar on all screens with links to Home, Submit Ticket, Track Request, and Help.
+- **FR-2:** The system shall allow users to navigate to the Home screen from any other screen.
+
+### Home/Service Portal Dashboard
+- **FR-3:** The system shall display a list of available services on the Home screen.
+- **FR-4:** The system shall display support announcements on the Home screen.
+
+### Submit Support Request
+- **FR-5:** The system shall provide a form for users to submit a support request with fields for Name, Email, Issue Category, and Problem Description.
+- **FR-6:** The system shall allow users to submit the support request form.
+- **FR-7:** The system shall allow users to clear the support request form.
+
+### Ticket Submission Confirmation
+- **FR-8:** The system shall display a confirmation message upon successful submission of a support request.
+- **FR-9:** The system shall display a summary of the submitted ticket, including Ticket ID, Category, Submitted by, Status, Date, and Estimated Response Time.
+
+### Track Request Status
+- **FR-10:** The system shall provide a search function for users to enter a Ticket ID and view the status of their request.
+- **FR-11:** The system shall display detailed ticket information, including Ticket Number, Category, Status, Submitted by, Last Updated, and Technician Notes.
+
+### Help/FAQ
+- **FR-12:** The system shall display a list of frequently asked questions and answers.
+- **FR-13:** The system shall provide contact information for IT support.
+
+## C. Traceability Mapping
+
+| Screen                        | Requirement IDs | Interface Elements                                   |
+|-------------------------------|-----------------|------------------------------------------------------|
+| Home/Service Portal Dashboard | FR-1, FR-2, FR-3, FR-4 | Navigation bar, service list, announcements section   |
+| Submit Support Request        | FR-1, FR-2, FR-5, FR-6, FR-7 | Form fields, Submit Ticket button, Clear Form button  |
+| Ticket Submission Confirmation| FR-1, FR-2, FR-8, FR-9 | Confirmation message, ticket summary, navigation buttons |
+| Track Request Status          | FR-1, FR-2, FR-10, FR-11 | Ticket ID input, Search button, ticket information display |
+| Help/FAQ                      | FR-1, FR-2, FR-12, FR-13 | FAQ list, contact information, Return Home button     |
+
+## Ambiguities and Assumptions
+
+- **Ambiguities:** The sketches do not specify error handling for invalid inputs or system downtime.
+- **Assumptions:** Users are authenticated before accessing the portal. The system provides real-time updates for ticket status.

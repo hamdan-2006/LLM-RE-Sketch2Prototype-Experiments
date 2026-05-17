@@ -1,0 +1,10 @@
+openai
+anthropic
+google-generativeai
+python-dotenv
+pandas
+jinja2
+Pillow
+playwright
+requests
+tqdm

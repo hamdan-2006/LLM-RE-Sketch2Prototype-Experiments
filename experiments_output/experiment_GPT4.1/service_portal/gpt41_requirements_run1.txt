@@ -1,0 +1,100 @@
+## A. Screen Descriptions
+
+### 1. Home / Service Portal Dashboard
+- **Purpose:** Landing page for the University IT Service Portal; provides navigation, service overview, and announcements.
+- **Key UI Components:** Navigation bar (Home, Submit Ticket, Track Request, Help), welcome message, logo/image, "Submit New Request" button, list of available services, support announcements.
+- **Main User Interactions:** Navigate to other screens, view services, submit new request, read announcements.
+
+### 2. Submit Support Request
+- **Purpose:** Allows users to submit a new IT support ticket.
+- **Key UI Components:** Navigation bar, form fields (Name, Email, Issue Category dropdown, Problem Description), Submit Ticket button, Clear Form button.
+- **Main User Interactions:** Enter ticket details, submit ticket, clear form.
+
+### 3. Ticket Submission Confirmation
+- **Purpose:** Confirms successful ticket submission and summarizes ticket details.
+- **Key UI Components:** Navigation bar, confirmation message, ticket summary (ID, category, submitter, status, date, estimated response), Track Request button, Return Home button.
+- **Main User Interactions:** Review ticket summary, navigate to track request or home.
+
+### 4. Track Request Status
+- **Purpose:** Allows users to check the status of a submitted ticket.
+- **Key UI Components:** Navigation bar, Ticket ID input, Search button, ticket information display (number, category, status, submitter, last updated, technician notes), Return Home button.
+- **Main User Interactions:** Enter Ticket ID, search for ticket, view ticket status, return home.
+
+### 5. Help / FAQ
+- **Purpose:** Provides answers to common questions and IT support contact information.
+- **Key UI Components:** Navigation bar, FAQ section (questions and answers), support contact info (email, phone), Return Home button.
+- **Main User Interactions:** Read FAQs, obtain contact info, return home.
+
+---
+
+## B. Functional Requirements
+
+### Navigation
+- **FR-1:** The system shall display a navigation bar with links to Home, Submit Ticket, Track Request, and Help on all screens. (All screens)
+- **FR-2:** The system shall allow users to navigate to any main screen using the navigation bar. (All screens)
+
+### Home / Dashboard
+- **FR-3:** The system shall display a welcome message and the university IT portal logo/image on the Home screen. (Screen 1)
+- **FR-4:** The system shall display a list of available IT services (e.g., Password Reset, Software Installation, Network Support, Account Access) on the Home screen. (Screen 1)
+- **FR-5:** The system shall display current support announcements on the Home screen. (Screen 1)
+- **FR-6:** The system shall provide a "Submit New Request" button on the Home screen that navigates to the Submit Support Request screen. (Screen 1)
+
+### Submit Support Request
+- **FR-7:** The system shall provide a form for users to enter their Name, Email, select an Issue Category, and describe their problem on the Submit Support Request screen. (Screen 2)
+- **FR-8:** The system shall provide an Issue Category dropdown with available service categories. (Screen 2)
+- **FR-9:** The system shall provide a "Submit Ticket" button that submits the support request. (Screen 2)
+- **FR-10:** The system shall provide a "Clear Form" button that resets all form fields. (Screen 2)
+- **FR-11:** The system shall validate that all required fields are completed before allowing submission. (Screen 2)
+
+### Ticket Submission Confirmation
+- **FR-12:** The system shall display a confirmation message upon successful ticket submission. (Screen 3)
+- **FR-13:** The system shall display a summary of the submitted ticket, including Ticket ID, Category, Submitter, Status, Submitted Date, and Estimated Response Time. (Screen 3)
+- **FR-14:** The system shall provide a "Track Request" button that navigates to the Track Request Status screen. (Screen 3)
+- **FR-15:** The system shall provide a "Return Home" button that navigates to the Home screen. (Screen 3)
+
+### Track Request Status
+- **FR-16:** The system shall provide an input field for users to enter a Ticket ID and a Search button to retrieve ticket status. (Screen 4)
+- **FR-17:** The system shall display ticket information, including Ticket Number, Category, Status, Submitter, Last Updated, and Technician Notes. (Screen 4)
+- **FR-18:** The system shall provide a "Return Home" button on the Track Request Status screen. (Screen 4)
+
+### Help / FAQ
+- **FR-19:** The system shall display a list of frequently asked questions and answers on the Help screen. (Screen 5)
+- **FR-20:** The system shall display IT support contact information (email, phone) on the Help screen. (Screen 5)
+- **FR-21:** The system shall provide a "Return Home" button on the Help screen. (Screen 5)
+
+---
+
+## C. Traceability Mapping
+
+| Screen Name                  | Requirement IDs         | Interface Elements                                      |
+|------------------------------|------------------------|---------------------------------------------------------|
+| Home / Dashboard             | FR-1, FR-2, FR-3, FR-4, FR-5, FR-6 | Navigation bar, welcome message, logo, services list, announcements, Submit New Request button |
+| Submit Support Request       | FR-1, FR-2, FR-7, FR-8, FR-9, FR-10, FR-11 | Navigation bar, form fields, Issue Category dropdown, Submit Ticket button, Clear Form button |
+| Ticket Submission Confirmation | FR-1, FR-2, FR-12, FR-13, FR-14, FR-15 | Navigation bar, confirmation message, ticket summary, Track Request button, Return Home button |
+| Track Request Status         | FR-1, FR-2, FR-16, FR-17, FR-18 | Navigation bar, Ticket ID input, Search button, ticket information, Return Home button |
+| Help / FAQ                   | FR-1, FR-2, FR-19, FR-20, FR-21 | Navigation bar, FAQ section, contact info, Return Home button |
+
+---
+
+## D. Ambiguities, Missing Information, and Assumptions
+
+- **Ambiguities:**
+  - The exact list of issue categories in the dropdown is not specified.
+  - The format and validation rules for Name and Email fields are not detailed.
+  - The process for updating ticket status and technician notes is not shown.
+  - The announcement content and update mechanism are unclear.
+
+- **Missing Information:**
+  - No authentication or user login is depicted.
+  - No indication of error handling or feedback for invalid submissions.
+  - No details on how technician notes are updated or by whom.
+
+- **Assumptions:**
+  - All users can access all screens without authentication.
+  - Ticket status and technician notes are updated by IT staff via a separate interface.
+  - The system will validate required fields before submission.
+  - The FAQ and announcements are managed by IT staff outside the depicted workflow.
+
+---
+
+**End of requirements analysis for the service portal scenario.**

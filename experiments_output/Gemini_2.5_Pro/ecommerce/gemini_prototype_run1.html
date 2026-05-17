@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce Prototype</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --border-color: #dee2e6;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            background-color: #f4f4f4;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--light-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-indicator {
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            margin-left: 4px;
+            vertical-align: top;
+        }
+
+        main > section {
+            padding: 2rem 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-gap: 20px;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: var(--light-color);
+            border-radius: 5px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .category-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .category-links .btn {
+            min-width: 120px;
+        }
+        .product-card {
+            text-align: center;
+        }
+        .product-card h4 {
+            margin: 0.5rem 0;
+        }
+        .product-card .price {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .special-offer {
+            background: var(--success-color);
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 5px;
+            margin-top: 2rem;
+        }
+
+        /* Products Page */
+        .slideshow-placeholder {
+            background: #ccc;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        .search-bar input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+        .product-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .product-list-item:last-child {
+            border-bottom: none;
+        }
+        .product-list-item .price {
+            font-weight: bold;
+            margin: 0 1rem;
+        }
+        .promotions {
+            background: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-top: 2rem;
+        }
+
+        /* Cart & Checkout */
+        .cart-table, .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+        .cart-table th, .cart-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .cart-table th {
+            background-color: var(--light-color);
+        }
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        .cost-summary {
+            width: 100%;
+            max-width: 350px;
+            margin-left: auto;
+        }
+        .cost-summary td {
+            padding: 8px;
+        }
+        .cost-summary tr td:last-child {
+            text-align: right;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .order-summary-details {
+            background: var(--light-color);
+            padding: 1.5rem;
+            border-radius: 5px;
+        }
+        .order-summary-details p {
+            margin: 0.5rem 0;
+        }
+        .order-summary-details strong {
+            display: inline-block;
+            width: 150px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-links {
+                text-align: center;
+            }
+            .cart-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo" onclick="showScreen('home-page')">Electronics Store</a>
+                <div class="nav-links">
+                    <a onclick="showScreen('home-page')">Home</a>
+                    <a onclick="showScreen('products-page')">Products</a>
+                    <a onclick="showScreen('cart-page')">Cart<span id="cart-count" class="cart-indicator">0</span></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Screen 1: Home Page -->
+        <section id="home-page">
+            <div class="hero card">
+                <h1>Welcome to Electronics Store</h1>
+                <p>Discover the best products at unbeatable prices. Fast delivery, all easy returns.</p>
+                <button class="btn btn-primary" onclick="showScreen('products-page')">Shop Now</button>
+            </div>
+
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-links">
+                <button class="btn btn-secondary" onclick="showScreen('products-page')">Laptops</button>
+                <button class="btn btn-secondary" onclick="showScreen('products-page')">Headphones</button>
+                <button class="btn btn-secondary" onclick="showScreen('products-page')">Games</button>
+            </div>
+
+            <h2 class="section-title">Featured Products</h2>
+            <div class="grid grid-3">
+                <div class="card product-card">
+                    <h4>Product 1 (Laptop)</h4>
+                    <p class="price">$449.99</p>
+                    <button class="btn btn-primary" onclick="addToCart({id: 1, name: 'Product 1 (Laptop)', price: 449.99})">Add to Cart</button>
+                </div>
+                <div class="card product-card">
+                    <h4>Product 2 (Headphones)</h4>
+                    <p class="price">$49.99</p>
+                    <button class="btn btn-primary" onclick="addToCart({id: 2, name: 'Product 2 (Headphones)', price: 49.99})">Add to Cart</button>
+                </div>
+                <div class="card product-card">
+                    <h4>Product 3 (Game)</h4>
+                    <p class="price">$49.99</p>
+                    <button class="btn btn-primary" onclick="addToCart({id: 3, name: 'Product 3 (Game)', price: 49.99})">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="special-offer">
+                <h2>Special Offer</h2>
+                <p>Get 30% off on selected items today!</p>
+                <button class="btn btn-light" onclick="showScreen('products-page')">View Deals</button>
+            </div>
+        </section>
+
+        <!-- Screen 2: Products Page -->
+        <section id="products-page" class="hidden">
+            <h2 class="section-title">Our Products</h2>
+            <div class="slideshow-placeholder">Products Slideshow</div>
+            
+            <div class="search-bar card">
+                <input type="text" id="search-input" placeholder="Search Products...">
+                <button class="btn btn-primary" onclick="alert('Search functionality not implemented.')">Search</button>
+            </div>
+
+            <div class="card">
+                <h3>All Products</h3>
+                <div class="product-list">
+                    <div class="product-list-item">
+                        <div><strong>Laptop</strong></div>
+                        <div><span class="price">$899.00</span><a href="#" onclick="addToCart({id: 4, name: 'Laptop', price: 899.00})">Add to Cart</a></div>
+                    </div>
+                    <div class="product-list-item">
+                        <div><strong>Wireless Mouse</strong></div>
+                        <div><span class="price">$25.00</span><a href="#" onclick="addToCart({id: 5, name: 'Wireless Mouse', price: 25.00})">Add to Cart</a></div>
+                    </div>
+                    <div class="product-list-item">
+                        <div><strong>Headphones</strong></div>
+                        <div><span class="price">$75.00</span><a href="#" onclick="addToCart({id: 6, name: 'Headphones', price: 75.00})">Add to Cart</a></div>
+                    </div>
+                    <div class="product-list-item">
+                        <div><strong>Smart Watch</strong></div>
+                        <div><span class="price">$199.00</span><a href="#" onclick="addToCart({id: 7, name: 'Smart Watch', price: 199.00})">Add to Cart</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="promotions">
+                <h3>Promotions</h3>
+                <p>- Free shipping on orders over $100</p>
+            </div>
+        </section>
+
+        <!-- Screen 3: Shopping Cart -->
+        <section id="cart-page" class="hidden">
+            <h2 class="section-title">Shopping Cart</h2>
+            <div class="card">
+                <div id="cart-items-container">
+                    <!-- Cart items will be rendered here by JS -->
+                </div>
+                <div id="cart-summary-container">
+                    <!-- Cart summary will be rendered here by JS -->
+                </div>
+                <div id="cart-empty-message" class="hidden" style="text-align:center; padding: 2rem;">
+                    <p>Your cart is empty.</p>
+                </div>
+                <div id="cart-actions" class="cart-actions">
+                    <button class="btn btn-secondary" onclick="showScreen('products-page')">Continue Shopping</button>
+                    <button class="btn btn-primary" onclick="showScreen('checkout-page')">Proceed to checkout</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 4: Checkout -->
+        <section id="checkout-page" class="hidden">
+            <h2 class="section-title">Checkout</h2>
+            <div class="card">
+                <form id="checkout-form" onsubmit="event.preventDefault(); placeOrder();">
+                    <fieldset>
+                        <legend><h3>Shipping Information</h3></legend>
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" required>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">Zip</label>
+                                <input type="text" id="zip" required>
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend><h3>Payment Method</h3></legend>
+                        <div class="form-group">
+                            <label for="paymentMethod">Payment Method</label>
+                            <select id="paymentMethod">
+                                <option>Credit Card</option>
+                                <option>Debit Card</option>
+                                <option>PayPal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" placeholder="1111-2222-3333-4444" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expDate">Expiration Date</label>
+                            <input type="text" id="expDate" placeholder="MM/YY" required>
+                        </div>
+                    </fieldset>
+                    
+                    <h3>Order Total: <span id="checkout-total"></span></h3>
+
+                    <div class="cart-actions">
+                        <button type="button" class="btn btn-secondary" onclick="showScreen('cart-page')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Place order</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Screen 5: Order Confirmation -->
+        <section id="confirmation-page" class="hidden">
+            <div class="card" style="text-align: center;">
+                <h2 class="section-title" style="color: var(--success-color);">Your order has been placed successfully!</h2>
+                
+                <h3>Order Summary</h3>
+                <div id="order-summary" class="order-summary-details" style="text-align: left;">
+                    <!-- Order summary details will be rendered here by JS -->
+                </div>
+                
+                <button class="btn btn-primary" style="margin-top: 2rem;" onclick="goHome()">Continue Shopping</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const screens = document.querySelectorAll('main > section');
+        let cart = [];
+
+        // Initial sample items for demonstration as per sketch
+        const initialCartItems = [
+            { id: 101, name: 'Laptop', price: 899.00, qty: 1 },
+            { id: 102, name: 'Headphones', price: 75.00, qty: 1 }
+        ];
+        cart = [...initialCartItems];
+
+        // --- NAVIGATION ---
+        function showScreen(screenId) {
+            screens.forEach(screen => {
+                if (screen.id === screenId) {
+                    screen.classList.remove('hidden');
+                } else {
+                    screen.classList.add('hidden');
+                }
+            });
+            window.scrollTo(0, 0);
+
+            if (screenId === 'cart-page') {
+                renderCart();
+            }
+            if (screenId === 'checkout-page') {
+                renderCheckout();
+            }
+        }
+
+        function goHome() {
+            cart = [];
+            updateCartCount();
+            showScreen('home-page');
+        }
+
+        // --- CART LOGIC ---
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartCount();
+            alert(`'${product.name}' has been added to your cart.`);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            renderCart();
+        }
+
+        function updateCartCount() {
+            const cartCountEl = document.getElementById('cart-count');
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            cartCountEl.textContent = totalItems;
+        }
+
+        function renderCart() {
+            const cartContainer = document.getElementById('cart-items-container');
+            const summaryContainer = document.getElementById('cart-summary-container');
+            const emptyMsg = document.getElementById('cart-empty-message');
+            const cartActions = document.getElementById('cart-actions');
+
+            cartContainer.innerHTML = '';
+            summaryContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                emptyMsg.classList.remove('hidden');
+                cartActions.classList.add('hidden');
+                summaryContainer.classList.add('hidden');
+                updateCartCount();
+                return;
+            }
+
+            emptyMsg.classList.add('hidden');
+            cartActions.classList.remove('hidden');
+            summaryContainer.classList.remove('hidden');
+
+            const table = document.createElement('table');
+            table.className = 'cart-table';
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+            const tbody = table.querySelector('tbody');
+
+            let subtotal = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                subtotal += itemTotal;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.qty}</td>
+                    <td>$${itemTotal.toFixed(2)}</td>
+                    <td><a href="#" onclick="removeFromCart(${item.id})">Remove</a></td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            cartContainer.appendChild(table);
+
+            const tax = subtotal * 0.08; // 8% tax rate
+            const total = subtotal + tax;
+
+            summaryContainer.innerHTML = `
+                <div class="cost-summary">
+                    <table class="summary-table">
+                        <tr><td>Subtotal:</td><td>$${subtotal.toFixed(2)}</td></tr>
+                        <tr><td>Tax:</td><td>$${tax.toFixed(2)}</td></tr>
+                        <tr><td><strong>Total:</strong></td><td><strong>$${total.toFixed(2)}</strong></td></tr>
+                    </table>
+                </div>
+            `;
+            updateCartCount();
+        }
+
+        // --- CHECKOUT & CONFIRMATION ---
+        function renderCheckout() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const tax = subtotal * 0.08;
+            const total = subtotal + tax;
+            document.getElementById('checkout-total').textContent = `$${total.toFixed(2)}`;
+        }
+
+        function placeOrder() {
+            const form = document.getElementById('checkout-form');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            renderConfirmation();
+            showScreen('confirmation-page');
+        }
+
+        function renderConfirmation() {
+            const summaryEl = document.getElementById('order-summary');
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const tax = subtotal * 0.08;
+            const total = subtotal + tax;
+
+            const itemsPurchased = cart.map(item => `${item.name} (x${item.qty})`).join(', ');
+            const shippingAddress = `
+                ${document.getElementById('fullName').value}<br>
+                ${document.getElementById('address').value}<br>
+                ${document.getElementById('city').value}, ${document.getElementById('state').value} ${document.getElementById('zip').value}
+            `;
+            const deliveryDate = new Date();
+            deliveryDate.setDate(deliveryDate.getDate() + 5);
+
+            summaryEl.innerHTML = `
+                <p><strong>Order #:</strong> <span>ORD-${Math.floor(Math.random() * 10000)}</span></p>
+                <p><strong>Items:</strong> <span>${itemsPurchased}</span></p>
+                <p><strong>Total Paid:</strong> <span>$${total.toFixed(2)}</span></p>
+                <p><strong>Payment Status:</strong> <span>Approved</span></p>
+                <p><strong>Estimated Delivery:</strong> <span>${deliveryDate.toDateString()}</span></p>
+                <p><strong>Shipping Address:</strong><br>${shippingAddress}</p>
+            `;
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+            showScreen('home-page');
+        });
+    </script>
+</body>
+</html>

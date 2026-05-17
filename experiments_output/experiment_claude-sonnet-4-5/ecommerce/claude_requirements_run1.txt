@@ -1,0 +1,280 @@
+# Requirements Analysis: Ecommerce System
+
+---
+
+## A. Screen Descriptions
+
+### Screen 1: Home Page (Landing)
+**Purpose:** Serve as the main entry point for the electronics store, showcasing promotional content, featured products, and navigation options.
+
+**Key UI Components:**
+- Site header with "Electronics Store" branding
+- Navigation menu: Home | Products | Cart
+- Welcome banner with promotional text
+- "Shop Now" call-to-action button
+- "Shop by Category" section with category buttons (Laptops, Headphones, Gaming)
+- "Featured Products" section displaying product cards (Product 1-3 with prices $49.99, $49.99, $49.99)
+- "Add to Cart" buttons for each featured product
+- "Special Offer" banner: "Get 30% off on selected items"
+- "View Deals" button
+
+**Main User Interactions:**
+- Navigate between pages using header menu
+- Browse products by category
+- Add featured products to cart
+- View special offers/deals
+
+---
+
+### Screen 2: Shopping Cart
+**Purpose:** Display selected items, allow quantity adjustments, show pricing breakdown, and enable checkout.
+
+**Key UI Components:**
+- Header navigation: Home | Products | Cart
+- "Selected Items" section with table columns: Product | Qty | Price | Action
+- Cart items list (Laptop $299, Headphones $75)
+- Remove action buttons for each item
+- Subtotal display ($974)
+- Tax display ($78)
+- Total display ($1052)
+- "Continue Shopping" button
+- "Proceed to Checkout" button
+
+**Main User Interactions:**
+- Remove items from cart
+- View pricing breakdown
+- Continue shopping or proceed to checkout
+
+---
+
+### Screen 3: Products Page (Catalog)
+**Purpose:** Display available products with search functionality and allow users to add items to cart.
+
+**Key UI Components:**
+- Header navigation: Home | Products | Cart
+- "Product Slideshow" area
+- "Featured Products" list with items:
+  - Laptop ($899)
+  - Wireless Mouse ($25)
+  - Headphones ($75)
+  - Smart Watch ($199)
+- "Add to Cart" buttons for each product
+- "Search Products" input field with search button
+- "Promotions" section: "Free shipping on orders over $100"
+
+**Main User Interactions:**
+- Browse featured products
+- Add products to cart
+- Search for specific products
+- View promotional information
+
+---
+
+### Screen 4: Checkout
+**Purpose:** Collect shipping information and payment details to complete the purchase.
+
+**Key UI Components:**
+- Header navigation: Home | Products | Carts (note: typo in sketch)
+- "Shipping Information" section with input fields:
+  - Full Name
+  - Address
+  - City
+  - State
+  - Zip
+- "Payment Method" section with dropdown
+- Payment card fields:
+  - Card Number
+  - Expiration Date
+- Order Total display ($1052)
+- "Place Order" button
+- "Cancel" button
+
+**Main User Interactions:**
+- Enter shipping address
+- Select payment method
+- Enter payment details
+- Submit or cancel order
+
+---
+
+### Screen 5: Order Confirmation
+**Purpose:** Confirm successful order placement and provide order summary details.
+
+**Key UI Components:**
+- Header navigation: Home | Products | Cart
+- Success message: "Your order has been placed successfully"
+- "Order Summary" section displaying:
+  - Order number (ORD-2045)
+  - Items purchased (Laptop, Headphones)
+  - Total Paid ($1052)
+  - Payment Status (Approved)
+  - Estimated Delivery (Oct 18, 25)
+  - Shipping Address (123 Main Street, Baltimore, MD 21201)
+- "Continue Shopping" button
+
+**Main User Interactions:**
+- Review order confirmation details
+- Return to shopping
+
+---
+
+## B. Functional Requirements
+
+### Navigation & Site Structure
+
+**FR-1:** The system shall provide a persistent navigation menu on all screens containing links to Home, Products, and Cart pages.
+
+**FR-2:** The system shall allow users to navigate between screens using the header navigation menu without losing cart contents.
+
+---
+
+### Product Browsing & Display
+
+**FR-3:** The system shall display featured products on the home page with product name, price, and an "Add to Cart" button for each item.
+
+**FR-4:** The system shall provide category-based browsing with at least three product categories (Laptops, Headphones, Gaming) accessible from the home page.
+
+**FR-5:** The system shall display a product catalog on the Products page showing product name, price, and "Add to Cart" functionality for each item.
+
+**FR-6:** The system shall provide a product search feature allowing users to search for products by entering search terms.
+
+**FR-7:** The system shall display promotional information including special offers and shipping policies on relevant pages.
+
+---
+
+### Shopping Cart Management
+
+**FR-8:** The system shall allow users to add products to their shopping cart from both the home page and products page.
+
+**FR-9:** The system shall display all selected items in the shopping cart with product name, quantity, individual price, and total price for each item.
+
+**FR-10:** The system shall allow users to remove individual items from the shopping cart.
+
+**FR-11:** The system shall calculate and display the subtotal, tax amount, and total order amount in the shopping cart.
+
+**FR-12:** The system shall provide a "Continue Shopping" option from the cart page to return users to product browsing.
+
+---
+
+### Checkout & Payment
+
+**FR-13:** The system shall collect shipping information including full name, address, city, state, and zip code during checkout.
+
+**FR-14:** The system shall provide a payment method selection mechanism with at least one payment option (card payment indicated by dropdown).
+
+**FR-15:** The system shall collect payment card information including card number and expiration date when card payment is selected.
+
+**FR-16:** The system shall display the order total amount on the checkout page before order submission.
+
+**FR-17:** The system shall allow users to cancel the checkout process and return to the previous screen.
+
+---
+
+### Order Processing & Confirmation
+
+**FR-18:** The system shall generate a unique order number upon successful order placement.
+
+**FR-19:** The system shall display an order confirmation page showing order number, purchased items, total paid, payment status, estimated delivery date, and shipping address.
+
+**FR-20:** The system shall provide a "Continue Shopping" option from the order confirmation page to allow users to browse additional products.
+
+---
+
+## C. Traceability Mapping
+
+### Screen 1 (Home Page) → Requirements
+
+| Requirement IDs | Interface Elements |
+|----------------|-------------------|
+| FR-1 | Navigation menu: Home \| Products \| Cart |
+| FR-3 | Featured Products section, Product cards with prices, "Add to Cart" buttons |
+| FR-4 | Shop by Category section, Category buttons (Laptops, Headphones, Gaming) |
+| FR-7 | Special Offer banner, "View Deals" button |
+| FR-8 | "Add to Cart" buttons on featured products |
+
+---
+
+### Screen 2 (Shopping Cart) → Requirements
+
+| Requirement IDs | Interface Elements |
+|----------------|-------------------|
+| FR-1 | Navigation menu: Home \| Products \| Cart |
+| FR-9 | Selected Items table with Product, Qty, Price columns |
+| FR-10 | Remove action buttons for each cart item |
+| FR-11 | Subtotal ($974), Tax ($78), Total ($1052) displays |
+| FR-12 | "Continue Shopping" button |
+
+---
+
+### Screen 3 (Products Page) → Requirements
+
+| Requirement IDs | Interface Elements |
+|----------------|-------------------|
+| FR-1 | Navigation menu: Home \| Products \| Cart |
+| FR-5 | Featured Products list with prices and "Add to Cart" buttons |
+| FR-6 | Search Products input field and search button |
+| FR-7 | Promotions section: "Free shipping on orders over $100" |
+| FR-8 | "Add to Cart" buttons for each product |
+
+---
+
+### Screen 4 (Checkout) → Requirements
+
+| Requirement IDs | Interface Elements |
+|----------------|-------------------|
+| FR-1 | Navigation menu: Home \| Products \| Carts |
+| FR-13 | Shipping Information form fields (Full Name, Address, City, State, Zip) |
+| FR-14 | Payment Method dropdown |
+| FR-15 | Card Number and Expiration Date input fields |
+| FR-16 | Order Total display ($1052) |
+| FR-17 | "Cancel" button |
+
+---
+
+### Screen 5 (Order Confirmation) → Requirements
+
+| Requirement IDs | Interface Elements |
+|----------------|-------------------|
+| FR-1 | Navigation menu: Home \| Products \| Cart |
+| FR-18 | Order number display (ORD-2045) |
+| FR-19 | Order Summary section with all order details |
+| FR-20 | "Continue Shopping" button |
+
+---
+
+## D. Ambiguities, Missing Information & Assumptions
+
+### Ambiguities:
+
+1. **Quantity Management:** Screen 2 shows quantity column but no mechanism to adjust quantities (only remove option visible)
+2. **Product Slideshow:** Screen 3 mentions "Product Slideshow" but no details on content or interaction
+3. **Payment Method Options:** Only card payment fields shown; dropdown suggests multiple options but alternatives unclear
+4. **Tax Calculation:** Tax amount shown but calculation method/rate not specified
+5. **Category Navigation:** Unclear if category buttons filter products on same page or navigate to separate views
+6. **Search Functionality:** No indication of search results display or filtering behavior
+
+### Missing Information:
+
+1. **User Authentication:** No login/registration functionality visible in any screen
+2. **Product Details:** No product detail page shown; unclear how users view full product information
+3. **Inventory Management:** No indication of stock availability or out-of-stock handling
+4. **Error Handling:** No validation messages or error states shown for forms
+5. **Order History:** No way to view past orders after confirmation
+6. **Payment Processing:** No indication of payment gateway integration or processing states
+7. **Shipping Options:** Only one shipping method implied; no selection mechanism shown
+8. **Email Confirmation:** No indication of email receipt or notifications
+
+### Assumptions Made:
+
+1. **Single Currency:** All prices assumed to be in USD based on $ symbol
+2. **Guest Checkout:** Assumed system allows checkout without user account (no login shown)
+3. **Automatic Tax Calculation:** System calculates tax automatically based on shipping address
+4. **Persistent Cart:** Cart contents persist across navigation between pages
+5. **Single Shipping Address:** Only one shipping address per order supported
+6. **Immediate Payment:** Payment processed immediately upon order placement
+7. **Fixed Shipping Threshold:** Free shipping promotion applies at $100 order value
+8. **State Selection:** State field likely uses dropdown (common pattern) though shown as text input
+
+---
+
+**End of Requirements Analysis Document**

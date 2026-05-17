@@ -1,0 +1,47 @@
+Experiment Log
+
+Model label: OpenAI GPT-4o
+Requested model ID: gpt-4o
+Pipeline: Two-phase generation
+
+Phase 1: Requirements, traceability, ambiguities
+Phase 2: Prototype generation using sketches + Phase 1 output
+
+Temperature: 0.2
+Top-p: 1.0
+Top-k: not supported by model/API
+Max output tokens per phase: 16384
+Runs per scenario: 3
+Image detail / quality: high
+Timeout: 180.0 seconds
+Retries: 2
+Date: 2026-05-07
+
+Base folder: C:\Users\hamda\python-projects\experiments\experiment_GPT4o
+
+------------------------------------------------------------
+[2026-05-07 00:50:32] OpenAI connection successful.
+[2026-05-07 00:50:32] Connection test returned model: gpt-4o-2024-08-06
+[2026-05-07 00:50:32] Two-phase GPT-4o experiment started.
+[2026-05-07 00:50:32] Scenario service_portal: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-07 00:50:53] service_portal run 1 Phase 1 completed in 21.11s. Flagged: No
+[2026-05-07 00:51:16] service_portal run 1 Phase 2 completed in 22.92s. Flagged: No
+[2026-05-07 00:51:35] service_portal run 2 Phase 1 completed in 19.31s. Flagged: No
+[2026-05-07 00:51:54] service_portal run 2 Phase 2 completed in 18.7s. Flagged: No
+[2026-05-07 00:52:16] service_portal run 3 Phase 1 completed in 21.53s. Flagged: No
+[2026-05-07 00:52:38] service_portal run 3 Phase 2 completed in 22.4s. Flagged: No
+[2026-05-07 00:52:38] Scenario Ecommerce: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-07 00:52:59] Ecommerce run 1 Phase 1 completed in 20.62s. Flagged: No
+[2026-05-07 00:53:24] Ecommerce run 1 Phase 2 completed in 25.24s. Flagged: No
+[2026-05-07 00:53:42] Ecommerce run 2 Phase 1 completed in 17.74s. Flagged: No
+[2026-05-07 00:54:02] Ecommerce run 2 Phase 2 completed in 20.23s. Flagged: No
+[2026-05-07 00:54:18] Ecommerce run 3 Phase 1 completed in 16.15s. Flagged: No
+[2026-05-07 00:54:37] Ecommerce run 3 Phase 2 completed in 19.13s. Flagged: No
+[2026-05-07 00:54:37] Scenario Healthcare: found sketches: Screen1.png, Screen2.png, Screen3.png, Screen4.png, Screen5.png
+[2026-05-07 00:54:54] Healthcare run 1 Phase 1 completed in 16.77s. Flagged: No
+[2026-05-07 00:55:16] Healthcare run 1 Phase 2 completed in 21.64s. Flagged: No
+[2026-05-07 00:55:33] Healthcare run 2 Phase 1 completed in 17.03s. Flagged: No
+[2026-05-07 00:55:54] Healthcare run 2 Phase 2 completed in 21.06s. Flagged: No
+[2026-05-07 00:56:10] Healthcare run 3 Phase 1 completed in 16.47s. Flagged: No
+[2026-05-07 00:56:35] Healthcare run 3 Phase 2 completed in 24.5s. Flagged: No
+[2026-05-07 00:56:35] Two-phase GPT-4o experiment completed.

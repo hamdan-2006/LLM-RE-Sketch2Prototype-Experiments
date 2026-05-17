@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Health Clinic Portal</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  min-height: 100vh;
+}
+
+header {
+  background: #2c5f8d;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav {
+  background: #3a7ab8;
+  padding: 12px 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+nav a:hover, nav a.active {
+  background: #2c5f8d;
+}
+
+main {
+  padding: 30px;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+.welcome {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.welcome h2 {
+  font-size: 28px;
+  color: #2c5f8d;
+  margin-bottom: 20px;
+}
+
+.logo-placeholder {
+  width: 200px;
+  height: 150px;
+  background: #e0e0e0;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #999;
+}
+
+.btn {
+  background: #2c5f8d;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px 5px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #1e4a6d;
+}
+
+.btn-secondary {
+  background: #6c757d;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.services, .announcements {
+  margin: 30px 0;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.services h3, .announcements h3 {
+  color: #2c5f8d;
+  margin-bottom: 15px;
+}
+
+.services ul, .announcements ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.services li, .announcements li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.services li:before {
+  content: "• ";
+  color: #2c5f8d;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-actions {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #c3e6cb;
+}
+
+.summary-box {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.summary-box h3 {
+  color: #2c5f8d;
+  margin-bottom: 15px;
+}
+
+.summary-item {
+  display: flex;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  font-weight: bold;
+  width: 180px;
+  color: #555;
+}
+
+.summary-value {
+  color: #333;
+}
+
+.appointments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.appointments-table th,
+.appointments-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.appointments-table th {
+  background: #2c5f8d;
+  color: white;
+}
+
+.appointments-table tr:hover {
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.details-box {
+  background: #e9f5ff;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border-left: 4px solid #2c5f8d;
+}
+
+.details-box h4 {
+  color: #2c5f8d;
+  margin-bottom: 10px;
+}
+
+.faq-section {
+  margin: 20px 0;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.faq-question {
+  font-weight: bold;
+  color: #2c5f8d;
+  margin-bottom: 8px;
+}
+
+.faq-answer {
+  color: #555;
+  line-height: 1.6;
+}
+
+.contact-info {
+  background: #e9f5ff;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.contact-info h4 {
+  color: #2c5f8d;
+  margin-bottom: 10px;
+}
+
+.contact-info p {
+  margin: 5px 0;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .summary-item {
+    flex-direction: column;
+  }
+  
+  .summary-label {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  
+  .appointments-table {
+    font-size: 14px;
+  }
+  
+  .appointments-table th,
+  .appointments-table td {
+    padding: 8px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Community Health Clinic Portal</h1>
+  </header>
+  
+  <nav>
+    <a href="#" data-screen="home" class="nav-link active">Home</a>
+    <a href="#" data-screen="schedule" class="nav-link">Schedule Appointment</a>
+    <a href="#" data-screen="my-appointments" class="nav-link">My Appointments</a>
+    <a href="#" data-screen="help" class="nav-link">Help</a>
+  </nav>
+  
+  <main>
+    <!-- Screen 1: Home -->
+    <div id="home" class="screen active">
+      <div class="welcome">
+        <h2>Welcome to Community Health Clinic</h2>
+        <div class="logo-placeholder">
+          [Clinic Logo]
+        </div>
+        <button class="btn" onclick="navigateTo('schedule')">Schedule New App</button>
+      </div>
+      
+      <div class="services">
+        <h3>Services Available</h3>
+        <ul>
+          <li>General Checkup</li>
+          <li>Pediatric Care</li>
+          <li>Vaccination Services</li>
+          <li>Follow-up Visits</li>
+        </ul>
+      </div>
+      
+      <div class="announcements">
+        <h3>Announcements</h3>
+        <ul>
+          <li>Flu shots available this week</li>
+          <li>New Patient forms updated</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Screen 2: Schedule Appointment -->
+    <div id="schedule" class="screen">
+      <h2>Schedule Appointment</h2>
+      
+      <form id="appointmentForm">
+        <div class="form-group">
+          <label for="patientName">Patient Name: *</label>
+          <input type="text" id="patientName" required>
+          <div class="error-message" id="nameError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address: *</label>
+          <input type="email" id="email" required>
+          <div class="error-message" id="emailError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Phone Number: *</label>
+          <input type="tel" id="phone" required>
+          <div class="error-message" id="phoneError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="appointmentType">Appointment Type: *</label>
+          <select id="appointmentType" required>
+            <option value="">Select type...</option>
+            <option value="General Checkup">General Checkup</option>
+            <option value="Pediatric Care">Pediatric Care</option>
+            <option value="Vaccination Services">Vaccination Services</option>
+            <option value="Follow-up Visits">Follow-up Visits</option>
+          </select>
+          <div class="error-message" id="typeError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="doctor">Preferred Doctor: *</label>
+          <select id="doctor" required>
+            <option value="">Select doctor...</option>
+            <option value="Dr. Smith">Dr. Smith</option>
+            <option value="Dr. Lee">Dr. Lee</option>
+            <option value="Dr. Johnson">Dr. Johnson</option>
+            <option value="Dr. Williams">Dr. Williams</option>
+          </select>
+          <div class="error-message" id="doctorError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="appointmentDate">Appointment Date: *</label>
+          <input type="date" id="appointmentDate" required>
+          <div class="error-message" id="dateError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="appointmentTime">Appointment Time: *</label>
+          <select id="appointmentTime" required>
+            <option value="">Select time...</option>
+            <option value="09:00 AM">09:00 AM</option>
+            <option value="09:30 AM">09:30 AM</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="10:30 AM">10:30 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="11:30 AM">11:30 AM</option>
+            <option value="02:00 PM">02:00 PM</option>
+            <option value="02:30 PM">02:30 PM</option>
+            <option value="03:00 PM">03:00 PM</option>
+            <option value="03:30 PM">03:30 PM</option>
+            <option value="04:00 PM">04:00 PM</option>
+          </select>
+          <div class="error-message" id="timeError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="notes">Additional Notes:</label>
+          <textarea id="notes"></textarea>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn">Confirm App</button>
+          <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear Form</button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Screen 3: Confirmation -->
+    <div id="confirmation" class="screen">
+      <h2>Appointment Confirmation</h2>
+      
+      <div class="success-message">
+        Your appointment has been scheduled successfully
+      </div>
+      
+      <div class="summary-box">
+        <h3>Appointment Summary</h3>
+        <div class="summary-item">
+          <span class="summary-label">Patient Name:</span>
+          <span class="summary-value" id="confirmName"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Appointment Type:</span>
+          <span class="summary-value" id="confirmType"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Doctor:</span>
+          <span class="summary-value" id="confirmDoctor"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Date:</span>
+          <span class="summary-value" id="confirmDate"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Time:</span>
+          <span class="summary-value" id="confirmTime"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Confirmation #:</span>
+          <span class="summary-value" id="confirmNumber"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Status:</span>
+          <span class="summary-value"><span class="status-badge status-confirmed">Confirmed</span></span>
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <button class="btn" onclick="navigateTo('my-appointments')">View My Appointments</button>
+        <button class="btn btn-secondary" onclick="navigateTo('home')">Return Home</button>
+      </div>
+    </div>
+    
+    <!-- Screen 4: My Appointments -->
+    <div id="my-appointments" class="screen">
+      <h2>My Appointments</h2>
+      
+      <h3>Upcoming Appointments</h3>
+      
+      <table class="appointments-table">
+        <thead>
+          <tr>
+            <th>Confirmation #</th>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="appointmentsList">
+          <tr onclick="showAppointmentDetails('HC-2045')">
+            <td>HC-2045</td>
+            <td>Dr. Smith</td>
+            <td>Oct 15, 2025</td>
+            <td><span class="status-badge status-confirmed">Confirmed</span></td>
+          </tr>
+          <tr onclick="showAppointmentDetails('HC-1988')">
+            <td>HC-1988</td>
+            <td>Dr. Lee</td>
+            <td>Oct 28, 2025</td>
+            <td><span class="status-badge status-pending">Pending</span></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="details-box" id="appointmentDetails" style="display: none;">
+        <h4>Appointment Details</h4>
+        <div class="summary-item">
+          <span class="summary-label">Selected Appointment:</span>
+          <span class="summary-value" id="detailsConfirmation"></span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Location:</span>
+          <span class="summary-value">Community Health Clinic</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Notes:</span>
+          <span class="summary-value">Arrive 15 minutes early</span>
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <button class="btn btn-secondary" onclick="cancelAppointment()">Cancel App</button>
+        <button class="btn" onclick="navigateTo('home')">Return Home</button>
+      </div>
+    </div>
+    
+    <!-- Screen 5: Help -->
+    <div id="help" class="screen">
+      <h2>Help and Support</h2>
+      
+      <div class="faq-section">
+        <h3>Frequently Asked Questions</h3>
+        
+        <div class="faq-item">
+          <div class="faq-question">Q: How do I schedule an appointment?</div>
+          <div class="faq-answer">A: Select "Schedule Appointment" from the menu</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Q: Can I cancel an appointment online?</div>
+          <div class="faq-answer">A: Yes, use the My Appointments page</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Q: How will I receive confirmation?</div>
+          <div class="faq-answer">A: Confirmation appears immediately after booking; contains information</div>
+        </div>
+      </div>
+      
+      <div class="contact-info">
+        <h4>Contact Information</h4>
+        <p><strong>Email:</strong> support@clinic.org</p>
+        <p><strong>Phone:</strong> (000) 555-0000</p>
+      </div>
+      
+      <div class="form-actions">
+        <button class="btn" onclick="navigateTo('home')">Return Home</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+let appointments = [
+  {
+    id: 'HC-2045',
+    name: 'Sarah Johnson',
+    type: 'General Checkup',
+    doctor: 'Dr. Smith',
+    date: 'Oct 15, 2025',
+    time: '10:30 AM',
+    status: 'Confirmed'
+  },
+  {
+    id: 'HC-1988',
+    name: 'John Doe',
+    type: 'Follow-up Visits',
+    doctor: 'Dr. Lee',
+    date: 'Oct 28, 2025',
+    time: '02:00 PM',
+    status: 'Pending'
+  }
+];
+
+let currentAppointment = null;
+
+function navigateTo(screenId) {
+  document.querySelectorAll('.screen').forEach(screen => {
+    screen.classList.remove('active');
+  });
+  document.getElementById(screenId).classList.add('active');
+  
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+    if (link.dataset.screen === screenId) {
+      link.classList.add('active');
+    }
+  });
+  
+  if (screenId === 'my-appointments') {
+    renderAppointments();
+  }
+}
+
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo(link.dataset.screen);
+  });
+});
+
+document.getElementById('appointmentForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  let isValid = true;
+  document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+  
+  const name = document.getElementById('patientName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const type = document.getElementById('appointmentType').value;
+  const doctor = document.getElementById('doctor').value;
+  const date = document.getElementById('appointmentDate').value;
+  const time = document.getElementById('appointmentTime').value;
+  
+  if (!name) {
+    document.getElementById('nameError').textContent = 'Patient name is required';
+    isValid = false;
+  }
+  
+  if (!email) {
+    document.getElementById('emailError').textContent = 'Email is required';
+    isValid = false;
+  }
+  
+  if (!phone) {
+    document.getElementById('phoneError').textContent = 'Phone number is required';
+    isValid = false;
+  }
+  
+  if (!type) {
+    document.getElementById('typeError').textContent = 'Please select appointment type';
+    isValid = false;
+  }
+  
+  if (!doctor) {
+    document.getElementById('doctorError').textContent = 'Please select a doctor';
+    isValid = false;
+  }
+  
+  if (!date) {
+    document.getElementById('dateError').textContent = 'Please select a date';
+    isValid = false;
+  }
+  
+  if (!time) {
+    document.getElementById('timeError').textContent = 'Please select a time';
+    isValid = false;
+  }
+  
+  if (!isValid) return;
+  
+  const confirmNumber = 'HC-' + Math.floor(2000 + Math.random() * 1000);
+  
+  const dateObj = new Date(date);
+  const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  
+  document.getElementById('confirmName').textContent = name;
+  document.getElementById('confirmType').textContent = type;
+  document.getElementById('confirmDoctor').textContent = doctor;
+  document.getElementById('confirmDate').textContent = formattedDate;
+  document.getElementById('confirmTime').textContent = time;
+  document.getElementById('confirmNumber').textContent = confirmNumber;
+  
+  appointments.push({
+    id: confirmNumber,
+    name: name,
+    type: type,
+    doctor: doctor,
+    date: formattedDate,
+    time: time,
+    status: 'Confirmed'
+  });
+  
+  navigateTo('confirmation');
+});
+
+function clearForm() {
+  document.getElementById('appointmentForm').reset();
+  document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+}
+
+function renderAppointments() {
+  const tbody = document.getElementById('appointmentsList');
+  tbody.innerHTML = '';
+  
+  appointments.forEach(apt => {
+    const row = document.createElement('tr');
+    row.onclick = () => showAppointmentDetails(apt.id);
+    
+    const statusClass = apt.status === 'Confirmed' ? 'status-confirmed' : 'status-pending';
+    
+    row.innerHTML = `
+      <td>${apt.id}</td>
+      <td>${apt.doctor}</td>
+      <td>${apt.date}</td>
+      <td><span class="status-badge ${statusClass}">${apt.status}</span></td>
+    `;
+    
+    tbody.appendChild(row);
+  });
+}
+
+function showAppointmentDetails(confirmationId) {
+  currentAppointment = confirmationId;
+  document.getElementById('detailsConfirmation').textContent = confirmationId;
+  document.getElementById('appointmentDetails').style.display = 'block';
+}
+
+function cancelAppointment() {
+  if (!currentAppointment) {
+    alert('Please select an appointment to cancel');
+    return;
+  }
+  
+  if (confirm('Are you sure you want to cancel appointment ' + currentAppointment + '?')) {
+    appointments = appointments.filter(apt => apt.id !== currentAppointment);
+    currentAppointment = null;
+    document.getElementById('appointmentDetails').style.display = 'none';
+    renderAppointments();
+    alert('Appointment cancelled successfully');
+  }
+}
+</script>
+</body>
+</html>

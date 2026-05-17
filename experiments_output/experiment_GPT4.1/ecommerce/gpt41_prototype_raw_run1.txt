@@ -1,0 +1,936 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Electronics Store Prototype</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root {
+      --primary: #2d72d9;
+      --secondary: #f5f6fa;
+      --accent: #f7b731;
+      --danger: #e74c3c;
+      --success: #27ae60;
+      --border: #d1d5db;
+      --radius: 8px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.04);
+      --font: 'Segoe UI', Arial, sans-serif;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font);
+      background: var(--secondary);
+      color: #222;
+      min-height: 100vh;
+    }
+    #app {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      min-height: 100vh;
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      justify-content: space-between;
+    }
+    .navbar-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+    .navbar-links {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .navbar-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      padding: 2px 0;
+    }
+    .navbar-link.active::after {
+      content: '';
+      display: block;
+      margin: 0 auto;
+      width: 70%;
+      border-bottom: 2px solid var(--accent);
+      margin-top: 2px;
+    }
+    .cart-count {
+      background: var(--accent);
+      color: #222;
+      font-size: 0.85em;
+      border-radius: 50%;
+      padding: 0 6px;
+      margin-left: 3px;
+      vertical-align: middle;
+      font-weight: bold;
+    }
+    main {
+      flex: 1;
+      padding: 1.5rem 1.2rem 2.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    h1, h2, h3 {
+      margin: 0.3em 0 0.5em 0;
+      font-weight: 600;
+    }
+    .center {
+      text-align: center;
+    }
+    .welcome-msg {
+      font-size: 1.3rem;
+      margin-bottom: 0.5em;
+      font-weight: 500;
+    }
+    .desc-msg {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 1.2em;
+    }
+    .btn, button, input[type="submit"] {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.55em 1.3em;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin: 0.2em 0.2em 0.2em 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .btn.secondary {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .btn.danger {
+      background: var(--danger);
+      color: #fff;
+    }
+    .btn.success {
+      background: var(--success);
+      color: #fff;
+    }
+    .btn[disabled], button[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .category-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.2em;
+      flex-wrap: wrap;
+    }
+    .category-btn {
+      flex: 1 1 120px;
+      min-width: 100px;
+      background: #f0f4ff;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 0.7em 0;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 0.5em;
+      transition: background 0.15s;
+    }
+    .category-btn.active, .category-btn:focus {
+      background: var(--primary);
+      color: #fff;
+    }
+    .featured-products, .products-list {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .product-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1em 1em 0.7em 1em;
+      min-width: 150px;
+      max-width: 180px;
+      flex: 1 1 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0.7em;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+    .product-name {
+      font-weight: 500;
+      margin-bottom: 0.2em;
+      text-align: center;
+    }
+    .product-price {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.5em;
+    }
+    .product-card .btn {
+      width: 100%;
+      margin-top: 0.3em;
+      font-size: 0.95em;
+    }
+    .special-offer {
+      background: var(--accent);
+      color: #222;
+      border-radius: var(--radius);
+      padding: 1em 1.2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1em;
+    }
+    .special-offer .btn {
+      background: #fff;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      margin-top: 0.7em;
+    }
+    .slideshow {
+      background: #e9eefa;
+      border-radius: var(--radius);
+      padding: 1.2em;
+      text-align: center;
+      margin-bottom: 1.2em;
+      min-height: 80px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .slideshow-img {
+      width: 60px;
+      height: 60px;
+      background: #d1d5db;
+      border-radius: 50%;
+      margin: 0 auto 0.5em auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      color: #888;
+    }
+    .slideshow-controls {
+      margin-top: 0.5em;
+      display: flex;
+      gap: 0.5em;
+      justify-content: center;
+    }
+    .slideshow-btn {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      font-size: 1.1em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0 0.1em;
+    }
+    .search-row {
+      display: flex;
+      gap: 0.5em;
+      margin: 1em 0 0.5em 0;
+      justify-content: center;
+      align-items: center;
+    }
+    .search-row input[type="text"] {
+      flex: 1 1 120px;
+      padding: 0.5em;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      font-size: 1em;
+      min-width: 80px;
+    }
+    .promotions-section {
+      background: #f0f4ff;
+      border-radius: var(--radius);
+      padding: 0.7em 1em;
+      margin: 0.7em 0 0.2em 0;
+      font-size: 1em;
+      color: #2d72d9;
+      text-align: center;
+    }
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1em;
+    }
+    .cart-table th, .cart-table td {
+      padding: 0.6em 0.4em;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      font-size: 1em;
+    }
+    .cart-table th {
+      background: #f0f4ff;
+      font-weight: 600;
+    }
+    .cart-table td .btn {
+      font-size: 0.9em;
+      padding: 0.3em 0.8em;
+    }
+    .cart-summary {
+      margin: 1em 0 1.5em 0;
+      font-size: 1.05em;
+      text-align: right;
+    }
+    .cart-summary .summary-row {
+      margin-bottom: 0.2em;
+    }
+    .cart-actions {
+      display: flex;
+      gap: 1.2em;
+      justify-content: flex-end;
+      margin-top: 1em;
+    }
+    .form-section {
+      background: #f8fafc;
+      border-radius: var(--radius);
+      padding: 1.2em 1em;
+      margin-bottom: 1em;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      margin-bottom: 1em;
+      align-items: center;
+    }
+    .form-label {
+      flex: 0 0 110px;
+      font-weight: 500;
+      font-size: 1em;
+    }
+    .form-input, .form-select {
+      flex: 1 1 180px;
+      padding: 0.5em;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      font-size: 1em;
+    }
+    .form-half {
+      flex: 1 1 100px;
+      min-width: 80px;
+    }
+    .form-error {
+      color: var(--danger);
+      font-size: 0.98em;
+      margin-bottom: 0.7em;
+      text-align: left;
+    }
+    .order-summary {
+      background: #f8fafc;
+      border-radius: var(--radius);
+      padding: 1.2em 1em;
+      margin: 1em 0;
+      font-size: 1.05em;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+    .order-summary-row {
+      margin-bottom: 0.5em;
+    }
+    .confirmation-msg {
+      color: var(--success);
+      font-size: 1.2em;
+      font-weight: 600;
+      margin: 1em 0 0.5em 0;
+      text-align: center;
+    }
+    @media (max-width: 700px) {
+      #app {
+        max-width: 100vw;
+        border-radius: 0;
+      }
+      main {
+        padding: 1rem 0.3rem 2.5rem 0.3rem;
+      }
+      .category-row, .featured-products, .products-list {
+        gap: 0.5rem;
+      }
+      .product-card {
+        min-width: 120px;
+        max-width: 160px;
+        padding: 0.7em 0.5em 0.5em 0.5em;
+      }
+      .form-label {
+        flex: 0 0 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="navbar" class="navbar"></div>
+    <main id="main-content"></main>
+  </div>
+  <script>
+    // --- Data ---
+    const categories = [
+      { id: 'laptops', name: 'Laptops' },
+      { id: 'headphones', name: 'Headphones' },
+      { id: 'games', name: 'Games' }
+    ];
+
+    const allProducts = [
+      { id: 'laptop', name: 'Laptop', price: 899, category: 'laptops', featured: true, img: '💻' },
+      { id: 'wireless-mouse', name: 'Wireless Mouse', price: 25, category: 'laptops', featured: false, img: '🖱️' },
+      { id: 'headphones', name: 'Headphones', price: 75, category: 'headphones', featured: true, img: '🎧' },
+      { id: 'smart-watch', name: 'Smart Watch', price: 199, category: 'headphones', featured: false, img: '⌚' },
+      { id: 'gamepad', name: 'Gamepad', price: 49, category: 'games', featured: true, img: '🎮' },
+      { id: 'vr-headset', name: 'VR Headset', price: 299, category: 'games', featured: false, img: '🕶️' }
+    ];
+
+    // For Home Page, select 3 featured products
+    const homeFeaturedProducts = [
+      { id: 'laptop', name: 'Laptop', price: 899, category: 'laptops', img: '💻' },
+      { id: 'headphones', name: 'Headphones', price: 75, category: 'headphones', img: '🎧' },
+      { id: 'gamepad', name: 'Gamepad', price: 49, category: 'games', img: '🎮' }
+    ];
+
+    // For Products Page slideshow
+    const slideshowProducts = [
+      { id: 'laptop', name: 'Laptop', price: 899, img: '💻' },
+      { id: 'wireless-mouse', name: 'Wireless Mouse', price: 25, img: '🖱️' },
+      { id: 'headphones', name: 'Headphones', price: 75, img: '🎧' },
+      { id: 'smart-watch', name: 'Smart Watch', price: 199, img: '⌚' }
+    ];
+
+    // Promotions
+    const promotions = [
+      "Free shipping on orders over $100"
+    ];
+
+    // Special Offer for Home Page
+    const specialOffer = {
+      text: "Get 30% off on selected items today!",
+      deals: [
+        { id: 'gamepad', name: 'Gamepad', price: 49, discounted: 34, img: '🎮' },
+        { id: 'smart-watch', name: 'Smart Watch', price: 199, discounted: 139, img: '⌚' }
+      ]
+    };
+
+    // Payment Methods
+    const paymentMethods = [
+      { value: '', label: 'Select...' },
+      { value: 'credit', label: 'Credit Card' },
+      { value: 'debit', label: 'Debit Card' },
+      { value: 'paypal', label: 'PayPal' }
+    ];
+
+    // --- State ---
+    let state = {
+      screen: 'home', // home, products, cart, checkout, confirmation, deals
+      cart: [],
+      cartCount: 0,
+      cartTotals: { subtotal: 0, tax: 0, total: 0 },
+      search: '',
+      productsFilter: null, // category id or null
+      slideshowIdx: 0,
+      checkoutForm: {
+        name: '', address: '', city: '', state: '', zip: '',
+        payment: '', card: '', exp: ''
+      },
+      checkoutError: '',
+      lastOrder: null
+    };
+
+    // --- Utility Functions ---
+    function formatPrice(p) {
+      return '$' + p.toFixed(2);
+    }
+    function getCartCount() {
+      return state.cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+    function getCartTotals() {
+      const subtotal = state.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const tax = Math.round(subtotal * 0.08 * 100) / 100; // 8% tax
+      const total = Math.round((subtotal + tax) * 100) / 100;
+      return { subtotal, tax, total };
+    }
+    function findProductById(id) {
+      return allProducts.find(p => p.id === id) ||
+             homeFeaturedProducts.find(p => p.id === id) ||
+             slideshowProducts.find(p => p.id === id) ||
+             specialOffer.deals.find(p => p.id === id);
+    }
+    function resetCheckoutForm() {
+      state.checkoutForm = {
+        name: '', address: '', city: '', state: '', zip: '',
+        payment: '', card: '', exp: ''
+      };
+      state.checkoutError = '';
+    }
+    function randomOrderNumber() {
+      return 'ORD-' + Math.floor(1000 + Math.random() * 9000);
+    }
+    function todayPlusDays(days) {
+      const d = new Date();
+      d.setDate(d.getDate() + days);
+      return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    }
+
+    // --- Navigation ---
+    function navigate(screen, opts={}) {
+      state.screen = screen;
+      if (screen === 'products') {
+        state.productsFilter = opts.category || null;
+        state.search = '';
+      }
+      if (screen === 'cart') {
+        // recalc totals
+        state.cartTotals = getCartTotals();
+      }
+      if (screen === 'checkout') {
+        resetCheckoutForm();
+        state.cartTotals = getCartTotals();
+      }
+      if (screen === 'confirmation') {
+        // nothing
+      }
+      if (screen === 'home') {
+        state.productsFilter = null;
+        state.search = '';
+      }
+      if (screen === 'deals') {
+        // nothing
+      }
+      render();
+    }
+
+    // --- Cart Logic ---
+    function addToCart(productId, priceOverride) {
+      const prod = findProductById(productId);
+      if (!prod) return;
+      let price = typeof priceOverride === 'number' ? priceOverride : prod.price;
+      let idx = state.cart.findIndex(item => item.id === productId && item.price === price);
+      if (idx >= 0) {
+        state.cart[idx].qty += 1;
+      } else {
+        state.cart.push({ id: productId, name: prod.name, price, qty: 1 });
+      }
+      state.cartCount = getCartCount();
+      state.cartTotals = getCartTotals();
+      render();
+      showStatus('Added to cart!', 900);
+    }
+    function removeFromCart(productId, price) {
+      state.cart = state.cart.filter(item => !(item.id === productId && item.price === price));
+      state.cartCount = getCartCount();
+      state.cartTotals = getCartTotals();
+      render();
+    }
+    function clearCart() {
+      state.cart = [];
+      state.cartCount = 0;
+      state.cartTotals = getCartTotals();
+    }
+
+    // --- UI Components ---
+    function renderNavbar() {
+      const links = [
+        { id: 'home', label: 'Home' },
+        { id: 'products', label: 'Products' },
+        { id: 'cart', label: 'Cart' }
+      ];
+      let html = `
+        <span class="navbar-title">Electronics Store</span>
+        <nav class="navbar-links">
+          ${links.map(link => `
+            <a class="navbar-link${state.screen === link.id ? ' active' : ''}" href="#" onclick="return false;" data-nav="${link.id}">
+              ${link.label}
+              ${link.id === 'cart' && state.cartCount > 0 ? `<span class="cart-count">${state.cartCount}</span>` : ''}
+            </a>
+          `).join('')}
+        </nav>
+      `;
+      document.getElementById('navbar').innerHTML = html;
+      document.querySelectorAll('.navbar-link').forEach(el => {
+        el.onclick = (e) => {
+          e.preventDefault();
+          const nav = el.getAttribute('data-nav');
+          if (nav) navigate(nav);
+        };
+      });
+    }
+
+    function showStatus(msg, timeout=1200) {
+      let el = document.createElement('div');
+      el.textContent = msg;
+      el.style.position = 'fixed';
+      el.style.top = '18px';
+      el.style.left = '50%';
+      el.style.transform = 'translateX(-50%)';
+      el.style.background = 'rgba(44, 180, 99, 0.98)';
+      el.style.color = '#fff';
+      el.style.padding = '0.7em 1.5em';
+      el.style.borderRadius = '8px';
+      el.style.fontWeight = 'bold';
+      el.style.fontSize = '1.05em';
+      el.style.zIndex = 9999;
+      el.style.boxShadow = '0 2px 10px rgba(0,0,0,0.08)';
+      document.body.appendChild(el);
+      setTimeout(() => { el.remove(); }, timeout);
+    }
+
+    // --- Screens ---
+    function renderHome() {
+      let featured = homeFeaturedProducts;
+      let catBtns = categories.map(cat => `
+        <button class="category-btn" onclick="navigate('products', {category:'${cat.id}'})">${cat.name}</button>
+      `).join('');
+      let featuredHtml = featured.map(prod => `
+        <div class="product-card">
+          <div class="product-name">${prod.img || ''} ${prod.name}</div>
+          <div class="product-price">${formatPrice(prod.price)}</div>
+          <button class="btn" onclick="addToCart('${prod.id}')">Add to Cart</button>
+        </div>
+      `).join('');
+      let offerHtml = `
+        <div class="special-offer">
+          <div><strong>Special Offer</strong></div>
+          <div style="margin:0.5em 0 0.2em 0;">${specialOffer.text}</div>
+          <button class="btn" onclick="navigate('deals')">View Deals</button>
+        </div>
+      `;
+      document.getElementById('main-content').innerHTML = `
+        <div class="center">
+          <div class="welcome-msg">Welcome to Electronics Store</div>
+          <div class="desc-msg">
+            Shop the latest trends.<br>
+            Discover the best products at unbeatable prices.<br>
+            Fast delivery and easy returns.
+          </div>
+          <button class="btn" onclick="navigate('products')">Shop Now</button>
+        </div>
+        <div>
+          <h3 class="center" style="margin-bottom:0.6em;">Shop by Category</h3>
+          <div class="category-row">${catBtns}</div>
+        </div>
+        <div>
+          <h3 class="center" style="margin-bottom:0.6em;">Featured Products</h3>
+          <div class="featured-products">${featuredHtml}</div>
+        </div>
+        ${offerHtml}
+      `;
+    }
+
+    function renderProducts() {
+      // Filter/search logic
+      let products = allProducts;
+      if (state.productsFilter) {
+        products = products.filter(p => p.category === state.productsFilter);
+      }
+      if (state.search && state.search.trim().length > 0) {
+        let s = state.search.trim().toLowerCase();
+        products = products.filter(p => p.name.toLowerCase().includes(s));
+      }
+      // Slideshow
+      let slide = slideshowProducts[state.slideshowIdx];
+      let slideshowHtml = `
+        <div class="slideshow">
+          <div class="slideshow-img">${slide.img}</div>
+          <div style="font-weight:500;">${slide.name}</div>
+          <div style="color:var(--primary);font-weight:600;">${formatPrice(slide.price)}</div>
+          <div class="slideshow-controls">
+            <button class="slideshow-btn" onclick="slideshowPrev()" title="Previous">&#8592;</button>
+            <button class="slideshow-btn" onclick="slideshowNext()" title="Next">&#8594;</button>
+          </div>
+        </div>
+      `;
+      // Featured products list
+      let featuredHtml = products.map(prod => `
+        <div class="product-card">
+          <div class="product-name">${prod.img || ''} ${prod.name}</div>
+          <div class="product-price">${formatPrice(prod.price)}</div>
+          <button class="btn" onclick="addToCart('${prod.id}')">Add to Cart</button>
+        </div>
+      `).join('');
+      // Search bar
+      let searchHtml = `
+        <form class="search-row" onsubmit="return false;">
+          <input type="text" placeholder="Search products..." value="${state.search}" id="search-input">
+          <button class="btn" onclick="doSearch()">Search</button>
+        </form>
+      `;
+      // Promotions
+      let promoHtml = promotions.map(p => `<div>${p}</div>`).join('');
+      document.getElementById('main-content').innerHTML = `
+        ${slideshowHtml}
+        <div>
+          <h3>Featured Products</h3>
+          <div class="products-list">${featuredHtml}</div>
+        </div>
+        ${searchHtml}
+        <div class="promotions-section">
+          <strong>Promotions:</strong> ${promoHtml}
+        </div>
+      `;
+      document.getElementById('search-input').oninput = function(e) {
+        state.search = e.target.value;
+      };
+      document.querySelector('.search-row button').onclick = function(e) {
+        doSearch();
+      };
+    }
+    function slideshowPrev() {
+      state.slideshowIdx = (state.slideshowIdx - 1 + slideshowProducts.length) % slideshowProducts.length;
+      render();
+    }
+    function slideshowNext() {
+      state.slideshowIdx = (state.slideshowIdx + 1) % slideshowProducts.length;
+      render();
+    }
+    function doSearch() {
+      state.productsFilter = null;
+      render();
+    }
+
+    function renderCart() {
+      let cart = state.cart;
+      let rows = cart.length === 0 ? `
+        <tr><td colspan="5" style="color:#888;">Your cart is empty.</td></tr>
+      ` : cart.map(item => `
+        <tr>
+          <td>${findProductById(item.id)?.img || ''} ${item.name}</td>
+          <td>${item.qty}</td>
+          <td>${formatPrice(item.price)}</td>
+          <td>
+            <button class="btn danger" onclick="removeFromCart('${item.id}',${item.price})">Remove</button>
+          </td>
+        </tr>
+      `).join('');
+      let totals = state.cartTotals;
+      document.getElementById('main-content').innerHTML = `
+        <h2 class="center">Shopping Cart</h2>
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+        <div class="cart-summary">
+          <div class="summary-row"><strong>Subtotal:</strong> ${formatPrice(totals.subtotal)}</div>
+          <div class="summary-row"><strong>Tax:</strong> ${formatPrice(totals.tax)}</div>
+          <div class="summary-row"><strong>Total:</strong> ${formatPrice(totals.total)}</div>
+        </div>
+        <div class="cart-actions">
+          <button class="btn secondary" onclick="navigate('products')">Continue Shopping</button>
+          <button class="btn success" onclick="proceedToCheckout()" ${cart.length === 0 ? 'disabled' : ''}>Proceed to Checkout</button>
+        </div>
+      `;
+    }
+    function proceedToCheckout() {
+      if (state.cart.length === 0) return;
+      navigate('checkout');
+    }
+
+    function renderCheckout() {
+      let f = state.checkoutForm;
+      let totals = state.cartTotals;
+      let err = state.checkoutError ? `<div class="form-error">${state.checkoutError}</div>` : '';
+      document.getElementById('main-content').innerHTML = `
+        <h2 class="center">Checkout</h2>
+        <form class="form-section" id="checkout-form" autocomplete="off">
+          <h3>Shipping Information</h3>
+          ${err}
+          <div class="form-row">
+            <label class="form-label" for="name">Full Name:</label>
+            <input class="form-input" type="text" id="name" name="name" value="${f.name}" required>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="address">Address:</label>
+            <input class="form-input" type="text" id="address" name="address" value="${f.address}" required>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="city">City:</label>
+            <input class="form-input form-half" type="text" id="city" name="city" value="${f.city}" required>
+            <label class="form-label" for="state" style="flex:0 0 60px;">State:</label>
+            <input class="form-input form-half" type="text" id="state" name="state" value="${f.state}" required>
+            <label class="form-label" for="zip" style="flex:0 0 40px;">Zip:</label>
+            <input class="form-input form-half" type="text" id="zip" name="zip" value="${f.zip}" required>
+          </div>
+          <h3>Payment Information</h3>
+          <div class="form-row">
+            <label class="form-label" for="payment">Payment Method:</label>
+            <select class="form-select" id="payment" name="payment" required>
+              ${paymentMethods.map(opt => `<option value="${opt.value}"${f.payment===opt.value?' selected':''}>${opt.label}</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="card">Card Number:</label>
+            <input class="form-input" type="text" id="card" name="card" maxlength="19" value="${f.card}" required>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="exp">Expiration Date:</label>
+            <input class="form-input" type="text" id="exp" name="exp" placeholder="MM/YY" maxlength="5" value="${f.exp}" required>
+          </div>
+          <div class="form-row" style="justify-content:flex-end;">
+            <strong>Order Total: ${formatPrice(totals.total)}</strong>
+          </div>
+          <div class="form-row" style="justify-content:flex-end;">
+            <button class="btn success" type="submit">Place Order</button>
+            <button class="btn secondary" type="button" onclick="cancelCheckout()">Cancel</button>
+          </div>
+        </form>
+      `;
+      // Attach form handlers
+      document.getElementById('checkout-form').onsubmit = function(e) {
+        e.preventDefault();
+        submitCheckout();
+      };
+      ['name','address','city','state','zip','payment','card','exp'].forEach(field => {
+        document.getElementById(field).oninput = function(e) {
+          state.checkoutForm[field] = e.target.value;
+        };
+      });
+    }
+    function cancelCheckout() {
+      navigate('cart');
+    }
+    function submitCheckout() {
+      let f = state.checkoutForm;
+      // Validate
+      if (!f.name.trim() || !f.address.trim() || !f.city.trim() ||
+          !f.state.trim() || !f.zip.trim() || !f.payment || !f.card.trim() || !f.exp.trim()) {
+        state.checkoutError = "Please complete all required fields.";
+        render();
+        return;
+      }
+      // Simple card/exp validation
+      if (!/^\d{4,19}$/.test(f.card.replace(/\s+/g,''))) {
+        state.checkoutError = "Invalid card number.";
+        render();
+        return;
+      }
+      if (!/^\d{2}\/\d{2}$/.test(f.exp)) {
+        state.checkoutError = "Expiration must be MM/YY.";
+        render();
+        return;
+      }
+      // Place order
+      let order = {
+        orderNo: randomOrderNumber(),
+        items: state.cart.map(item => ({ name: item.name, qty: item.qty, price: item.price })),
+        total: state.cartTotals.total,
+        paymentStatus: 'APPROVED',
+        delivery: todayPlusDays(3),
+        shipping: {
+          name: f.name,
+          address: f.address,
+          city: f.city,
+          state: f.state,
+          zip: f.zip
+        }
+      };
+      state.lastOrder = order;
+      clearCart();
+      navigate('confirmation');
+    }
+
+    function renderConfirmation() {
+      let o = state.lastOrder;
+      if (!o) {
+        document.getElementById('main-content').innerHTML = `<div class="center">No order found.</div>`;
+        return;
+      }
+      let items = o.items.map(i => `${i.name} x${i.qty}`).join(', ');
+      let shippingAddr = `${o.shipping.address}<br>${o.shipping.city}, ${o.shipping.state} ${o.shipping.zip}`;
+      document.getElementById('main-content').innerHTML = `
+        <h2 class="center">Order Confirmation</h2>
+        <div class="confirmation-msg">Your order has been placed successfully!</div>
+        <div class="order-summary">
+          <div class="order-summary-row"><strong>Order #:</strong> ${o.orderNo}</div>
+          <div class="order-summary-row"><strong>Items:</strong> ${items}</div>
+          <div class="order-summary-row"><strong>Total Paid:</strong> ${formatPrice(o.total)}</div>
+          <div class="order-summary-row"><strong>Payment Status:</strong> ${o.paymentStatus}</div>
+          <div class="order-summary-row"><strong>Estimated Delivery:</strong> ${o.delivery}</div>
+          <div class="order-summary-row"><strong>Shipping Address:</strong><br>${shippingAddr}</div>
+        </div>
+        <div class="center">
+          <button class="btn" onclick="navigate('home')">Continue Shopping</button>
+        </div>
+      `;
+    }
+
+    function renderDeals() {
+      let deals = specialOffer.deals.map(prod => `
+        <div class="product-card">
+          <div class="product-name">${prod.img || ''} ${prod.name}</div>
+          <div class="product-price"><span style="text-decoration:line-through;color:#888;">${formatPrice(prod.price)}</span>
+            <span style="color:var(--accent);font-weight:600;">${formatPrice(prod.discounted)}</span>
+          </div>
+          <button class="btn" onclick="addToCart('${prod.id}',${prod.discounted})">Add to Cart</button>
+        </div>
+      `).join('');
+      document.getElementById('main-content').innerHTML = `
+        <h2 class="center">Special Deals</h2>
+        <div class="center" style="margin-bottom:1em;">${specialOffer.text}</div>
+        <div class="featured-products">${deals}</div>
+        <div class="center">
+          <button class="btn secondary" onclick="navigate('home')">Back to Home</button>
+        </div>
+      `;
+    }
+
+    // --- Main Render ---
+    function render() {
+      renderNavbar();
+      switch(state.screen) {
+        case 'home': renderHome(); break;
+        case 'products': renderProducts(); break;
+        case 'cart': renderCart(); break;
+        case 'checkout': renderCheckout(); break;
+        case 'confirmation': renderConfirmation(); break;
+        case 'deals': renderDeals(); break;
+        default: renderHome();
+      }
+      // Expose functions for onclick
+      window.navigate = navigate;
+      window.addToCart = addToCart;
+      window.removeFromCart = removeFromCart;
+      window.proceedToCheckout = proceedToCheckout;
+      window.cancelCheckout = cancelCheckout;
+      window.slideshowPrev = slideshowPrev;
+      window.slideshowNext = slideshowNext;
+    }
+
+    // --- Initial Render ---
+    render();
+  </script>
+</body>
+</html>
+```

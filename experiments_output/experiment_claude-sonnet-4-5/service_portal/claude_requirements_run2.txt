@@ -1,0 +1,257 @@
+# Service Portal System - Requirements Artifacts
+
+## A. Screen Descriptions
+
+### Screen 1: Home / Service Portal Dashboard
+**Purpose:** Landing page providing overview of IT services and quick access to support functions.
+
+**Key UI Components:**
+- Header: "University IT Service Portal"
+- Navigation menu: Home | Submit Ticket | Track Request | Help
+- Welcome message: "Welcome to IT support"
+- Image/logo placeholder
+- "Submit New Request" button
+- Services Available section listing:
+  - Password Reset
+  - Software Installation
+  - Network Support
+  - Account Access
+- Support Announcements section:
+  - Scheduled maintenance Friday
+  - New VPN instructions available
+
+**Main User Interactions:**
+- Navigate between main sections
+- Click "Submit New Request" to initiate ticket creation
+- View available services and announcements
+
+---
+
+### Screen 2: Submit Support Request
+**Purpose:** Form for users to create and submit new IT support tickets.
+
+**Key UI Components:**
+- Page title: "Submit Support Request"
+- Navigation menu (consistent with Screen 1)
+- Form fields:
+  - Name (text input)
+  - Email (text input)
+  - Issue Category (dropdown)
+  - Problem Description (text area)
+- Action buttons:
+  - "Submit Ticket"
+  - "Clear Form"
+
+**Main User Interactions:**
+- Enter personal information
+- Select issue category from dropdown
+- Describe problem in detail
+- Submit completed form or clear to restart
+
+---
+
+### Screen 3: Ticket Submission Confirmation
+**Purpose:** Confirm successful ticket submission and display ticket details.
+
+**Key UI Components:**
+- Page title: "Support Request Submitted"
+- Navigation menu (consistent)
+- Confirmation message: "Your support request has been submitted"
+- Ticket Summary section displaying:
+  - Ticket ID (e.g., IT-2045)
+  - Category (e.g., Network Support)
+  - Submitted by (e.g., Student)
+  - Status (e.g., Open)
+  - Submitted Date (e.g., Oct 16, 2025)
+  - Estimated Response Time (e.g., 24 Hours)
+- Action buttons:
+  - "Track Request"
+  - "Return Home"
+
+**Main User Interactions:**
+- View ticket confirmation details
+- Navigate to track request status
+- Return to home page
+
+---
+
+### Screen 4: Track Request Status
+**Purpose:** Allow users to search for and view detailed status of submitted tickets.
+
+**Key UI Components:**
+- Page title: "Track Support Request"
+- Navigation menu (consistent)
+- Search section:
+  - Ticket ID input field
+  - "Search" button
+- Ticket Information display:
+  - Ticket # (e.g., 2025-164)
+  - Category (e.g., Network Support)
+  - Status (e.g., In Progress)
+  - Submitted by (e.g., Student)
+  - Last Updated (e.g., April 29, 2026)
+  - Technician Notes (e.g., "Issue currently being investigated")
+- "Return Home" button
+
+**Main User Interactions:**
+- Enter ticket ID to search
+- View current ticket status and details
+- Read technician updates
+- Return to home page
+
+---
+
+### Screen 5: Help / FAQ
+**Purpose:** Provide self-service help resources and frequently asked questions.
+
+**Key UI Components:**
+- Page title: "Help and Support"
+- Navigation menu (consistent)
+- "Frequently Asked Questions" section
+- FAQ entries with questions and answers:
+  - Q: How do I reset my password?
+    - A: Click "Forgot Password" on login page
+  - Q: How long does ticket response take?
+    - A: Most requests are answered within 24 hours
+  - Q: How can I track my request?
+    - A: Use the Track Request page with your Ticket ID
+- Contact information:
+  - Email: support@university.edu
+  - Phone number/return home link
+
+**Main User Interactions:**
+- Browse FAQ content
+- Find answers to common questions
+- Access contact information
+
+---
+
+## B. Functional Requirements
+
+### Navigation and Access (FR-1 to FR-3)
+
+**FR-1:** The system shall provide a persistent navigation menu on all screens containing links to Home, Submit Ticket, Track Request, and Help sections.
+
+**FR-2:** The system shall allow users to navigate between any main sections (Home, Submit Ticket, Track Request, Help) from any screen without losing unsaved data warnings.
+
+**FR-3:** The system shall display the portal title "University IT Service Portal" on all screens.
+
+### Service Information Display (FR-4 to FR-5)
+
+**FR-4:** The system shall display a list of available IT services on the home page including Password Reset, Software Installation, Network Support, and Account Access.
+
+**FR-5:** The system shall display support announcements on the home page including scheduled maintenance notifications and new service availability.
+
+### Ticket Submission (FR-6 to FR-10)
+
+**FR-6:** The system shall provide a ticket submission form requiring Name, Email, Issue Category, and Problem Description fields.
+
+**FR-7:** The system shall provide a dropdown menu for Issue Category selection containing predefined service categories.
+
+**FR-8:** The system shall validate that all required fields (Name, Email, Issue Category, Problem Description) are completed before allowing ticket submission.
+
+**FR-9:** The system shall generate a unique Ticket ID upon successful submission of a support request.
+
+**FR-10:** The system shall provide a "Clear Form" function that resets all input fields on the submission form to empty state.
+
+### Ticket Confirmation and Tracking (FR-11 to FR-15)
+
+**FR-11:** The system shall display a confirmation page after successful ticket submission showing the Ticket ID, Category, Submitted By, Status, Submitted Date, and Estimated Response Time.
+
+**FR-12:** The system shall automatically assign an initial status of "Open" to newly created tickets.
+
+**FR-13:** The system shall calculate and display an Estimated Response Time for submitted tickets.
+
+**FR-14:** The system shall allow users to search for ticket details by entering a Ticket ID in the Track Request section.
+
+**FR-15:** The system shall display ticket information including Ticket Number, Category, Status, Submitted By, Last Updated date, and Technician Notes when a valid Ticket ID is searched.
+
+### Status Management (FR-16 to FR-17)
+
+**FR-16:** The system shall support multiple ticket status values including at minimum "Open," "In Progress," and other workflow states.
+
+**FR-17:** The system shall record and display the Last Updated date whenever ticket information is modified.
+
+### Help and Support (FR-18 to FR-19)
+
+**FR-18:** The system shall provide a Help/FAQ section containing frequently asked questions and answers about common support topics.
+
+**FR-19:** The system shall display IT support contact information including email address on the Help page.
+
+---
+
+## C. Traceability Mapping
+
+### Screen 1 (Home/Dashboard) → Requirements
+- **FR-1, FR-2, FR-3:** Navigation menu (Home, Submit Ticket, Track Request, Help)
+- **FR-4:** Services Available list
+- **FR-5:** Support Announcements section
+- **FR-6:** "Submit New Request" button (initiates navigation to Screen 2)
+
+### Screen 2 (Submit Support Request) → Requirements
+- **FR-1, FR-2, FR-3:** Navigation menu
+- **FR-6:** Form fields (Name, Email, Issue Category, Problem Description)
+- **FR-7:** Issue Category dropdown
+- **FR-8:** Form validation (implicit in submission process)
+- **FR-9:** Ticket ID generation (triggered by Submit Ticket button)
+- **FR-10:** "Clear Form" button
+
+### Screen 3 (Ticket Submission Confirmation) → Requirements
+- **FR-1, FR-2, FR-3:** Navigation menu
+- **FR-9:** Ticket ID display (e.g., IT-2045)
+- **FR-11:** Ticket Summary section (all confirmation details)
+- **FR-12:** Status field showing "Open"
+- **FR-13:** Estimated Response Time display (24 Hours)
+- **FR-14:** "Track Request" button (navigation to Screen 4)
+
+### Screen 4 (Track Request Status) → Requirements
+- **FR-1, FR-2, FR-3:** Navigation menu
+- **FR-14:** Ticket ID search input and Search button
+- **FR-15:** Ticket Information display section
+- **FR-16:** Status field (e.g., "In Progress")
+- **FR-17:** Last Updated date field
+
+### Screen 5 (Help/FAQ) → Requirements
+- **FR-1, FR-2, FR-3:** Navigation menu
+- **FR-18:** Frequently Asked Questions section with Q&A pairs
+- **FR-19:** Contact information (support@university.edu)
+
+---
+
+## D. Ambiguities, Missing Information, and Assumptions
+
+### Ambiguities:
+1. **Authentication:** No login screen is shown. It's unclear if users must authenticate or if the portal allows anonymous submissions.
+2. **Ticket ID Format:** Multiple formats shown (IT-2045, 2025-164). The standard format is not defined.
+3. **Category List:** The complete list of issue categories available in the dropdown is not specified.
+4. **Response Time Calculation:** The logic for determining "Estimated Response Time" is not defined.
+5. **Search Functionality:** Screen 4 shows a search function, but it's unclear if search requires exact Ticket ID match or supports partial matching.
+
+### Missing Information:
+1. **User Roles:** No distinction between student, faculty, staff, or guest users.
+2. **Notification System:** No indication of email confirmations or status update notifications.
+3. **Ticket Updates:** No interface for users to add comments or additional information to existing tickets.
+4. **Attachment Capability:** No file upload functionality shown for supporting documentation.
+5. **Ticket History:** No indication of whether users can view all their past tickets.
+6. **Priority Levels:** No mechanism for indicating urgency or priority.
+7. **Assignment Logic:** How tickets are assigned to technicians is not shown.
+8. **Closed/Resolved States:** Workflow for ticket closure and resolution is not depicted.
+
+### Assumptions Made:
+1. **Assumed:** Users can access the portal without authentication (public access) since no login screen is shown.
+2. **Assumed:** Ticket ID is automatically generated by the system and displayed immediately after submission.
+3. **Assumed:** The "Submitted By" field captures the name entered in the submission form.
+4. **Assumed:** Users can track any ticket if they know the Ticket ID (no ownership validation).
+5. **Assumed:** Technician Notes are read-only for end users.
+6. **Assumed:** The system maintains a timestamp for ticket creation and updates.
+7. **Assumed:** Navigation between screens does not require re-authentication.
+8. **Assumed:** The FAQ content is static and managed by administrators (not user-editable).
+9. **Assumed:** Email validation follows standard format (contains @ symbol and domain).
+10. **Assumed:** "Return Home" and "Home" navigation links lead to Screen 1.
+
+### Unclear Elements:
+1. **Technician Interface:** No screens shown for IT staff to manage, update, or resolve tickets.
+2. **Edit Capability:** Whether users can edit submitted tickets is not addressed.
+3. **Cancellation:** No option shown to cancel or close a ticket from the user side.
+4. **Multi-language Support:** No indication of internationalization requirements.
+5. **Accessibility:** No specific accessibility features are indicated in the sketches.

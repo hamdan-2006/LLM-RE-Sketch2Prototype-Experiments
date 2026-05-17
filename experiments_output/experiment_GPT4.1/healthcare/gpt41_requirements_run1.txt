@@ -1,0 +1,104 @@
+## A. Screen Descriptions
+
+### 1. Home / Dashboard (Community Health Clinic Portal)
+- **Purpose:** Entry point for users to access appointment scheduling, view services, and see announcements.
+- **Key UI Components:** Navigation bar (Home, Schedule Appointment, My Appointments, Help), welcome message, infographic/logo, "Schedule New Appointment" button, list of available services, announcements section.
+- **Main User Interactions:** Navigate to other screens, view services, read announcements, initiate scheduling a new appointment.
+
+### 2. Appointment Scheduling Form
+- **Purpose:** Collect patient information and appointment preferences to schedule a new appointment.
+- **Key UI Components:** Navigation bar, input fields (Patient Name, Email, Phone), dropdowns (Appointment Type, Preferred Doctor, Appointment Time), date picker (Appointment Date), additional notes field, Confirm and Clear Form buttons.
+- **Main User Interactions:** Enter and submit appointment details, clear the form, navigate to other screens.
+
+### 3. Appointment Confirmation
+- **Purpose:** Display confirmation and summary of a successfully scheduled appointment.
+- **Key UI Components:** Navigation bar, confirmation message, appointment summary (patient, type, doctor, date, time, confirmation number, status), buttons/links (View My Appointments, Return Home).
+- **Main User Interactions:** Review appointment details, navigate to My Appointments or Home.
+
+### 4. My Appointments / Appointment Tracking
+- **Purpose:** Allow users to view and manage their upcoming appointments.
+- **Key UI Components:** Navigation bar, list/table of appointments (confirmation #, doctor, date, status), appointment details section, Cancel Appointment and Return Home buttons.
+- **Main User Interactions:** View appointment list, select appointment for details, cancel appointment, return home.
+
+### 5. Help / FAQ Page
+- **Purpose:** Provide answers to common questions and support contact information.
+- **Key UI Components:** Navigation bar, FAQ list, support email and phone, Return Home button.
+- **Main User Interactions:** Read FAQs, access support contact info, return home.
+
+---
+
+## B. Functional Requirements
+
+### Navigation & General
+- **FR-1:** The system shall display a navigation bar with links to Home, Schedule Appointment, My Appointments, and Help on all screens. *(All screens)*
+- **FR-2:** The system shall allow users to navigate between screens using the navigation bar. *(All screens)*
+
+### Home / Dashboard
+- **FR-3:** The system shall display a welcome message and clinic infographic/logo on the Home screen. *(Home)*
+- **FR-4:** The system shall display a list of available services on the Home screen. *(Home)*
+- **FR-5:** The system shall display current announcements on the Home screen. *(Home)*
+- **FR-6:** The system shall provide a "Schedule New Appointment" button on the Home screen that navigates to the Appointment Scheduling Form. *(Home)*
+
+### Appointment Scheduling
+- **FR-7:** The system shall provide a form to collect patient name, email address, and phone number for scheduling an appointment. *(Appointment Scheduling Form)*
+- **FR-8:** The system shall provide dropdown menus for selecting appointment type, preferred doctor, and appointment time. *(Appointment Scheduling Form)*
+- **FR-9:** The system shall provide a date picker for selecting the appointment date. *(Appointment Scheduling Form)*
+- **FR-10:** The system shall provide a field for additional notes. *(Appointment Scheduling Form)*
+- **FR-11:** The system shall provide a "Confirm Appointment" button to submit the scheduling form. *(Appointment Scheduling Form)*
+- **FR-12:** The system shall provide a "Clear Form" button to reset all input fields. *(Appointment Scheduling Form)*
+- **FR-13:** The system shall validate required fields before allowing appointment submission. *(Appointment Scheduling Form)*
+
+### Appointment Confirmation
+- **FR-14:** The system shall display a confirmation message upon successful appointment scheduling. *(Appointment Confirmation)*
+- **FR-15:** The system shall display an appointment summary including patient name, appointment type, doctor, date, time, confirmation number, and status. *(Appointment Confirmation)*
+- **FR-16:** The system shall provide a link/button to view My Appointments from the confirmation screen. *(Appointment Confirmation)*
+- **FR-17:** The system shall provide a button to return to the Home screen from the confirmation screen. *(Appointment Confirmation)*
+
+### My Appointments / Tracking
+- **FR-18:** The system shall display a list of upcoming appointments with confirmation number, doctor, date, and status. *(My Appointments)*
+- **FR-19:** The system shall display details of a selected appointment, including location and notes. *(My Appointments)*
+- **FR-20:** The system shall provide a "Cancel Appointment" button for each appointment. *(My Appointments)*
+- **FR-21:** The system shall provide a button to return to the Home screen from the My Appointments screen. *(My Appointments)*
+
+### Help / FAQ
+- **FR-22:** The system shall display a list of frequently asked questions and answers. *(Help/FAQ)*
+- **FR-23:** The system shall display support contact information (email and phone) on the Help screen. *(Help/FAQ)*
+- **FR-24:** The system shall provide a button to return to the Home screen from the Help screen. *(Help/FAQ)*
+
+---
+
+## C. Traceability Mapping
+
+| Screen                | Requirement IDs         | Interface Elements                                              |
+|-----------------------|------------------------|----------------------------------------------------------------|
+| Home                  | FR-1, FR-2, FR-3, FR-4, FR-5, FR-6 | Navigation bar, welcome message, infographic/logo, services list, announcements, Schedule New Appointment button |
+| Appointment Scheduling Form | FR-1, FR-2, FR-7, FR-8, FR-9, FR-10, FR-11, FR-12, FR-13 | Navigation bar, input fields, dropdowns, date picker, notes field, Confirm and Clear buttons |
+| Appointment Confirmation | FR-1, FR-2, FR-14, FR-15, FR-16, FR-17 | Navigation bar, confirmation message, appointment summary, View My Appointments, Return Home buttons |
+| My Appointments       | FR-1, FR-2, FR-18, FR-19, FR-20, FR-21 | Navigation bar, appointments list/table, appointment details, Cancel Appointment, Return Home buttons |
+| Help / FAQ            | FR-1, FR-2, FR-22, FR-23, FR-24 | Navigation bar, FAQ list, support contact info, Return Home button |
+
+---
+
+## D. Ambiguities, Missing Information, and Assumptions
+
+- **Ambiguities:**
+  - No indication of user authentication or login process.
+  - The process for selecting and displaying available doctors and appointment times is not detailed.
+  - The handling of appointment conflicts or unavailable slots is not shown.
+  - No explicit error handling or feedback for failed actions.
+
+- **Missing Information:**
+  - No details on how appointments are canceled or if confirmation is required.
+  - No information on how announcements are managed or updated.
+  - No indication if users can edit existing appointments.
+
+- **Assumptions:**
+  - All users can access all screens without authentication.
+  - Dropdowns for doctor and time are dynamically populated based on appointment type and date.
+  - Announcements and services are managed by clinic staff outside this workflow.
+  - Appointment status can be "confirmed" or "pending" as shown.
+  - Email and phone contact for support are static and not interactive beyond display.
+
+---
+
+**End of requirements analysis.**
